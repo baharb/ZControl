@@ -71,7 +71,7 @@ import CommonFuncs from '../../Common/lib/CommonFuncs';
 
               }
               catch(error){
-                  console.log("errrrorrrrrrrrrrrrrrrrrrrrrrrrrr: " +error + "---" + " Error Schedule")
+//                  console.log("errrrorrrrrrrrrrrrrrrrrrrrrrrrrr: " +error + "---" + " Error Schedule")
                   alert(t("schedule:errorGetAllSchedules"));
               }
           });
@@ -124,7 +124,7 @@ import CommonFuncs from '../../Common/lib/CommonFuncs';
                   if(scheduleDataUdp.length > 0 && scheduleDataUdp != false){
                        getResponse = 1
                        getError = 0
-                       console.log("save schedule...." + scheduleDataUdp[5])
+//                       console.log("save schedule...." + scheduleDataUdp[5])
                        if(timeout != ""){clearTimeout(timeout)}
                        if(scheduleDataUdp[4] == 1){
                             id = 0;
@@ -140,14 +140,14 @@ import CommonFuncs from '../../Common/lib/CommonFuncs';
                             this.saveScheduleInDB(id, scheduleIns);
                        }
                        else{
-                            console.log("Error in Save Schedule")
+//                            console.log("Error in Save Schedule")
                             getResponse = 1
                             getError = 1
                             reject(false)
                        }
                   }
                   else{
-                       console.log("Error in Save Schedule")
+//                       console.log("Error in Save Schedule")
                        getResponse = 1
                        getError = 1
                        reject(false)
@@ -183,7 +183,7 @@ import CommonFuncs from '../../Common/lib/CommonFuncs';
 //       if(!retry && retry != 0){
 //                retry = 5
 //            }
-      console.log("in updateeeee: ")
+//      console.log("in updateeeee: ")
 
       // scenario = new Scenario()
 
@@ -196,7 +196,7 @@ import CommonFuncs from '../../Common/lib/CommonFuncs';
               data => {
 		 CommonFuncs.syncDB().then(dataFromController => {
 	              // from = scenarioMaxNumber
-	              console.log("Get data from sync db: " + dataFromController)
+//	              console.log("Get data from sync db: " + dataFromController)
 	              to = scenarioMaxNumber + this.SCHEDULE_MAX_NAMBER
 	              j = 1
 
@@ -215,20 +215,20 @@ import CommonFuncs from '../../Common/lib/CommonFuncs';
 
 	              ZagrosDB.buildQuery(Vars.queryUpdate, "Schedule", "status", "id IN("+schedulesString+")", params, "", "", 0, 0).then(
 	                  data => {
-				console.log("update status: ")
+//				console.log("update status: ")
 				resolve(schedulesString)
 	                  }
 	              )
 	              .catch(
 	                  error => {
-	                      console.log("Error in save Schedule in DB: " + error)
+//	                      console.log("Error in save Schedule in DB: " + error)
 	                      reject(error)
 	                      alert(i18n.t("schedule:errorSaveSchedule"));
 	                  }
 	              );
 	          })
                     .catch(error => {
-                        console.log("Error sync DB from controller : " + error +"---")
+//                        console.log("Error sync DB from controller : " + error +"---")
 
 //	              if(retry > 0){
 //	                    this.updateSchedulesFromController(scenarioMaxNumber, retry-1)
@@ -241,7 +241,7 @@ import CommonFuncs from '../../Common/lib/CommonFuncs';
           )
           .catch(
               error => {
-                  console.log("Error in update Schedule in DB: " + error)
+//                  console.log("Error in update Schedule in DB: " + error)
                   reject(error)
                   alert(i18n.t("schedule:errorSaveSchedule"));
               }
@@ -275,7 +275,7 @@ import CommonFuncs from '../../Common/lib/CommonFuncs';
                         resolve(dataSchedule);
                    }
                    else{
-                        console.log("Error in Get Schedule")
+//                        console.log("Error in Get Schedule")
                    }
                 }
             ).catch(error => {reject(error)});
@@ -350,7 +350,7 @@ import CommonFuncs from '../../Common/lib/CommonFuncs';
     }
 
     saveScheduleInDB(id, scheduleIns){
-          console.log("save schedule in db")
+//          console.log("save schedule in db")
         params = new Array();
         params[0] = scheduleIns.title;
         params[1] = 1
@@ -396,12 +396,12 @@ import CommonFuncs from '../../Common/lib/CommonFuncs';
                         )
                         .catch(
                            error => {
-                                console.log("error delete Schedule in db");
+//                                console.log("error delete Schedule in db");
                            }
                         );
                    }
                    else{
-                     console.log("Error in delete Schedule")
+//                     console.log("Error in delete Schedule")
                      getResponse = 0
                      getError = 0
                    }

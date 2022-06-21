@@ -150,7 +150,7 @@ export class ScenarioSetting extends React.Component {
 
                             if(data[i+2] == curtain.CURTAIN_WIFI_TYPE || data[i+2] == curtain.CURTAIN_RS485_TYPE){ // curtain
                                 id = this.getCurtainId(data[i], data[i+2], curtain)
-                                 console.log("Curtain: " + id + "----" + data[i+1])
+//                                 console.log("Curtain: " + id + "----" + data[i+1])
                                 curtains[id-1].type_id = data[i];
                                 curtains[id-1].value = data[i+1]
                                 curtains[id-1].type = data[i+2];
@@ -207,10 +207,10 @@ export class ScenarioSetting extends React.Component {
                             
                             checkedinput = this.state.checkedInputEvents
                             endIE = data[endS+1] + endS + 2;
-                            console.log("end E: "+ endIE + "--i : "+i + "---endS: "+ endS)
+//                            console.log("end E: "+ endIE + "--i : "+i + "---endS: "+ endS)
 
                             for(i = endS + 2; i < endIE; i++){
-                                console.log("IE: " + i + "----")
+//                                console.log("IE: " + i + "----")
                                 // console.log(data[i])
                                 checkedinput[data[i]-1] = true;
                                 // console.log("IE: "+(data[i]-1))
@@ -302,7 +302,7 @@ export class ScenarioSetting extends React.Component {
         scenario = new Scenario();
         scenario.getScenario(scenarioId).then(
             data => {
-                console.log("Get Scenario in setting scenario .... ")
+//                console.log("Get Scenario in setting scenario .... ")
                 if(data.length > 0){
                     this.getActionsOfScenario(data).then(
                               scenarioD => {
@@ -402,7 +402,7 @@ export class ScenarioSetting extends React.Component {
 
             setTimeout(() => {
 
-                      console.log("error save scenario i n setting")
+//                      console.log("error save scenario i n setting")
                 if(retry == 0){
                            this.setState({
                                             spinner: false,
@@ -469,7 +469,7 @@ export class ScenarioSetting extends React.Component {
                     outputs: data
                 }, () => {
                     resolve(true)
-                    console.log("get output done")
+//                    console.log("get output done")
                 })
             }
          )
@@ -504,7 +504,7 @@ export class ScenarioSetting extends React.Component {
                     inputEvents: dataI,
                     checkedInputEvents: checkedInput
                 }, () => {
-                     console.log("ie get done")
+//                     console.log("ie get done")
                                     resolve(true)
                 })
             }
@@ -533,7 +533,7 @@ export class ScenarioSetting extends React.Component {
                     schedules: dataS,
                     checkedSchedules: checkedSchedule
                 }, () => {
-                    console.log("schedule get done")
+//                    console.log("schedule get done")
                      resolve(true)
                 })
 
@@ -562,7 +562,7 @@ export class ScenarioSetting extends React.Component {
                 this.setState({
                     curtains: dataCurtain
                 }, () => {
-	                 console.log("curtains get done")
+//	                 console.log("curtains get done")
 	                 resolve(true)
 	       })
 
@@ -742,8 +742,8 @@ export class ScenarioSetting extends React.Component {
 	                           initial={initial}
 	                           formHorizontal={true}
 	                           onPress={(value, index) => {
-					checkedArray = this.state.curtains;
-	                                          console.log("checked curtain: " + index + "---" + value +"---" + checkedArray[item.id-1].value)
+					                checkedArray = this.state.curtains;
+//	                                          console.log("checked curtain: " + index + "---" + value +"---" + checkedArray[item.id-1].value)
 	                                          checkedArray[item.id-1].value = radioCurtain[index].value;
 	                                          this.setState({
 	                                              curtains: checkedArray,

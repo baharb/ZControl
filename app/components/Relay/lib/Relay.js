@@ -65,7 +65,7 @@ export default class Relay  {
             .catch(error => {
                 getResponse = 0
                 getError = 0
-                console.log("error in update : "+ error)
+//                console.log("error in update : "+ error)
             })
 
         }) // End Promise
@@ -124,14 +124,14 @@ export default class Relay  {
                     offset += secretKeyBytes.length;                    
                     params[offset] = relay.type;
 //
-                   console.log("eeeeeeeeeeeee: " +password.toString() + "--" + ssid.toString() + "---" + securityKey.toString()+ "---"+ offset + "---" + relay.type +"----params:" + params[0] + "-" + params[1] + "-" + params[2] + "-" + params[3] + "-" +
-                      + params[4] + "-" + params[5] + "-" + params[6] + "-" + params[7] + "-" +
-                      + params[8] + "-" + params[9] + "-" + params[10] + "-" + params[11] + "-" +
-                      + params[12] + "-" + params[13] + "-" + params[14] + "-" + params[15] + "-" +
-                      + params[16] + "-" + params[17] + "-" + params[18] + "-" + params[19]+ "-" +
-                      + params[20] + "-" + params[21] + "-" + params[22] + "-" + params[23]+ "-" +
-                      + params[24] + "-" + params[25] + "-" + params[26] + "-" + params[27]+ "-" +
-                      + params[28] + "-" + params[29] + "-" + params[30] + "-" + params[31]);
+//                   console.log("eeeeeeeeeeeee: " +password.toString() + "--" + ssid.toString() + "---" + securityKey.toString()+ "---"+ offset + "---" + relay.type +"----params:" + params[0] + "-" + params[1] + "-" + params[2] + "-" + params[3] + "-" +
+//                      + params[4] + "-" + params[5] + "-" + params[6] + "-" + params[7] + "-" +
+//                      + params[8] + "-" + params[9] + "-" + params[10] + "-" + params[11] + "-" +
+//                      + params[12] + "-" + params[13] + "-" + params[14] + "-" + params[15] + "-" +
+//                      + params[16] + "-" + params[17] + "-" + params[18] + "-" + params[19]+ "-" +
+//                      + params[20] + "-" + params[21] + "-" + params[22] + "-" + params[23]+ "-" +
+//                      + params[24] + "-" + params[25] + "-" + params[26] + "-" + params[27]+ "-" +
+//                      + params[28] + "-" + params[29] + "-" + params[30] + "-" + params[31]);
 
                     udpSaveR = new UDP(Commands.REQ_MODULE, Commands.FLAG_SPECIAL, params)
                     udpSaveR.sendUdpPacket(Vars.controllerBroadcastIP, Vars.controllerModule2Port, false).then(
@@ -156,12 +156,15 @@ export default class Relay  {
                             }
                         }
                     )
-                    .catch(error => console.log("error in save key "+error))
+                    .catch(error => {
+                        alert(i18n.t("relay:errorSaveRelay"))
+//                        console.log("error in save key "+error)
+                     })
                 }
              )
              .catch(error => {
                  alert(i18n.t("relay:errorSaveRelay"))
-                 console.log("error 5 " + error)
+//                 console.log("error 5 " + error)
              });
 
        }) // End Promise
@@ -217,7 +220,7 @@ export default class Relay  {
                     where_params[0] = 1                
                     where_index = 1
 
-                    console.log("Listinggggggggggggggg modulessss: " + dataListUdp.length)
+//                    console.log("Listinggggggggggggggg modulessss: " + dataListUdp.length)
 
                     dataOut = new Array();
                     CommonFunctions.arrayCopy(dataListUdp, 4, dataOut, 0, dataListUdp.length - 4);
@@ -233,19 +236,19 @@ export default class Relay  {
                     num_of_relay = 0
 
                     // console.log("aaaa"+relaysFromDB.length+"---"+f+"--"+to)
-                     console.log("----RElayssssssssssssssss:" + dataOut[0] + "-" + dataOut[1] + "-" + dataOut[2] + "-" + dataOut[3] + "-" +
-                      + dataOut[4] + "-" + dataOut[5] + "-" + dataOut[6] + "-" + dataOut[7] + "-" +
-                      + dataOut[8] + "-" + dataOut[9] + "-" + dataOut[10] + "-" + dataOut[11] + "-" +
-                      + dataOut[12] + "-" + dataOut[13] + "-" + dataOut[14] + "-" + dataOut[15] + "-" +
-                      + dataOut[16] + "-" + dataOut[17] + "-" + dataOut[18] + "-" + dataOut[19]+ "-" +
-                      + dataOut[20] + "-" + dataOut[21] + "-" + dataOut[22] + "-" + dataOut[23]+ "-" +
-                      + dataOut[24] + "-" + dataOut[25] + "-" + dataOut[26] + "-" + dataOut[27]+ "-" +
-                      + dataOut[28] + "-" + dataOut[29] + "-" + dataOut[30] + "-" + dataOut[31]);
+//                     console.log("----RElayssssssssssssssss:" + dataOut[0] + "-" + dataOut[1] + "-" + dataOut[2] + "-" + dataOut[3] + "-" +
+//                      + dataOut[4] + "-" + dataOut[5] + "-" + dataOut[6] + "-" + dataOut[7] + "-" +
+//                      + dataOut[8] + "-" + dataOut[9] + "-" + dataOut[10] + "-" + dataOut[11] + "-" +
+//                      + dataOut[12] + "-" + dataOut[13] + "-" + dataOut[14] + "-" + dataOut[15] + "-" +
+//                      + dataOut[16] + "-" + dataOut[17] + "-" + dataOut[18] + "-" + dataOut[19]+ "-" +
+//                      + dataOut[20] + "-" + dataOut[21] + "-" + dataOut[22] + "-" + dataOut[23]+ "-" +
+//                      + dataOut[24] + "-" + dataOut[25] + "-" + dataOut[26] + "-" + dataOut[27]+ "-" +
+//                      + dataOut[28] + "-" + dataOut[29] + "-" + dataOut[30] + "-" + dataOut[31]);
                     // Todo: Status 
                     while(f<to){                            
 
                         if(num_of_relay >= dataOut[n_level]){ // After listing all relays of a level
-                            console.log("num: " + n_level)
+//                            console.log("num: " + n_level)
                             level = level + this.MAX_ARRAYS[n_level]
                             n_level++
                             num_of_relay = 0
@@ -255,7 +258,7 @@ export default class Relay  {
                             f = f + dataOut[n_level] * 2
                             n_level++
                             num_of_relay = 0
-                            console.log("num1 : " + n_level)
+//                            console.log("num1 : " + n_level)
                         }  
 
                         if(dataOut[n_level] > 0 && n_level < 14){
@@ -281,12 +284,12 @@ export default class Relay  {
 
                         ZagrosDB.buildQuery(Vars.queryUpdate, "Relay", "flag", where, where_params, "", "", 0).then(
                             data => {
-                                console.log("got in updateeeeeee")
+//                                console.log("got in updateeeeeee")
                                 resolve(relaysFromDB)
                             }   
                         )
                         .catch(error => {
-                                console.log(error +"eeeeeeeeeeeee")
+//                                console.log(error +"eeeeeeeeeeeee")
                                 reject(error)
                                 alert(i18n.t("output:errorSaveOutputInDB"));
                         });
@@ -310,7 +313,7 @@ export default class Relay  {
             .catch(error => {
 //                getResponse = 0
 //                getError = 0
-              console.log("error in update : "+ error)
+//              console.log("error in update : "+ error)
               reject(error)
             })
 

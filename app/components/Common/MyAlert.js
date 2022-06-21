@@ -158,7 +158,8 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     textAlign: "center",
     fontFamily: (dir === 'right') ? 'Vazir-Medium' : 'Nunito-Bold',
-    fontSize: 16
+    fontSize: 16,
+    color: '#1d0527',
   })       ,
     txtInput: (dir) => ({
       fontSize: 15,

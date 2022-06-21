@@ -405,7 +405,7 @@ import i18n from 'i18next';
 //                                             getResponse = 0
 //                                             getError = 1
                                              reject(error)
-                                           console.log("error in update : "+ error)
+//                                           console.log("error in update : "+ error)
                                          })
                               }
                     )

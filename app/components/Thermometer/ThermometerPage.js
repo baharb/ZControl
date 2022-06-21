@@ -78,7 +78,7 @@ export class ThermometerPage extends React.Component {
 	          )
 	          .catch(
 	                   error => {
-	                        console.log("error therm 1 " + error)
+//	                        console.log("error therm 1 " + error)
 	                        getError = 1
 	                        if(retry == 0){
 //	                                   console.log("Error get thermmsss" + "---" + error)

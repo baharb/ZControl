@@ -74,7 +74,7 @@ export class SchedulePage extends React.Component {
 
 			if(timeout != ""){ clearTimeout(timeout) }
 
-			console.log("Data from dB schedulessss.... " + data.length +"---"+data)
+//			console.log("Data from dB schedulessss.... " + data.length +"---"+data)
 
 			this.setState({
 			          schedules: data,
@@ -102,7 +102,7 @@ export class SchedulePage extends React.Component {
 //	          })
 //	          alert(this.props.t("schedule:errorGetAllSchedules"));
         })
-	console.log("Before check timeout : " + timeout)
+//	console.log("Before check timeout : " + timeout)
 
 
           timeout = setTimeout(() => {

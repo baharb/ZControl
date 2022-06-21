@@ -13,7 +13,7 @@ export class DateSetting extends React.Component {
     constructor(props){
       super(props);
       this.state = {
-        startYear: 1398,
+        startYear: 1400,
         startMonth: 1,
         startDay: 1,
         startH: 12,
@@ -80,15 +80,15 @@ export class DateSetting extends React.Component {
                   year = (year << 8) | (data[1] & 0xff);
 
                   startDate = moment(year + "/" + data[2] + "/" + data[3] , 'YYYY/M/D');
-                  console.log("dateeeeeeeeeeee: " +startDate + "---" + year +"-" + data[2]+"--"+data[3])
+//                  console.log("dateeeeeeeeeeee: " +startDate + "---" + year +"-" + data[2]+"--"+data[3])
 
                   if(i18n.t("common:language") == "persian"){
                               start = startDate.format('jYYYY/jM/jD');
-                              console.log("Persian: ----" + start)
+//                              console.log("Persian: ----" + start)
                   }
                   else{
                               start = startDate.format('YYYY/M/D');
-                              console.log("English: ----" + start)
+//                              console.log("English: ----" + start)
                   }
 
                   startDateArray = start.split("/");
@@ -141,8 +141,6 @@ export class DateSetting extends React.Component {
               onValueChange={(itemValue, itemIndex) =>
                 this.setState({startYear: itemValue})
               }>
-                    <Picker.Item label="1398" value={"1398"} />
-                    <Picker.Item label="1399" value={"1399"} />
                     <Picker.Item label="1400" value={"1400"} />
                     <Picker.Item label="1401" value={"1401"} />
                     <Picker.Item label="1402" value={"1402"} />
@@ -175,8 +173,6 @@ export class DateSetting extends React.Component {
                         onValueChange={(itemValue, itemIndex) =>
                           this.setState({startYear: itemValue})
                         }>
-          				<Picker.Item label="2020" value={"2020"} />
-                  <Picker.Item label="2021" value={"2021"} />
                   <Picker.Item label="2022" value={"2022"} />
                   <Picker.Item label="2023" value={"2023"} />
                   <Picker.Item label="2024" value={"2024"} />

@@ -337,6 +337,7 @@
     "errorGetAllInputEvents":"A problem occurred in extracting the list of input triggers. Please try again.",
     "errorGetInputEvent":"A problem occurred in extracting the input trigger. Please try again.",
     "errorSaveInputEvent":"A problem occurred in saving the input trigger. Please try again.",
+
   },
   "schedule": {
     "schedule":"Schedule",

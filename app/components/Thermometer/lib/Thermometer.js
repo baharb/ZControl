@@ -130,7 +130,7 @@ import WifiManager from 'react-native-wifi';
                         )
                         .catch(
                            error => {
-                                console.log(i18n.t("thermometer:errorDeleteThermometer"));
+//                                console.log(i18n.t("thermometer:errorDeleteThermometer"));
                            }
                         );
                    }
@@ -354,7 +354,7 @@ import WifiManager from 'react-native-wifi';
 	                            }
 	                        )
 	                        .catch(error => {
-	                                console.log(error +"eeeeeeeeeeeee")
+//	                                console.log(error +"eeeeeeeeeeeee")
 	                                reject(error)
 	                                alert(i18n.t("thermometer:errorSaveThermometerInDB"));
 	                        });
@@ -381,7 +381,7 @@ import WifiManager from 'react-native-wifi';
 	            .catch(error => {
 //	                getResponse = 0
 //	                getError = 0
-	                console.log("error in update thermometer: "+ error)
+//	                console.log("error in update thermometer: "+ error)
 	                reject(error)
 	            })
 
@@ -504,7 +504,7 @@ import WifiManager from 'react-native-wifi';
 		);
 
                     timeout = setTimeout(() => {
-          	      console.log("Error in save Thermostat Timeout: " +getError+"---"+getResponse+"---")
+//          	      console.log("Error in save Thermostat Timeout: " +getError+"---"+getResponse+"---")
           	       if((getResponse == 0 && getError == 0) || (getError == 1)){
           			reject(false)
 
@@ -536,18 +536,18 @@ import WifiManager from 'react-native-wifi';
 //		console.log("in update controller.... "+outputsLength+"-----"+outputsArray[0]+"-"+outputsArray[1]+"-"+outputsArray[2]+"-"+outputsArray[3]+"-"+outputsArray[4]+"-"+outputsArray.length)
 
 
-		console.log("Edit therm: :" + params[0] + "--" + params[1] + "--" + params[2] + "--" + params[3] + "--" +
-	                       + params[4] + "--" + params[5] + "--" + params[6] + "--" + params[7] + "--"+
-	                       + params[8] + "--" + params[9] + "--" + params[10] + "--11:" + params[11] +"--12:" +
-	                       + params[12] + "--13:" + params[13] + "--14:" + params[14] + "--15:" + params[15] + "--16:" +
-	                       + params[16] + "--17:" + params[17] + "--18:" + params[18] + "--19:" + params[19] )
+//		console.log("Edit therm: :" + params[0] + "--" + params[1] + "--" + params[2] + "--" + params[3] + "--" +
+//	                       + params[4] + "--" + params[5] + "--" + params[6] + "--" + params[7] + "--"+
+//	                       + params[8] + "--" + params[9] + "--" + params[10] + "--11:" + params[11] +"--12:" +
+//	                       + params[12] + "--13:" + params[13] + "--14:" + params[14] + "--15:" + params[15] + "--16:" +
+//	                       + params[16] + "--17:" + params[17] + "--18:" + params[18] + "--19:" + params[19] )
 
                     //todo: params, commands
                     udp1 = new UDP(Commands.REQ_TABLET_MB_COM, Commands.FLAG_THERMOS_EDIT, params)
 		udp1.sendUdpPacket("", "", true).then(
                                   data => {
                                         getResponse = 1
-                                       console.log("SAVE Thermometer " + data[4])
+//                                       console.log("SAVE Thermometer " + data[4])
                                        resolve(true)
                                   }
                     ) .catch(error =>
@@ -560,7 +560,7 @@ import WifiManager from 'react-native-wifi';
                     );
 
                      timeout = setTimeout(() => {
-                          console.log("Error in save Thermostat Timeout: " +getError+"---"+getResponse+"---")
+//                          console.log("Error in save Thermostat Timeout: " +getError+"---"+getResponse+"---")
                            if((getResponse == 0 && getError == 0) || (getError == 1)){
                                         reject(false)
                             }

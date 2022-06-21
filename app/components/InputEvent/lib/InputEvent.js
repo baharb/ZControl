@@ -72,7 +72,7 @@ export default class InputEvent {
 
             }
             catch (error) {
-                console.log("errrrorrrrrrrrrrrrrrrrrrrrrrrrrr: " + error + "---" + " Error IE")
+//                console.log("errrrorrrrrrrrrrrrrrrrrrrrrrrrrr: " + error + "---" + " Error IE")
                 alert(t("inputEvent:errorSaveInputEvent"));
             }
         });
@@ -89,9 +89,9 @@ export default class InputEvent {
             // ZagrosDB.executeSQL("DROP TABLE IF EXISTS [iputEvent]");
             // this.makeTable();
             packetData = this.getInputEventBytes(inputEventIns, mode, checkedInput, checkedOutputs, outputs);
-            console.log("packet data: " + packetData.length + "--" + packetData)
+//            console.log("packet data: " + packetData.length + "--" + packetData)
             if (packetData == false) {
-                console.log("Error in save input event " + packetData)
+//                console.log("Error in save input event " + packetData)
                 reject(i18n.t("inputEvent:errorSaveInputEvent"))
             }
             else {
@@ -145,13 +145,13 @@ export default class InputEvent {
                             getResponse = 1
                             getError = 1
                             reject(false)
-                            console.log("Error in Save inputEvent 2")
+//                            console.log("Error in Save inputEvent 2")
                         }
                     })
                     .catch(error => {
                         getResponse = 1; getError = 1
                         reject(false)
-                        console.log("Errorrrr in save inputevent: " + error)
+//                        console.log("Errorrrr in save inputevent: " + error)
                     });
 
                 //            setTimeout(() => {
@@ -189,7 +189,7 @@ export default class InputEvent {
         )
         .catch(
             error => {
-                console.log("Error in save input event in DB: " + error)
+//                console.log("Error in save input event in DB: " + error)
                 alert(i18n.t("inputEvent:errorSaveInputEvent"));
             }
         );
@@ -228,23 +228,26 @@ export default class InputEvent {
             j = 7;
             allOutputsLen = outputs.length;
 
-            for (i = 0; i < allOutputsLen; i++) {
-                if (checkedOutputs[i] == true) {
-                    id = 0
+            // Output Type
+            if (inputEventIns.inputEventType == 1) {
+                for (i = 0; i < allOutputsLen; i++) {
+                    if (checkedOutputs[i] == true) {
+                        id = 0
 
-                    if ((outputs[i].type == output.OUTPUT_DIGITAL_TYPE) || (outputs[i].type == output.OUTPUT_ANALOG_TYPE)) {
-                        id = outputs[i].id
+                        if ((outputs[i].type == output.OUTPUT_DIGITAL_TYPE) || (outputs[i].type == output.OUTPUT_ANALOG_TYPE)) {
+                            id = outputs[i].id
+                        }
+                        else {
+                            id = outputs[i].type_id
+                        }
+
+                        inputEventBytes[j] = id;
+                        inputEventBytes[++j] = outputs[i].value;
+                        inputEventBytes[++j] = (outputs[i].operand << 4) | outputs[i].type;
+
+                        // todo: operand , type
+                        ++j;
                     }
-                    else {
-                        id = outputs[i].type_id
-                    }
-
-                    inputEventBytes[j] = id;
-                    inputEventBytes[++j] = outputs[i].value;
-                    inputEventBytes[++j] = (outputs[i].operand << 4) | outputs[i].type;
-
-                    // todo: operand , type
-                    ++j;
                 }
             }
 
@@ -256,17 +259,17 @@ export default class InputEvent {
             }
 //            inputEventBytes[j] = inputEventIns.travel
 
-            console.log("Save input event : " + inputEventBytes[0] + "-" + inputEventBytes[1] + "-" +
-                inputEventBytes[2] + "-" + inputEventBytes[3] + "-" + inputEventBytes[4] + "-" + inputEventBytes[5] + "-" +
-                inputEventBytes[6] + "-" + inputEventBytes[7] + "-" + inputEventBytes[8] + "-" + inputEventBytes[9] + "-" +
-                inputEventBytes[10] + "-" + inputEventBytes[11] + "-" + inputEventBytes[12] + "-" + inputEventBytes[13] + "-" +
-                inputEventBytes[14] + "-" + inputEventBytes[15] + "-" + inputEventBytes[16] + "-" + inputEventBytes[17])
+//            console.log("Save input event : " + inputEventBytes[0] + "-" + inputEventBytes[1] + "-" +
+//                inputEventBytes[2] + "-" + inputEventBytes[3] + "-" + inputEventBytes[4] + "-" + inputEventBytes[5] + "-" +
+//                inputEventBytes[6] + "-" + inputEventBytes[7] + "-" + inputEventBytes[8] + "-" + inputEventBytes[9] + "-" +
+//                inputEventBytes[10] + "-" + inputEventBytes[11] + "-" + inputEventBytes[12] + "-" + inputEventBytes[13] + "-" +
+//                inputEventBytes[14] + "-" + inputEventBytes[15] + "-" + inputEventBytes[16] + "-" + inputEventBytes[17])
 
             return inputEventBytes;
 
         }
         catch (error) {
-            console.log("Error in save input event: " + error)
+//            console.log("Error in save input event: " + error)
             return false;
         }
     }
@@ -305,7 +308,7 @@ export default class InputEvent {
                         )
                             .catch(
                                 error => {
-                                    console.log("Error in save input event in DB: " + error)
+//                                    console.log("Error in save input event in DB: " + error)
                                     alert(i18n.t("inputEvent:errorSaveInputEvent"));
                                 }
                             );
@@ -313,14 +316,14 @@ export default class InputEvent {
                         resolve(inputEventsString)
                     })
                         .catch(error => {
-                            console.log("Error sync DB from controller : " + error)
+//                            console.log("Error sync DB from controller : " + error)
                             reject(error)
                         })
                 }
             )
                 .catch(
                     error => {
-                        console.log("Error in save input event in DB: " + error)
+//                        console.log("Error in save input event in DB: " + error)
                         alert(i18n.t("inputEvent:errorSaveInputEvent"));
                     }
                 );
@@ -343,7 +346,7 @@ export default class InputEvent {
             udp1 = new UDP((Commands.REQ_INPUT_EVENT | Commands.MOD_CONFIG), Commands.FLAG_DELETE, params1);
             udp1.sendUdpPacket("", "", true).then(
                 data => {
-                    console.log("Reply for delete: " + data.length + "-" + inputEventId + "--" + data[0])
+//                    console.log("Reply for delete: " + data.length + "-" + inputEventId + "--" + data[0])
                     getResponse = 1
                     getError = 0
 
@@ -354,24 +357,24 @@ export default class InputEvent {
                         // Delete selected inputEvent. set status to 0
                         ZagrosDB.buildQuery(Vars.queryUpdate, "InputEvent", "status", "id=" + inputEventId, params, "", "", 0, 0).then(
                             data1 => {
-                                console.log("Delete ok : " + data1)
+//                                console.log("Delete ok : " + data1)
                                 resolve(true);
                             }
                         )
                             .catch(
                                 error => {
-                                    console.log("error delte 1: " + error)
+//                                    console.log("error delte 1: " + error)
                                     reject("error delete inputEvent in db");
                                 }
                             );
                     }
                     else {
-                        console.log("Error in delete input event " + data.length)
+//                        console.log("Error in delete input event " + data.length)
                         getResponse = 0; getError = 0
                     }
                 }
             ).catch(error => {
-                console.log("Error in delete " + error)
+//                console.log("Error in delete " + error)
                 getResponse = 0; getError = 1
             });
 
@@ -383,7 +386,7 @@ export default class InputEvent {
                         this.deleteInputEvent(inputEventId, retry - 1)
                     }
                     else {
-                        console.log("Error in retry")
+//                        console.log("Error in retry")
                         reject(i18n.t("inputEvent:errorDeleteInputEvent"))
                     }
                 }
@@ -420,7 +423,7 @@ export default class InputEvent {
                         resolve(dataInputEvent)
                     }
                     else {
-                        console.log("error get input eenteee")
+//                        console.log("error get input eenteee")
                         //                        getError = 1
                         //                        if(retry > 0){
                         //                              this.getInputEvent(inputEventId, retry-1)
@@ -433,7 +436,7 @@ export default class InputEvent {
                     }
                 }
             ).catch(error => {
-                console.log("Error in get input event : " + error)
+//                console.log("Error in get input event : " + error)
                 //                getError = 1;
                 //                 if(retry > 0){
                 //                          this.getInputEvent(inputEventId, retry-1)

@@ -46,7 +46,7 @@ export class OutputPage extends React.Component {
         getResponse = 0
         getError = 0
 
-        if(!retry && (retry != 0)){retry = 4}
+        if(!retry && (retry != 0)){retry = 3}
 
         const {t} = this.props;
 
@@ -71,7 +71,7 @@ export class OutputPage extends React.Component {
         ZagrosDB.buildQuery(Vars.querySelect, "Output", "", "", "", "", "", 1).then(
             data => {
                 output = new Output();
-                    console.log("grom dbbb: " + data.length)
+//                    console.log("grom dbbb: " + data.length)
                 output.getAllOutputsFromController(data).then(
                     outputFromDB => {
                         getResponse = 1

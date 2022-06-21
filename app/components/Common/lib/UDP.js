@@ -296,7 +296,7 @@ export default class UDP {
 
                                 setTimeout(() => {
                                     if (received == 0) {
-                                        console.log("force  closeeee : " + "---try: " + trySendFailed + "----freeSend: " + freeSendPacket + "--- timeout: " + retryTimeout)
+//                                        console.log("force  closeeee : " + "---try: " + trySendFailed + "----freeSend: " + freeSendPacket + "--- timeout: " + retryTimeout)
 //                                        dgramSocket.close()
                                         trySendFailed++
                                         trys++

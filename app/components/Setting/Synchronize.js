@@ -59,7 +59,7 @@ export class Synchronize extends React.Component {
                           for(i=0; i<result.length; i++){
 //                            console.log("name: "+result[i].name+"------"+ result.length)
                                 if(result[i].name == 'zagrosDB'){
-                                    console.log("name 2: "+result[i].name)
+//                                    console.log("name 2: "+result[i].name)
                                     return Promise.all([RNFS.stat(result[i].path), result[i].path]);
                                 }
                           }
@@ -77,7 +77,7 @@ export class Synchronize extends React.Component {
                           resolve(contents);
                         })
                         .catch((err) => {
-                          console.log("errrorrrrr: " +err.message, err.code);
+//                          console.log("errrorrrrr: " +err.message, err.code);
                           reject(err)
                         });
 

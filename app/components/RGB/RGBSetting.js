@@ -62,7 +62,7 @@ export class RGBSetting extends React.Component {
             rgbIns.title = this.state.rgbTitle;
 
             rgb = new RGB();
-
+//            console.log("mode: " + this.state.mode)
             if(this.state.mode == Vars.modeUpdate){
                 rgbIns.id = this.state.rgbId;
                 rgb.updateRGBInDB(rgbIns).then(
@@ -84,13 +84,21 @@ export class RGBSetting extends React.Component {
                 rgb.getNextId().then(
                     newId => {
 
+//            console.log("id: " + newId)
                         rgbIns.id = newId[0].id;
                         rgb.saveRGBInController(rgbIns).then(
                             data => {
+
+//            console.log("contr: " + data.length)
                                 rgb.updateRGBInDB(rgbIns).then(
                                     data1 => {
+
+//            console.log("db: " + data1)
                                         if(data1 == true){
                                             this.props.navigation.navigate('RGBPage');
+                                        }
+                                        else{
+                                             alert(this.props.t("rgb:errorSaveRGBInDB"))
                                         }
                                     }
                                 )
@@ -101,9 +109,14 @@ export class RGBSetting extends React.Component {
                                 );
                             }
                         )
-                        .catch(
-                            error => alert(this.props.t("rgb:errorSaveRGBInController"))
+                        .catch(error =>
+                            {alert(this.props.t("rgb:errorSaveRGBInController"))}
                         );
+                    }
+                )
+                .catch(
+                    error => {
+                        alert(this.props.t("rgb:errorSaveRGBInController"))
                     }
                 )
 

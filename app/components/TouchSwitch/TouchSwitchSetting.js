@@ -168,7 +168,7 @@ export class TouchSwitchSetting extends React.Component {
            )
           .catch(
               error => {
-                console.log("Error in get touchRGB: " + error)
+//                console.log("Error in get touchRGB: " + error)
                 getError = 1
               }
           );
@@ -176,7 +176,7 @@ export class TouchSwitchSetting extends React.Component {
           timeoutRetry = (selectedConnection == 0) ? 1100 :2500
 
     	  timeout = setTimeout(() => {
-    	      console.log("Error in get Touchswitch Timeout: " +getError+"---"+getResponse+"---"+retry)
+//    	      console.log("Error in get Touchswitch Timeout: " +getError+"---"+getResponse+"---"+retry)
     	      if(retry == 0){
                      this.setState({
                            spinner: false,
@@ -229,9 +229,9 @@ export class TouchSwitchSetting extends React.Component {
 	                touchSwitchIns.color = this.state.color
 	                touchSwitchIns.applyToAll = (this.state.applyToAll == false) ? 0 : 1
 
-		      console.log("Save params: type: " + touchSwitchIns.type +"--- type id: " + touchSwitchIns.type_id +"--- id: "+ touchSwitchIns.id+
-		      "---- mode: " + touchSwitchIns.modeRgb +"---- speed: " + touchSwitchIns.speed +"---- start: " + touchSwitchIns.start +"----- end: " +
-		      touchSwitchIns.end +"---- color: " + touchSwitchIns.color +"--- apply to all: " + touchSwitchIns.applyToAll)
+//		      console.log("Save params: type: " + touchSwitchIns.type +"--- type id: " + touchSwitchIns.type_id +"--- id: "+ touchSwitchIns.id+
+//		      "---- mode: " + touchSwitchIns.modeRgb +"---- speed: " + touchSwitchIns.speed +"---- start: " + touchSwitchIns.start +"----- end: " +
+//		      touchSwitchIns.end +"---- color: " + touchSwitchIns.color +"--- apply to all: " + touchSwitchIns.applyToAll)
 
             touchSwitch.updateTouchSwitchInController(touchSwitchIns).then(
                 data => {
@@ -246,7 +246,7 @@ export class TouchSwitchSetting extends React.Component {
             )
             .catch(
                 error => {
-                    console.log("error in touch: " + error)
+//                    console.log("error in touch: " + error)
                     getError = 1
 //	                        alert(this.props.t("touchSwitch:errorSaveTouchSwitch"))
                 }
@@ -265,7 +265,7 @@ export class TouchSwitchSetting extends React.Component {
                 }
                 else{
                     if(getResponse == 0 || getError == 1){
-                        console.log("error : " + retry + "---"+getResponse+"---"+getError)
+//                        console.log("error : " + retry + "---"+getResponse+"---"+getError)
                         this.saveTouchSwitch(inRelease, retry-1)
                     }
                   }
@@ -275,7 +275,7 @@ export class TouchSwitchSetting extends React.Component {
 	        if(this.state.mode == Vars.modeInsert){
 	                touchSwitch.getNextId(this.state.selectedType).then(
 	                    newId => {
-	                        console.log("type: "+newId[0].id+"---"+newId[0].type_id)
+//	                        console.log("type: "+newId[0].id+"---"+newId[0].type_id)
 	                        touchSwitchIns.id = newId[0].id;
 	                        touchSwitchIns.type_id = newId[0].type_id;
 	                        touchSwitchIns.type = this.state.selectedType;
@@ -291,7 +291,7 @@ export class TouchSwitchSetting extends React.Component {
 	                                )
 	                                .catch(
 	                                    error => {
-	                                        console.log("eror2 " + error)
+//	                                        console.log("eror2 " + error)
 	                                        alert(this.props.t("touchSwitch:errorSaveTouchSwitch"))
 	                                    }
 	                                );
@@ -301,7 +301,7 @@ export class TouchSwitchSetting extends React.Component {
 	                            error => {
 	                                alert(this.props.t("touchSwitch:errorSaveTouchSwitch"))
 
-	                                console.log("eror3 " + error)
+//	                                console.log("eror3 " + error)
 	                            }
 	                        );
 	                    }
@@ -412,7 +412,7 @@ export class TouchSwitchSetting extends React.Component {
                                                                 style={commonStyles.rgbPickerDashboard}
                                                                 itemStyle={commonStyles.rgbItemStylePicker(i18n.t("common:dir"))}
                                                                 onValueChange={(itemValue, itemIndex) => {
-                                                                                  console.log("Mode: " + this.state.modeRgb)
+//                                                                                  console.log("Mode: " + this.state.modeRgb)
                                                                           this.setState({modeRgb: itemValue})
                                                                   }
                                                            }>
@@ -436,7 +436,7 @@ export class TouchSwitchSetting extends React.Component {
                                                                          itemStyle={commonStyles.rgbItemStylePicker(i18n.t("common:dir"))}
                                                                          onValueChange={(itemValue, itemIndex) => {
                                                                                          this.setState({speed: itemValue}, () => {
-                                                                                         console.log("speeeeed: " + this.state.speed)
+//                                                                                         console.log("speeeeed: " + this.state.speed)
                                                                                          })
                                                                            }
                                                                     }>
@@ -544,7 +544,7 @@ export class TouchSwitchSetting extends React.Component {
 	                              <View style={{flex:1}}>
 	                                         <CheckBox
 	                                                           onChange={(checked) => {
-	                                                                      console.log("Checkeddddd: " + checked)
+//	                                                                      console.log("Checkeddddd: " + checked)
 	                                                                      this.setState({ applyToAll: !this.state.applyToAll });
 	                                                            }
 	                                                           }

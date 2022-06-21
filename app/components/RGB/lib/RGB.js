@@ -183,7 +183,7 @@ import WifiManager from 'react-native-wifi';
             .catch(error => {
                 getResponse = 0
                 getError = 0
-              console.log("error in update : "+ error)
+//              console.log("error in update : "+ error)
             })
 
         })
@@ -434,6 +434,9 @@ import WifiManager from 'react-native-wifi';
 
     // Save RGB in Controller
     saveRGBInController(rgb){
+        getResponse = 0
+        getError = 0
+
         return new Promise((resolve, reject) => {
             ipBytes = new Uint8Array(4);
             ssidBytes = new Uint8Array();
@@ -481,17 +484,18 @@ import WifiManager from 'react-native-wifi';
                     offset += secretKeyBytes.length;                    
                     params[offset] = this.RGB_WIFI_TYPE;
 //
-                   console.log("sec:" + securityKey + "  ssid" + ssid + "  pass" + password + "---" + this.RGB_WIFI_TYPE+"-----params:" + params[0] + "-" + params[1] + "-" + params[2] + "-" + params[3] + "-" +
-                      + params[4] + "-" + params[5] + "-" + params[6] + "-" + params[7] + "-" +
-                      + params[8] + "-" + params[9] + "-" + params[10] + "-" + params[11] + "-" +
-                      + params[12] + "-" + params[13] + "-" + params[14] + "-" + params[15] + "-" +
-                      + params[16] + "-" + params[17] + "-" + params[18] + "-" + params[19] + "-" +
-                      + params[20] + "-" + params[21] + "-" + params[22] + "-" + params[23] + "-" +
-                      + params[24] + "-" + params[25] + "-" + params[26] + "-" + params[27]);
+//                   console.log("sec:" + securityKey + "  ssid" + ssid + "  pass" + password + "---" + this.RGB_WIFI_TYPE+"-----params:" + params[0] + "-" + params[1] + "-" + params[2] + "-" + params[3] + "-" +
+//                      + params[4] + "-" + params[5] + "-" + params[6] + "-" + params[7] + "-" +
+//                      + params[8] + "-" + params[9] + "-" + params[10] + "-" + params[11] + "-" +
+//                      + params[12] + "-" + params[13] + "-" + params[14] + "-" + params[15] + "-" +
+//                      + params[16] + "-" + params[17] + "-" + params[18] + "-" + params[19] + "-" +
+//                      + params[20] + "-" + params[21] + "-" + params[22] + "-" + params[23] + "-" +
+//                      + params[24] + "-" + params[25] + "-" + params[26] + "-" + params[27]);
 
                     udpSave = new UDP(Commands.REQ_MODULE, Commands.FLAG_SETUP_TEMP, params)
                     udpSave.sendUdpPacket(Vars.controllerBroadcastIP, Vars.controllerModulePort, false).then(
                         data => {
+                            getResponse = 1
                             if(data.length > 0 && data != false){
                                 WifiManager.connectToProtectedSSID(ssid, password, true)
                                     .then(
@@ -505,11 +509,19 @@ import WifiManager from 'react-native-wifi';
                 }
              )
              .catch(error => {
-             alert(this.props.t("rgb:errorCreateRGB"))
+                    alert(this.props.t("rgb:errorCreateRGB"))
+                    getError = 1
+                    reject(false)
                     console.log("Error in rgb 7: "+error)
              });
 
+            timeout = setTimeout(() => {
+//          	      console.log("Error in save Thermostat Timeout: " +getError+"---"+getResponse+"---")
+          	       if((getResponse == 0 && getError == 0) || (getError == 1)){
+          			reject(false)
 
+                }
+            }, 3000);
 
        }) // End Promise
         //
@@ -532,7 +544,7 @@ import WifiManager from 'react-native-wifi';
                 dataOk => {
                     getResponse = 1
                     getError = 0
-                        console.log("REsponseeeeeeeeeeeeeeeeeeeeeeeee::::: "+dataOk[4])
+//                        console.log("REsponseeeeeeeeeeeeeeeeeeeeeeeee::::: "+dataOk[4])
                     if(dataOk[4] == 1){
                         resolve(true)
                     }

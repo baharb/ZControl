@@ -459,7 +459,7 @@ export class RGBItem extends React.PureComponent {
 
 		this.onColorChange = this.onColorChange.bind(this)
 		this.colorChange = this.colorChange.bind(this)
-		this.onReleaseTouch = this.onReleaseTouch.bind(this)
+//		this.onReleaseTouch = this.onReleaseTouch.bind(this)
 
 		//    this.changeView = this.changeView.bind(this)
 	}
@@ -487,11 +487,7 @@ export class RGBItem extends React.PureComponent {
 
 	}
 
-	onReleaseTouch() {
-//		console.log("DAshboard Release: " + this.state.done + "---" + "'$'")
 
-		//          this.onColorChange(this.state.color, this.state.mode, this.state.speed)
-	}
 
 	colorChange(color) {
 		clickRGB = 1
@@ -733,27 +729,23 @@ class CurtainItem extends React.PureComponent {
 						</View>
 					</View>
 					: null}
-				<View style={commonStyles.flex1}>
+				    <View style={commonStyles.flex1}>
 					<TouchableHighlight style={commonStyles.curtainTouchDashboard} onPress={() => {
 						this.runCurtain(Commands.CURTAIN_OPEN, 1)
 					}} >
 						<Image source={require('../Common/img/common-light-curtain.png')} style={commonStyles.curtainAction} />
 					</TouchableHighlight>
-				</View>
-				<View style={commonStyles.flex1}>
-					<TouchableHighlight style={commonStyles.curtainTouchDashboard} onPress={() => {
-						
-						this.runCurtain(Commands.CURTAIN_STOP, 1)
-						
-					}}>
+                    </View>
+                    <View style={commonStyles.flex1}>
+                    <TouchableHighlight style={commonStyles.curtainTouchDashboard} onPress={() => {
+                            this.runCurtain(Commands.CURTAIN_STOP, 1)
+                        }}>
 						<Image source={require('../Common/img/curtain-light-stop.png')} style={commonStyles.curtainAction} />
 					</TouchableHighlight>
 				</View>
 				<View style={commonStyles.flex1} >
 					<TouchableHighlight style={commonStyles.curtainTouchDashboard} onPress={() => {
-						
 						this.runCurtain(Commands.CURTAIN_CLOSE, 1)
-						
 					}}>
 						<Image source={require('../Common/img/common-light-closecurtain.png')} style={commonStyles.curtainAction} />
 					</TouchableHighlight>
@@ -972,7 +964,7 @@ class ThermometerItemList extends React.PureComponent {
 							</View>
 						</TouchableHighlight>
 						{(this.state.summary) ?
-							<View style={(screenWidth < 400) ? { width: 100 } : { width: 150 }} >
+							<View style={(screenWidth < 450) ? { width: 100 } : { width: 150 }} >
 								<Text style={commonStyles.tempDashboardSummary(i18n.t('common:dir'))}>{this.props.thermometers[this.props.id - 1].temp}{"\u00b0 c"}</Text>
 							</View>
 							: null}
@@ -992,7 +984,7 @@ class ThermometerItemList extends React.PureComponent {
 							}}
 							value={this.state.on}
 						/>
-						<Text style={(screenWidth < 400 || (screenHeight < screenWidth)) ? commonStyles.displayNone : commonStyles.onOffTitleDashboard(i18n.t('common:dir'))} >{i18n.t('thermometer:onOff')}</Text>
+						<Text style={(screenWidth < 450 || (screenHeight < screenWidth)) ? commonStyles.displayNone : commonStyles.onOffTitleDashboard(i18n.t('common:dir'))} >{i18n.t('thermometer:onOff')}</Text>
 					</View>
 				</View>
 				{(!this.state.summary) ? (
@@ -1290,7 +1282,8 @@ export class Dashboard extends React.PureComponent {
 		)
 			.catch(
 				error => {
-					alert(this.props.t("rgb:errorGetAllRGBsFromDB"));
+				console.log("error rgb: "+error)
+//					alert(this.props.t("rgb:errorGetAllRGBsFromDB"));
 				}
 			)
 	}
@@ -1481,7 +1474,7 @@ export class Dashboard extends React.PureComponent {
 		getResponse = 0
 		getError = 0
 		timeout = ""
-		console.log("IIIIn THERMOMETERSSSSS: " + selectedTab);
+//		console.log("IIIIn THERMOMETERSSSSS: " + selectedTab);
 		stopUpdate = 1
 		thermometer = new Thermometer()
 
@@ -1580,7 +1573,7 @@ export class Dashboard extends React.PureComponent {
 				})
 			}
 		).catch(error => {
-			console.log("error in update thermometer dashboard: " + error)
+//			console.log("error in update thermometer dashboard: " + error)
 			getError = 1
 		})
 

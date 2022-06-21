@@ -645,7 +645,7 @@ shouldComponentUpdate(nextProps, nextState) {
             })
          }
      ).catch(error => {
-       console.log("error in update thermometer dashboard: "+ error)
+//       console.log("error in update thermometer dashboard: "+ error)
        this.stopUpdate = 0
      })
 

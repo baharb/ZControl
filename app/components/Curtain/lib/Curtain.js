@@ -465,13 +465,13 @@ import WifiManager from 'react-native-wifi';
                     offset += secretKeyBytes.length;                    
                     params[offset] = this.CURTAIN_WIFI_TYPE;
 //
-                   console.log("sec:" + securityKey + "  ssid" + ssid + "  pass" + password + "---" + this.CURTAIN_WIFI_TYPE+"-----params:" + params[0] + "-" + params[1] + "-" + params[2] + "-" + params[3] + "-" +
-                      + params[4] + "-" + params[5] + "-" + params[6] + "-" + params[7] + "-" +
-                      + params[8] + "-" + params[9] + "-" + params[10] + "-" + params[11] + "-" +
-                      + params[12] + "-" + params[13] + "-" + params[14] + "-" + params[15] + "-" +
-                      + params[16] + "-" + params[17] + "-" + params[18] + "-" + params[19] + "-" +
-                      + params[20] + "-" + params[21] + "-" + params[22] + "-" + params[23] + "-" +
-                      + params[24] + "-" + params[25] + "-" + params[26] + "-" + params[27]);
+//                   console.log("sec:" + securityKey + "  ssid" + ssid + "  pass" + password + "---" + this.CURTAIN_WIFI_TYPE+"-----params:" + params[0] + "-" + params[1] + "-" + params[2] + "-" + params[3] + "-" +
+//                      + params[4] + "-" + params[5] + "-" + params[6] + "-" + params[7] + "-" +
+//                      + params[8] + "-" + params[9] + "-" + params[10] + "-" + params[11] + "-" +
+//                      + params[12] + "-" + params[13] + "-" + params[14] + "-" + params[15] + "-" +
+//                      + params[16] + "-" + params[17] + "-" + params[18] + "-" + params[19] + "-" +
+//                      + params[20] + "-" + params[21] + "-" + params[22] + "-" + params[23] + "-" +
+//                      + params[24] + "-" + params[25] + "-" + params[26] + "-" + params[27]);
 
 		// todo: Change port for new version ------ with Amin
 		            udpSave = new UDP(Commands.REQ_MODULE, Commands.FLAG_CURTAIN, params)
@@ -495,7 +495,7 @@ import WifiManager from 'react-native-wifi';
     }
 
     static runCurtain(curtainTypeId, curtainType, command){
-        console.log("Run Curtain: " + curtainTypeId + "----" + curtainType)
+//        console.log("Run Curtain: " + curtainTypeId + "----" + curtainType)
 
         return new Promise((resolve, reject) => {
             params = new Array()
@@ -506,7 +506,7 @@ import WifiManager from 'react-native-wifi';
             udpRun = new UDP(Commands.REQ_CURTAIN, Commands.FLAG_RUN, params);
             udpRun.sendUdpPacket("", "", true).then(
                 dataOk => {
-                    console.log("REsponseeeeeeeeeee::::: "+dataOk[4])
+//                    console.log("REsponseeeeeeeeeee::::: "+dataOk[4])
                     if(dataOk[4] == 1){
                         resolve(true)
                     }

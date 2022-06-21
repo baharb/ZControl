@@ -101,7 +101,7 @@ INPUT_EVENT_MAX_NUMBER = 70
                       udp1 = new UDP(Commands.REQ_LOGIN, Commands.FLAG_RUN, "");
                       udp1.sendUdpPacket("", "", true,retryTimeout).then(
                           data => {
-                          console.log("get dataaaa22222222: " + data[5] + "=== " + data[6] +"----" + data.length)
+//                          console.log("get dataaaa22222222: " + data[5] + "=== " + data[6] +"----" + data.length)
                               if(data.length > 0 && data != false) {
                                   
                                   Output.OUTPUT_DIGITAL = data[5] - data[6];

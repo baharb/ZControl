@@ -212,6 +212,13 @@ export default commonStyles = StyleSheet.create({
       marginTop: 5,
       marginBottom: 5,
   },
+  mic: {
+        flex: 1,
+        justifyContent:'center',
+      alignItems: 'center',
+
+  },
+  micImage: {width: 140, height: 140},
   addIconContainer: {
       position: 'absolute',
       width: 56,
@@ -539,8 +546,8 @@ export default commonStyles = StyleSheet.create({
    rgbsFlatlistDashboard: {flex:1, marginTop: 40,height:'100%'},
    thermsFlatlistDashboard: {marginTop: 50},
    thermsFlatlistDashboardHor: {marginTop: 42},
-   curtainsFlatlistDashboard: {height: 60, backgroundColor:'#000'},
-   curtainsFlatlistDashboardHor: {height: 50, backgroundColor:'rgba(29, 5, 39, 0.9)'},
+   curtainsFlatlistDashboard: {height: 60, },
+   curtainsFlatlistDashboardHor: {height: 50, },
   titleScenarioDashboard: (dir) => ({
           alignItems: 'center',
           padding: 3,
@@ -859,6 +866,7 @@ export default commonStyles = StyleSheet.create({
     borderRadius:4,
     backgroundColor: '#fff',
     height: 45,
+    color: '#1d0527',
   }),
   pickerFieldSchedule: (dir) => ({
     flex:1,
@@ -871,11 +879,17 @@ export default commonStyles = StyleSheet.create({
     borderRadius:4,
     backgroundColor: '#fff',
     height: 45,
+    color: '#1d0527',
   }),
-  picker: {},
-  pickerSchedule:{},
-  pickerTherm:{height: 40, flex:1,  marginLeft: 10, marginRight: 10},
-  pickerThermSpeed:{height: 40, width: '90%',  marginLeft: 10, marginRight: 10, flex:2},
+  picker: {
+    color: '#1d0527',
+  },
+  pickerSchedule:{
+    color: '#1d0527',},
+  pickerTherm:{height: 40, flex:1,  marginLeft: 10, marginRight: 10,
+    color: '#1d0527',},
+  pickerThermSpeed:{height: 40, width: '90%',  marginLeft: 10, marginRight: 10, flex:2,
+    color: '#1d0527',},
   checkBoxSchedule: (dir) => ({
           color: "#80628d",
           fontFamily: (dir === 'right') ? 'Vazir-Medium' : 'Nunito-Bold',
@@ -926,11 +940,13 @@ rgbViewDashboard:(dir) => ({
 }),
 rgbImageDashboard: {justifyContent:'center', flex:2,resizeMode: 'contain',marginTop:1 },
 rgbTriangleDashboard: {flex: 14, paddingTop:5},
-rgbPickerDashboard: {},
+rgbPickerDashboard: {
+    color: '#1d0527',},
 rgbItemStylePicker: (dir) => ({
 	fontFamily: (dir === 'right') ? 'Vazir-Medium' : 'Nunito-Bold',
 	fontSize:12,
-	borderRadius:20
+	borderRadius:20,
+    color: '#1d0527',
 }),
 viewPickerRgb: (dir) => ({
 	backgroundColor:'#fff',
@@ -956,11 +972,15 @@ scenarioViewDashboard: {
 curtainViewDashboard: (dir) => ({
 	flex:1,
 	flexDirection: (dir === 'right') ? 'row-reverse' : 'row',
-	paddingTop:5
+	paddingTop:5,
+	backgroundColor:'rgba(29, 5, 39, 0.9)',
+	paddingBottom: 5,
+
 }),
 curtainViewDashboardHor: (dir) => ({
 	flex:1,
 	flexDirection: (dir === 'right') ? 'row-reverse' : 'row',
+	backgroundColor:'rgba(29, 5, 39, 0.9)',
 }),
 curtainItemDashboard: (dir) => ({
 	flex:1,
@@ -1005,7 +1025,8 @@ viewFooter:{height:40},
 tabTitle: (dir) => ({
 	fontFamily: (dir === 'right') ? 'Vazir-Medium' : 'Nunito-Bold',
 	fontSize: 18,
-	marginBottom:(dir === 'right') ? 10 : 5
+	marginBottom:(dir === 'right') ? 10 : 5,
+    color: '#1d0527',
 }),
 tabItemDashboard: {flex:1, flexDirection:'column'},
 viewTabStyle: (dir) => ({
@@ -1062,16 +1083,18 @@ viewTabStyleTS: (dir) => ({
 }),
 tab1First: (dir) => ({
 	alignItems: 'center',
-          justifyContent: 'center',
-          paddingTop: 2,
-          marginLeft:5,
-          marginRight:5,
-          marginTop:5,
-          marginBottom:5,
-          borderTopLeftRadius: 20,
-          borderTopRightRadius:20,
-          flex:1,
-          fontFamily: (dir === 'right') ? 'Vazir-Medium' : 'Nunito-Bold',
+      justifyContent: 'center',
+      paddingTop: 2,
+      marginLeft:5,
+      marginRight:5,
+      marginTop:5,
+      marginBottom:5,
+      borderTopLeftRadius: 20,
+      borderTopRightRadius:20,
+      flex:1,
+      fontFamily: (dir === 'right') ? 'Vazir-Medium' : 'Nunito-Bold',
+      color: '#1d0527',
+
  }),
  tab1Second: (dir) => (
           {
@@ -1086,6 +1109,7 @@ tab1First: (dir) => ({
 	          borderTopLeftRadius:20,
 	          flex:1,
 	          fontFamily: (dir === 'right') ? 'Vazir-Medium' : 'Nunito-Bold',
+      color: 'rgba(29, 5, 39, 0.9)',
 }),
 tab1FirstHor: (dir) => ({
 	alignItems: 'center',
@@ -1098,6 +1122,7 @@ tab1FirstHor: (dir) => ({
           borderTopRightRadius:20,
           flex:1,
           fontFamily: (dir === 'right') ? 'Vazir-Medium' : 'Nunito-Bold',
+      color: 'rgba(29, 5, 39, 0.9)',
  }),
  tab1SecondHor: (dir) => (
           {
@@ -1111,6 +1136,7 @@ tab1FirstHor: (dir) => ({
 	          borderTopLeftRadius:20,
 	          flex:1,
 	          fontFamily: (dir === 'right') ? 'Vazir-Medium' : 'Nunito-Bold',
+      color: 'rgba(29, 5, 39, 0.9)',
 }),
 tab2First: (dir) => ({
 	flex:1,
@@ -1120,11 +1146,13 @@ tab2First: (dir) => ({
 	borderBottomLeftRadius: (dir === 'left') ? 50 : 0,
 	borderTopLeftRadius: (dir === 'left') ? 50 : 0,
 	backgroundColor:'#561f6d',
+      color: 'rgba(29, 5, 39, 0.9)',
 }),
 tab2Middle: (dir) => ({
 	flex:1,
 	height: (Dimensions.get('window').height) > 867 ? 55 : 50,
 	backgroundColor:'#561f6d',
+      color: 'rgba(29, 5, 39, 0.9)',
 }),
 tab2Second: (dir) => ({
 	flex:1,
@@ -1134,6 +1162,7 @@ tab2Second: (dir) => ({
 	borderBottomRightRadius: (dir === 'left') ? 50 : 0,
 	borderTopRightRadius: (dir === 'left') ? 50 : 0,
 	backgroundColor:'#561f6d',
+      color: 'rgba(29, 5, 39, 0.9)',
 }),
 styleTab2First: (dir) => ({
 	alignItems: 'center',
@@ -1236,6 +1265,7 @@ voiceCommandPicker: (dir) =>({
     height: 40,
     width: 200,
 	fontFamily: (dir === 'right') ? 'Vazir-Medium' : 'Nunito-Bold',
+    color: '#1d0527',
 }),
 voiceCommandViewOutputs: (dir) =>({
     flex:1, flexDirection:'column', justifyContent: 'flex-start',
@@ -1265,6 +1295,7 @@ pickerViewThermostat: (dir) =>({
 	fontFamily: (dir === 'right') ? 'Vazir-Medium' : 'Nunito-Bold',
 	fontSize:16,
 	borderRadius:4,
+    color: '#1d0527',
 }),
 pickerHolderTherm: (dir) =>({
     marginLeft: 10,

@@ -99,7 +99,7 @@ export class CommonFuncs extends React.Component {
                data => {
                   getResponse = 1
 //                  if(timeout != "") { clearTimeout(timeout) }
-                   console.log("res sync: "+data.length+"-"+data[0]+"-"+data[1]+"-"+data[2])
+//                   console.log("res sync: "+data.length+"-"+data[0]+"-"+data[1]+"-"+data[2])
                   dataFromController = new Array()
                   CommonFunctions.arrayCopy(data, 4, dataFromController, 0, data.length - 4);
                    if(data){

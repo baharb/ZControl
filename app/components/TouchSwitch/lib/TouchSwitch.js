@@ -59,13 +59,13 @@ export default class TouchSwitch  {
                 dataWiredMods => {
                     getResponse = 1
                     getError = 0
-                    console.log("SCANNNNNNNNNNNNNNN DONEEEE")
+//                    console.log("SCANNNNNNNNNNNNNNN DONEEEE")
                     resolve(dataWiredMods)
             })
             .catch(error => {
                 getResponse = 0
                 getError = 0
-                console.log("error in update : "+ error)
+//                console.log("error in update : "+ error)
             })
 
         }) // End Promise
@@ -124,31 +124,31 @@ export default class TouchSwitch  {
                     offset += secretKeyBytes.length;                    
                     params[offset] = touchSwitch.type;
 //
-                   console.log("eeeeeeeeeeeee: " +password.toString() + "--" + ssid.toString() + "---" + securityKey.toString()+ "---"+ offset + "---" + touchSwitch.type +"----params:" + params[0] + "-" + params[1] + "-" + params[2] + "-" + params[3] + "-" +
-                      + params[4] + "-" + params[5] + "-" + params[6] + "-" + params[7] + "-" +
-                      + params[8] + "-" + params[9] + "-" + params[10] + "-" + params[11] + "-" +
-                      + params[12] + "-" + params[13] + "-" + params[14] + "-" + params[15] + "-" +
-                      + params[16] + "-" + params[17] + "-" + params[18] + "-" + params[19]+ "-" +
-                      + params[20] + "-" + params[21] + "-" + params[22] + "-" + params[23]+ "-" +
-                      + params[24] + "-" + params[25] + "-" + params[26] + "-" + params[27]+ "-" +
-                      + params[28] + "-" + params[29] + "-" + params[30] + "-" + params[31]);
+//                   console.log("eeeeeeeeeeeee: " +password.toString() + "--" + ssid.toString() + "---" + securityKey.toString()+ "---"+ offset + "---" + touchSwitch.type +"----params:" + params[0] + "-" + params[1] + "-" + params[2] + "-" + params[3] + "-" +
+//                      + params[4] + "-" + params[5] + "-" + params[6] + "-" + params[7] + "-" +
+//                      + params[8] + "-" + params[9] + "-" + params[10] + "-" + params[11] + "-" +
+//                      + params[12] + "-" + params[13] + "-" + params[14] + "-" + params[15] + "-" +
+//                      + params[16] + "-" + params[17] + "-" + params[18] + "-" + params[19]+ "-" +
+//                      + params[20] + "-" + params[21] + "-" + params[22] + "-" + params[23]+ "-" +
+//                      + params[24] + "-" + params[25] + "-" + params[26] + "-" + params[27]+ "-" +
+//                      + params[28] + "-" + params[29] + "-" + params[30] + "-" + params[31]);
 
                     udpSaveTo = new UDP(Commands.REQ_MODULE, Commands.FLAG_SPECIAL, params)
                     udpSaveTo.sendUdpPacket(Vars.controllerBroadcastIP, Vars.controllerModule2Port, false).then(
                         data => {
                             if(data.length > 0 && data != false){
                                 if(data[4] == 0){
-                                    console.log(data[0]+"*"+data[1]+"*"+data[2]+"*"+data[3]+"*"+data[4]+"*"+data[5]+"*")
+//                                    console.log(data[0]+"*"+data[1]+"*"+data[2]+"*"+data[3]+"*"+data[4]+"*"+data[5]+"*")
                                     reject(i18n.t('touchSwitch:selectedTypeIncorrect'))
                                 }
                                 else{
                                     WifiManager.connectToProtectedSSID(ssid.toString(), password.toString(), true)
                                         .then( data => {
-                                            console.log(ssid+"--"+password)
+//                                            console.log(ssid+"--"+password)
                                         }
                                     )
                                     .catch(error => {
-                                        console.log("e 6" +error)
+//                                        console.log("e 6" +error)
                                     })
 
                                     resolve(true)
@@ -156,12 +156,16 @@ export default class TouchSwitch  {
                             }
                         }
                     )
-                    .catch(error => console.log("error in save key "+error))
+                    .catch(error => {
+                        alert(i18n.t("touchSwitch:errorSaveTouchSwitch"))
+//                        console.log("error in save key "+error)
+                        })
+
                 }
              )
              .catch(error => {
                  alert(i18n.t("touchSwitch:errorSaveTouchSwitch"))
-                 console.log("error 5 " + error)
+//                 console.log("error 5 " + error)
              });
 
        }) // End Promise
@@ -192,7 +196,7 @@ export default class TouchSwitch  {
         udpRgb.sendUdpPacket("", "", true).then(
                  dataColorChanged => {
                         if(dataColorChanged[4] == 1){ // It's OK
-                                  console.log("changed successfully: " + dataColorChanged[4])
+//                                  console.log("changed successfully: " + dataColorChanged[4])
                                   this.updateTouchSwitchInDB(touchSwitchIns)
                                   resolve(true)
                         }
@@ -202,7 +206,7 @@ export default class TouchSwitch  {
 
                  }
              ).catch(error => {
-    		console.log("error in update colorChange: "+ error)
+//    		console.log("error in update colorChange: "+ error)
     		reject(error)
              })
              })
@@ -255,7 +259,7 @@ export default class TouchSwitch  {
                     where_params[0] = 1                
                     where_index = 1
 
-                    console.log(dataListUdp.length)
+//                    console.log(dataListUdp.length)
 
                     dataOut = new Array();
                     CommonFunctions.arrayCopy(dataListUdp, 4, dataOut, 0, dataListUdp.length - 4);
@@ -271,14 +275,14 @@ export default class TouchSwitch  {
                     num_of_touch = 0 
 
                     // console.log("aaaa"+touchesFromDB.length+"---"+f+"--"+to)
-                     console.log("----params:" + dataOut[0] + "-" + dataOut[1] + "-" + dataOut[2] + "-" + dataOut[3] + "-" +
-                      + dataOut[4] + "-" + dataOut[5] + "-" + dataOut[6] + "-" + dataOut[7] + "-" +
-                      + dataOut[8] + "-" + dataOut[9] + "-" + dataOut[10] + "-" + dataOut[11] + "-" +
-                      + dataOut[12] + "-" + dataOut[13] + "-" + dataOut[14] + "-" + dataOut[15] + "-" +
-                      + dataOut[16] + "-" + dataOut[17] + "-" + dataOut[18] + "-" + dataOut[19]+ "-" +
-                      + dataOut[20] + "-" + dataOut[21] + "-" + dataOut[22] + "-" + dataOut[23]+ "-" +
-                      + dataOut[24] + "-" + dataOut[25] + "-" + dataOut[26] + "-" + dataOut[27]+ "-" +
-                      + dataOut[28] + "-" + dataOut[29] + "-" + dataOut[30] + "-" + dataOut[31]);
+//                     console.log("----params:" + dataOut[0] + "-" + dataOut[1] + "-" + dataOut[2] + "-" + dataOut[3] + "-" +
+//                      + dataOut[4] + "-" + dataOut[5] + "-" + dataOut[6] + "-" + dataOut[7] + "-" +
+//                      + dataOut[8] + "-" + dataOut[9] + "-" + dataOut[10] + "-" + dataOut[11] + "-" +
+//                      + dataOut[12] + "-" + dataOut[13] + "-" + dataOut[14] + "-" + dataOut[15] + "-" +
+//                      + dataOut[16] + "-" + dataOut[17] + "-" + dataOut[18] + "-" + dataOut[19]+ "-" +
+//                      + dataOut[20] + "-" + dataOut[21] + "-" + dataOut[22] + "-" + dataOut[23]+ "-" +
+//                      + dataOut[24] + "-" + dataOut[25] + "-" + dataOut[26] + "-" + dataOut[27]+ "-" +
+//                      + dataOut[28] + "-" + dataOut[29] + "-" + dataOut[30] + "-" + dataOut[31]);
                     // Todo: Status 
                     while(f<to){                            
 
@@ -317,12 +321,12 @@ export default class TouchSwitch  {
 
                         ZagrosDB.buildQuery(Vars.queryUpdate, "TouchSwitch", "flag", where, where_params, "", "", 0).then(
                             data => {
-                                console.log("got in updateeeeeee")
+//                                console.log("got in updateeeeeee")
                                 resolve(touchesFromDB)
                             }   
                         )
                         .catch(error => {
-                                console.log(error +"eeeeeeeeeeeee")
+//                                console.log(error +"eeeeeeeeeeeee")
                                 reject(error)
                                 alert(i18n.t("output:errorSaveOutputInDB"));
                         });
@@ -334,7 +338,7 @@ export default class TouchSwitch  {
             })
             .catch(error => {
 
-              console.log("error in update : "+ error)
+//              console.log("error in update : "+ error)
               reject(error)
             })
 
@@ -353,9 +357,9 @@ export default class TouchSwitch  {
 	           udpGetTo.sendUdpPacket("", "", true).then(
 	                          dataListUdp => {
 	                              dataTouchSwitch = new Array();
-	                              console.log("Get RGBT successfull: len: " + dataListUdp.length +"---params: " + dataListUdp[4] + "--" + dataListUdp[5] + "--"+
-	                               dataListUdp[6] + "--" +dataListUdp[7] + "--" +dataListUdp[8] + "--"+
-	                               dataListUdp[9] + "--"+dataListUdp[10] + "--"  )
+//	                              console.log("Get RGBT successfull: len: " + dataListUdp.length +"---params: " + dataListUdp[4] + "--" + dataListUdp[5] + "--"+
+//	                               dataListUdp[6] + "--" +dataListUdp[7] + "--" +dataListUdp[8] + "--"+
+//	                               dataListUdp[9] + "--"+dataListUdp[10] + "--"  )
 	                              CommonFunctions.arrayCopy(dataListUdp, 4, dataTouchSwitch, 0, dataListUdp.length - 4);
 	                              resolve(dataTouchSwitch)
 	                    }
@@ -520,7 +524,7 @@ export default class TouchSwitch  {
     //                    alert("thermometer sql: "+sqlInsTable);
                         ZagrosDB.buildQuery(Vars.querySelect, "TouchSwitch", "COUNT(*) AS count", "", "", "", "", 1, 0).then(
                             data2 => {
-                            console.log("wifiiiiii"+data2[0].count)
+//                            console.log("wifiiiiii"+data2[0].count)
                                 resolve(data2);
                             }
                         )

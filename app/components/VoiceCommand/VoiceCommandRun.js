@@ -1,9 +1,10 @@
 import React from 'react';
 import { translate} from 'react-i18next';
-import { TouchableOpacity, TouchableHighlight, KeyboardAvoidingView, ScrollView, View, Text} from 'react-native';
+import { TouchableOpacity, TouchableHighlight, KeyboardAvoidingView, ScrollView, View, Text, Image} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import commonStyles from '../Common/css/commonStyles';
 import {MyButton} from '../Common/MyButton';
+import {MyAlert} from '../Common/MyAlert';
 import Output from '../Output/lib/Output';
 import Scenario from '../Scenario/lib/Scenario';
 import ZagrosDB from '../Common/lib/DB';
@@ -13,6 +14,7 @@ import Commands from '../Common/vars/commands';
 import Voice from 'react-native-voice';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import i18n from 'i18next';
+import FastImage from 'react-native-fast-image'
 
 export class VoiceCommandRun extends React.Component {
   //    output1: Output;
@@ -35,6 +37,8 @@ export class VoiceCommandRun extends React.Component {
       command: "",
       sliderOutput: 0,
       checkOutput: false,
+      voicecom: "",
+      alertMod: false,
     }
 
     Voice.onSpeechStart = this.onSpeechStart.bind(this);
@@ -63,6 +67,51 @@ export class VoiceCommandRun extends React.Component {
 	this.setState({
 	    results: e.value,
 	});
+
+	voices = ""
+
+	this.state.results.map((result, index) => {
+	    if(voices == ""){
+	        voices = "'"+result+ "'"
+	    }
+	    else{
+	        voices = voices + ",'" + result + "'"
+	    }
+	})
+
+//    console.log("voices: "+voices)
+    params1 = new Array()
+//    params1[0] = voices
+    ZagrosDB.buildQuery(Vars.querySelect, "VoiceCommand", "", "command IN ("+ voices +")" , params1, "", "", 1).then(
+    data => {
+     console.log("---" + data[0].command)
+      if(data.length > 0 && data != false){
+          if(data[0].scenario_id > 0){
+            scenario = new Scenario()
+            this.setState({voicecom: data[0].command})
+            scenario.run(data[0].scenario_id)
+            this.props.navigation.navigate("Dashboard")
+
+          }
+          else{
+            this.clickOutput(data[0].output_id, data[0].output_value, data[0].type_id, data[0].type, 3)
+          }
+      }
+      else{
+          this.setState({ alertMod: true})
+//          alert(this.props.t("voiceCommand:errorRunVoiceCommand"))
+      }
+
+    }
+    )
+    .catch(
+        error => {
+            this.setState({ alertMod: true})
+//            alert(this.props.t("voiceCommand:errorRunVoiceCommand"));
+        }
+     )
+
+
   }
 
   async _startRecognition(e) {
@@ -70,6 +119,7 @@ export class VoiceCommandRun extends React.Component {
 		recognized: '',
 		started: '',
 		results: [],
+		voicecom: "",
 	});
 
 	const {t} = this.props;
@@ -79,7 +129,18 @@ export class VoiceCommandRun extends React.Component {
 	} catch (e) {
 	          console.error(e);
 	}
-    }
+
+	 setTimeout(() => {
+//	    console.log("voice come: " + this.state.voicecom)
+	    if(this.state.voicecom == ""){
+	        this.setState({
+	            alertMod: true,
+	        })
+	    }
+
+	}, 10000);
+
+}
 
   componentDidMount(){
 
@@ -139,6 +200,8 @@ export class VoiceCommandRun extends React.Component {
         selectedScenario: 0,
         selectedOutputValue: 0,
       });
+
+      this._startRecognition()
     }
 
   }
@@ -222,85 +285,36 @@ export class VoiceCommandRun extends React.Component {
                          }
      }
 
-//  clickOutput(outputId, outputValue, outputTypeId, type, retry){
-//    let getResponse = 0
-//    let getError = 0
+//  runVoiceCommand(voiceCommand){
 //
-//    udp1 = new UDP();
+//     params1 = new Array()
+//     params1[0] = voiceCommand
+//    ZagrosDB.buildQuery(Vars.querySelect, "VoiceCommand", "", "command=?" , params1, "", "", 1).then(
+//        data => {
+//        // console.log("data from db: " + data +"---" + data[0].scenario_id +"---" + data[0].command)
+//          if(data.length > 0 && data != false){
+//              if(data[0].scenario_id > 0){
+//                scenario = new Scenario()
+//                scenario.run(data[0].scenario_id)
+//                this.props.navigation.navigate("Dashboard")
 //
-//    params1 = new Array();
-//    params1[0] = outputId;
-//    if(type == 0) {// digital
-//      params1[1] = outputValue;
-//    }
-//    else{ // Analog , slider
-//      params1[1] = outputValue;
-//    }
-//
-//    // Stop sending packets to controller for update outputs
-//    this.stopUpdate = 1;
-//    // retry = 5
-//    if(retry > 0){
-//      udp1.sendUdpPacket((Commands.REQ_OUTPUT | Commands.MOD_CONFIG), (Commands.FLAG_EDIT | Commands.OPT_OUTPUT_SET_STATE), params1, "", "", true, retry).then(
-//          dataOutUdp => {
-//            getResponse = 1
-//            getError = 0
-//
-//            this.props.navigation.navigate("Dashboard")
+//              }
+//              else{
+//                this.clickOutput(data[0].output_id, data[0].output_value, data[0].type_id, data[0].type, 3)
+//              }
 //          }
-//      ).catch(error => {
-//          getResponse = 1
-//          getError = 1
-//          // console.log("get output Error " + outputId + "-"+ outputValue)
-//
-//      })
-//    }
-//
-//    setTimeout(() => {
-//      // console.log(outputId+"- aaaa - " + getResponse+"---"+outputValue)
-//        if(getResponse == 0 && getError == 0){
-//          // console.log("timeeeeout-" +outputId)
-//          if(retry > 0){
-//            this.clickOutput(outputId, outputValue, outputTypeId, type, retry-1)
+//          else{
+//              alert(this.props.t("voiceCommand:errorRunVoiceCommand"))
 //          }
-//          else {
-//            alert(this.props.t("voiceCommand:errorRunVoiceCommand"))
-//          }
+//
 //        }
-//    }, 2000);
-//
+//    )
+//    .catch(
+//        error => {
+//            alert(this.props.t("voiceCommand:errorRunVoiceCommand"));
+//        }
+//     )
 //  }
-
-  runVoiceCommand(voiceCommand){
-
-     params1 = new Array()
-     params1[0] = voiceCommand
-    ZagrosDB.buildQuery(Vars.querySelect, "VoiceCommand", "", "command=?" , params1, "", "", 1).then(
-        data => {
-        // console.log("data from db: " + data +"---" + data[0].scenario_id +"---" + data[0].command)
-          if(data.length > 0 && data != false){
-              if(data[0].scenario_id > 0){
-                scenario = new Scenario()
-                scenario.run(data[0].scenario_id)
-                this.props.navigation.navigate("Dashboard")
-
-              }
-              else{
-                this.clickOutput(data[0].output_id, data[0].output_value, data[0].type_id, data[0].type, 3)
-              }
-          }
-          else{
-              alert(this.props.t("voiceCommand:errorRunVoiceCommand"))
-          }
-
-        }
-    )
-    .catch(
-        error => {
-            alert(this.props.t("voiceCommand:errorRunVoiceCommand"));
-        }
-     )
-  }
 
   render() {
         const { t } = this.props;
@@ -308,43 +322,52 @@ export class VoiceCommandRun extends React.Component {
 
         return (
           <KeyboardAvoidingView keyboardVerticalOffset={-500} behavior="padding"  style={commonStyles.flex1} enabled >
+
             <ScrollView>
               <LinearGradient colors={['#1d0527', '#350e45', '#4f1965']} style={commonStyles.cont}>
 
                 <View style={commonStyles.containerView}>
                  <View style={commonStyles.voiceCommandView} >
-                                    <TouchableOpacity  onPress={() => { this._startRecognition()}}
-                                        style={commonStyles.voiceCommandMic}>
-                                      <Icon
-                                       size={50}
-                                       color={'#fff'}
-                                       name={'mic'}
-                                       />
+                    <View style={commonStyles.listViewTouchView(i18n.t('common:dir'))}>
+                         <Text style={commonStyles.listViewTouchText(i18n.t('common:dir'))}>{i18n.t('voiceCommand:voiceCommandFillCommand')}</Text>
+                    </View>
+                 </View>
+                 <View style={commonStyles.mic}>
 
-                                       </TouchableOpacity>
-                                  </View>
+                      <FastImage
+                        source={{
+                          uri: Image.resolveAssetSource(require('../../assets/img/common-light-mic.gif')).uri,
+                        }}
+                        style={[{  width: 72, height: 72 }]}
 
-                  <View style={commonStyles.flex1}>
-                      {this.state.results.map((result, index) =>
-                      <View key={index} style={commonStyles.listViewRow}>
-                            <TouchableHighlight
-                                 style={commonStyles.touchSwip}
-	                          onPress={() => {
-	                            this.runVoiceCommand(result);
-	                          }}
-	                  >
+                      />
+
+                 </View>
+                 <View style={commonStyles.line} />
+                 <View style={commonStyles.flex1}>
+
 	                  <View style={commonStyles.listViewTouchView(i18n.t('common:dir'))}>
-	                              <Text style={commonStyles.listViewTouchText(i18n.t('common:dir'))}>{result}</Text>
+	                      <Text style={commonStyles.listViewTouchText(i18n.t('common:dir'))}>{this.state.voicecom}</Text>
 	                  </View>
-                        </TouchableHighlight>
-                        </View>
-                      )}
                   </View>
 
                 </View>
 
 
             </LinearGradient>
+             {(this.state.alertMod) ?  (
+                                <View>
+                                     <MyAlert modalVisible={this.state.alertMod}
+                                       onClick2={() => {
+                                           this.setState({ alertMod: false})
+                                           this._startRecognition()
+                                       }}
+                                       onClick1={() => this.props.navigation.navigate("Dashboard")}
+                                       title1={i18n.t('common:cancel')}
+                                       title2={i18n.t('common:actions.ok')}
+                                       title={this.props.t("voiceCommand:errorRunVoiceCommand")}   />
+                              </View>
+                              ) : (null) }
           </ScrollView>
         </KeyboardAvoidingView>
       );

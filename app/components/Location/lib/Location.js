@@ -39,7 +39,7 @@ export default class Location  {
             .catch(
                 error => {
                     alert(i18n.t("location:errorSaveLocationInDB"));
-                    console.log("eeeeeeeeeee: " +error)
+//                    console.log("eeeeeeeeeee: " +error)
                 }
             );
         }
@@ -65,7 +65,7 @@ export default class Location  {
             .catch(
                 error => {
                     alert(i18n.t("location:errorUpdateLocationInDB"));
-                    console.log("errorrrrrrrrrrrrrrrrrrrrrrrrrr "+error)
+//                    console.log("errorrrrrrrrrrrrrrrrrrrrrrrrrr "+error)
                     resolve(error)
                 }
             );

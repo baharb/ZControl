@@ -49,6 +49,8 @@ selectedConnection = 0
 trySendFailed=0
 dir=""
 dgramSocket = ""
+
+console.ignoredYellowBox = true
 //LogBox.ignoreAllLogs(true)
 
 //console.log("INnnnnnnnnnn Apppppppppppp: "+dir)

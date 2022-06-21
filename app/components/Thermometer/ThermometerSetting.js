@@ -81,7 +81,7 @@ export class ThermometerSetting extends React.Component {
       )
       .catch(
           error => {
-            console.log("error in get outputs: " + error)
+//            console.log("error in get outputs: " + error)
               alert(this.props.t("output:errorGetOutputDataFromDB"));
           }
        )
@@ -157,9 +157,9 @@ export class ThermometerSetting extends React.Component {
             thermUdp = new Array()
 	        CommonFunctions.arrayCopy(thermUdpd, 4, thermUdp, 0, thermUdpd.length - 4);
 
-            console.log("GEt thermmm:    "+thermUdp[0]+"--"+thermUdp[1]+"--"+thermUdp[2]+"--"+thermUdp[3]+"--"+thermUdp[4]+"--"+
-            thermUdp[5]+"--"+thermUdp[6]+"--"+thermUdp[7]+"--"+thermUdp[8]+"--"+thermUdp[9]+"--"+
-            thermUdp[10]+"--"+thermUdp[11]+"--"+thermUdp[12]+"--"+thermUdp[13]+"--"+thermUdp[14]+"--")
+//            console.log("GEt thermmm:    "+thermUdp[0]+"--"+thermUdp[1]+"--"+thermUdp[2]+"--"+thermUdp[3]+"--"+thermUdp[4]+"--"+
+//            thermUdp[5]+"--"+thermUdp[6]+"--"+thermUdp[7]+"--"+thermUdp[8]+"--"+thermUdp[9]+"--"+
+//            thermUdp[10]+"--"+thermUdp[11]+"--"+thermUdp[12]+"--"+thermUdp[13]+"--"+thermUdp[14]+"--")
 
             getResponse = 1
 		    if(timeout!= ""){ clearTimeout(timeout)}
@@ -312,7 +312,7 @@ export class ThermometerSetting extends React.Component {
 
 		}
                 ).catch(error => {
-                        console.log("Error in get Thermometer " + error +"---" +retry)
+//                        console.log("Error in get Thermometer " + error +"---" +retry)
                         getError = 1;
 //                         if(retry == 0){
 //                                        if(timeout != ""){ clearTimeout(timeout)  }
@@ -367,235 +367,243 @@ export class ThermometerSetting extends React.Component {
             thermometerIns.mode_type = this.state.thermometerModeType
             thermometerIns.selectedThermometerType = this.state.selectedThermometerType
 
-	  outputsNum = 0
+            outputsNum = 0
 
-	  console.log("In Save mod: " + thermometerIns.reference_temp +"---" +this.state.thermometerReferenceTemp +"---" +
-	                    parseInt(this.state.thermometerReferenceTemp) +"---" +
-	                    parseInt(this.state.thermometerReferenceTemp) + thermometer.THERMOMETER_OFFSET)
+    //	  console.log("In Save mod: " + thermometerIns.reference_temp +"---" +this.state.thermometerReferenceTemp +"---" +
+    //	                    parseInt(this.state.thermometerReferenceTemp) +"---" +
+    //	                    parseInt(this.state.thermometerReferenceTemp) + thermometer.THERMOMETER_OFFSET)
 
-            if(this.state.mode == Vars.modeUpdate){
-                       thermometerIns.id = this.state.thermometerId;
-                       outputsArray = new Array(40)
-                       i = 0
+           if(this.state.mode == Vars.modeUpdate){
+               thermometerIns.id = this.state.thermometerId;
+               outputsArray = new Array(40)
+               i = 0
 
-                	  if(this.state.selectedThermometerType == 1){ // Cooler
-                		outputsNum = 3
+              if(this.state.selectedThermometerType == 1){ // Cooler
+                outputsNum = 3
+                if(this.state.selectedOutput1 > 0){
+                    outputsArray[0] = {id:this.state.selectedOutput1,
+                                   type_id:this.state.outputs[this.state.selectedOutput1-1].type_id,
+                                   type:this.state.outputs[this.state.selectedOutput1-1].type,
+                                   sub_type: 2} // Water pomp
+                }
 
-			outputsArray[0] = {id:this.state.selectedOutput1, type_id:this.state.outputs[this.state.selectedOutput1-1].type_id,
-			                                  type:this.state.outputs[this.state.selectedOutput1-1].type, sub_type: 2} // Water pomp
+                 if(this.state.selectedOutput2 > 0){
+                    outputsArray[1] = {id:this.state.selectedOutput2,
+                                   type_id:this.state.outputs[this.state.selectedOutput2-1].type_id,
+                                   type:this.state.outputs[this.state.selectedOutput2-1].type,
+                                   sub_type: 3} // Fan
+                 }
 
-			outputsArray[1] = {id:this.state.selectedOutput2, type_id:this.state.outputs[this.state.selectedOutput2-1].type_id,
-			                                  type:this.state.outputs[this.state.selectedOutput2-1].type, sub_type: 3} // Fan
+                 if(this.state.selectedOutput3 > 0){
+                        outputsArray[2] = {id:this.state.selectedOutput3,
+                                           type_id:this.state.outputs[this.state.selectedOutput3-1].type_id,
+                                           type:this.state.outputs[this.state.selectedOutput3-1].type,
+                                           sub_type: 4} // Fan 2
+                 }
 
-		           outputsArray[2] = {id:this.state.selectedOutput3, type_id:this.state.outputs[this.state.selectedOutput3-1].type_id,
-                                                                 type:this.state.outputs[this.state.selectedOutput3-1].type, sub_type: 4} // Fan 2
+              }
+              else if(this.state.selectedThermometerType == 2){ // Air conditioner 2 Speed
 
-                	  }
-                	  else if(this.state.selectedThermometerType == 2){ // Air conditioner 2 Speed
-//                		if(this.state.selectedOutput1 > 0){
-//                		          outputsArray[i] = {id:this.state.selectedOutput1, type_id:this.state.outputs[this.state.selectedOutput1-1].type_id,
-//                              			                                  type:this.state.outputs[this.state.selectedOutput1-1].type, sub_type: 1} // On/Off
-//
-//	                              i++
-//	                              outputsNum++
-//                		}
+                if(this.state.selectedOutput2 > 0){
+                          outputsArray[i] = {id:this.state.selectedOutput2,
+                                             type_id:this.state.outputs[this.state.selectedOutput2-1].type_id,
+                                             type:this.state.outputs[this.state.selectedOutput2-1].type,
+                                             sub_type: 3} // Fan1
 
-                		if(this.state.selectedOutput2 > 0){
-                		          outputsArray[i] = {id:this.state.selectedOutput2,
-                		                                           type_id:this.state.outputs[this.state.selectedOutput2-1].type_id,
-                                                                         type:this.state.outputs[this.state.selectedOutput2-1].type, sub_type: 3} // Fan1
+                          i++
+                          outputsNum++
+                }
 
-                                        i++
-	                              outputsNum++
-                              }
+                if(this.state.selectedOutput3 > 0){
+                          outputsArray[i] = {id:this.state.selectedOutput3,
+                          type_id:this.state.outputs[this.state.selectedOutput3-1].type_id,
+                          type:this.state.outputs[this.state.selectedOutput3-1].type,
+                          sub_type: 4} // Fan 2
 
-                		if(this.state.selectedOutput3 > 0){
-                		          outputsArray[i] = {id:this.state.selectedOutput3,
-                                                                         type_id:this.state.outputs[this.state.selectedOutput3-1].type_id,
-                                                                         type:this.state.outputs[this.state.selectedOutput3-1].type, sub_type: 4} // Fan 2
+                          outputsNum++
+                }
+              }
 
-	                              outputsNum++
-                              }
-                	  }
-		  else if(this.state.selectedThermometerType == 3){ // Air conditioner 2 Speed
-//                		if(this.state.selectedOutput1 > 0){
-//	                               outputsArray[i] = {id:this.state.selectedOutput1,
-//	                                                                 type_id:this.state.outputs[this.state.selectedOutput1-1].type_id,
-//                                                                          type:this.state.outputs[this.state.selectedOutput1-1].type, sub_type: 1} // On/Off
-//
-//                                        i++
-//                                        outputsNum++
-//                		}
+              else if(this.state.selectedThermometerType == 3){ // Air conditioner 2 Speed
+                   if(this.state.selectedOutput2 > 0){
+                      outputsArray[i] = {id:this.state.selectedOutput2,
+                                         type_id:this.state.outputs[this.state.selectedOutput2-1].type_id,
+                                         type:this.state.outputs[this.state.selectedOutput2-1].type,
+                                         sub_type: 3} // Fan 1
 
-                		if(this.state.selectedOutput2 > 0){
-                		          outputsArray[i] = {id:this.state.selectedOutput2,
-                                                                         type_id:this.state.outputs[this.state.selectedOutput2-1].type_id,
-                                                                          type:this.state.outputs[this.state.selectedOutput2-1].type, sub_type: 3} // Fan 1
+                            i++
+                      outputsNum++
+                   }
 
-                                        i++
-	                              outputsNum++
-                              }
+                   if(this.state.selectedOutput3 > 0){
+                      outputsArray[i] = {id:this.state.selectedOutput3,
+                                         type_id:this.state.outputs[this.state.selectedOutput3-1].type_id,
+                                         type:this.state.outputs[this.state.selectedOutput3-1].type,
+                                         sub_type: 4} // Fan 2
 
-                		if(this.state.selectedOutput3 > 0){
-                		          outputsArray[i] = {id:this.state.selectedOutput3,
-                                                                         type_id:this.state.outputs[this.state.selectedOutput3-1].type_id,
-                                                                         type:this.state.outputs[this.state.selectedOutput3-1].type, sub_type: 4} // Fan 2
+                      i++
+                      outputsNum++
+                   }
 
-                                        i++
-	                              outputsNum++
-                              }
+                   if(this.state.selectedOutput4 > 0){
+                      outputsArray[i] = {id:this.state.selectedOutput4,
+                      type_id:this.state.outputs[this.state.selectedOutput4-1].type_id,
+                      type:this.state.outputs[this.state.selectedOutput4-1].type,
+                      sub_type: 5} // Fan 3
 
-                		if(this.state.selectedOutput4 > 0){
-                		          outputsArray[i] = {id:this.state.selectedOutput4,
-                                                                         type_id:this.state.outputs[this.state.selectedOutput4-1].type_id,
-                                                                         type:this.state.outputs[this.state.selectedOutput4-1].type, sub_type: 5} // Fan 3
+                      outputsNum++
+                   }
 
-	                              outputsNum++
-                              }
+              }
+              else if(this.state.selectedThermometerType == 4){ // Split
+                    if(this.state.selectedOutput1 > 0){
+                      outputsArray[i] = {id:this.state.selectedOutput1,
+                                         type_id:this.state.outputs[this.state.selectedOutput1-1].type_id,
+                                         type:this.state.outputs[this.state.selectedOutput1-1].type,
+                                         sub_type: 1} // On/Off
 
-                	  }
-		  else if(this.state.selectedThermometerType == 4){ // Split
-                		if(this.state.selectedOutput1 > 0){
-	                              outputsArray[i] = {id:this.state.selectedOutput1,
-                                                                          type_id:this.state.outputs[this.state.selectedOutput1-1].type_id,
-                                                                          type:this.state.outputs[this.state.selectedOutput1-1].type, sub_type: 1} // On/Off
-
-	                              i++
-	                              outputsNum++
-                		}
-
-                	  }
-		  else if(this.state.selectedThermometerType == 5){ // Radiator
-                		if(this.state.selectedOutput1 > 0){
-                		          outputsArray[i] = {id:this.state.selectedOutput1,
-                                                                         type_id:this.state.outputs[this.state.selectedOutput1-1].type_id,
-                                                                         type:this.state.outputs[this.state.selectedOutput1-1].type, sub_type: 1} // On/Off
-	                              i++
-	                              outputsNum++
-                		}
-
-                		if(this.state.selectedOutput2 > 0){
-                		          outputsArray[i] = {id:this.state.selectedOutput2,
-                                                                         type_id:this.state.outputs[this.state.selectedOutput2-1].type_id,
-                                                                         type:this.state.outputs[this.state.selectedOutput2-1].type, sub_type: 8} // Valve
-
-                                        i++
-	                              outputsNum++
-                              }
-
-                		if(this.state.selectedOutput3 > 0){
-                		          outputsArray[i] = {id:this.state.selectedOutput3,
-                                                                         type_id:this.state.outputs[this.state.selectedOutput3-1].type_id,
-                                                                         type:this.state.outputs[this.state.selectedOutput3-1].type, sub_type: 8} // Valve
-
-                                        i++
-	                              outputsNum++
-                              }
-
-                		if(this.state.selectedOutput4 > 0){
-                		          outputsArray[i] = {id:this.state.selectedOutput4,
-                                                                         type_id:this.state.outputs[this.state.selectedOutput4-1].type_id,
-                                                                         type:this.state.outputs[this.state.selectedOutput4-1].type, sub_type: 8} // Valve
-
-                                        i++
-	                              outputsNum++
-                              }
-
-                		if(this.state.selectedOutput5 > 0){
-                		          outputsArray[i] = {id:this.state.selectedOutput5,
-                                                                         type_id:this.state.outputs[this.state.selectedOutput5-1].type_id,
-                                                                         type:this.state.outputs[this.state.selectedOutput5-1].type, sub_type: 8} // Valve
-
-                                        i++
-	                              outputsNum++
-                              }
-
-                		if(this.state.selectedOutput6 > 0){
-                		          outputsArray[i] = {id:this.state.selectedOutput6,
-                                                                         type_id:this.state.outputs[this.state.selectedOutput6-1].type_id,
-                                                                         type:this.state.outputs[this.state.selectedOutput6-1].type, sub_type: 8} // Valve
-
-                                        i++
-	                              outputsNum++
-                              }
-
-                		if(this.state.selectedOutput7 > 0){
-                		          outputsArray[i] = {id:this.state.selectedOutput7,
-                                                                         type_id:this.state.outputs[this.state.selectedOutput7-1].type_id,
-                                                                         type:this.state.outputs[this.state.selectedOutput7-1].type, sub_type: 8} // Valve
-
-                                        i++
-	                              outputsNum++
-                              }
-
-                		if(this.state.selectedOutput8 > 0){
-                		          outputsArray[i] = {id:this.state.selectedOutput8,
-                                                                         type_id:this.state.outputs[this.state.selectedOutput8-1].type_id,
-                                                                         type:this.state.outputs[this.state.selectedOutput8-1].type, sub_type: 8} // Valve
-
-                                        i++
-	                              outputsNum++
-                              }
-
-                		if(this.state.selectedOutput9 > 0){
-                		          outputsArray[i] = {id:this.state.selectedOutput9,
-                                                                         type_id:this.state.outputs[this.state.selectedOutput9-1].type_id,
-                                                                         type:this.state.outputs[this.state.selectedOutput9-1].type, sub_type: 8} // Valve
-
-                                        i++
-	                              outputsNum++
-                              }
-
-                		if(this.state.selectedOutput10 > 0){
-                		          outputsArray[i] = {id:this.state.selectedOutput10,
-                                                                         type_id:this.state.outputs[this.state.selectedOutput10-1].type_id,
-                                                                         type:this.state.outputs[this.state.selectedOutput10-1].type, sub_type: 8} // Valve
-
-                                        i++
-	                              outputsNum++
-                              }
-
-                		if(this.state.selectedOutput11 > 0){
-                		          outputsArray[i] = {id:this.state.selectedOutput11,
-                                                                         type_id:this.state.outputs[this.state.selectedOutput11-1].type_id,
-                                                                         type:this.state.outputs[this.state.selectedOutput11-1].type, sub_type: 8} // Valve
-
-                                        i++
-	                              outputsNum++
-                              }
-
-                	  }
-
-                	thermometerIns.outputsArray = outputsArray
-                	thermometerIns.outputsNum = outputsNum
-
-                    thermometer.saveThermometerInController(thermometerIns, this.state.mode).then(
-                       data => {
-//                              console.log("get data from felan")
-                              // todo check answer
-	                    thermometer.updateThermometerInDB(thermometerIns).then(
-		                    data1 => {
-//		                    console.log("get data from update")
-		                        if(data1 == true){
-		                            this.props.navigation.navigate(this.state.fromPage);
-		                        }
-		                    }
-		           )
-		           .catch(
-		                    error => {
-		                        alert(this.props.t("thermometer:errorUpdateThermometer"))
-		                    }
-		           );
-                })
-                    .catch(
-                    error =>{
-                              console.log("Error in update theometer: " + error)
-	                    alert(this.props.t("thermometer:errorUpdateThermometer"))
+                      i++
+                      outputsNum++
                     }
-                )
+
+              }
+              else if(this.state.selectedThermometerType == 5){ // Radiator
+                    if(this.state.selectedOutput1 > 0){
+                              outputsArray[i] = {id:this.state.selectedOutput1,
+                                                 type_id:this.state.outputs[this.state.selectedOutput1-1].type_id,
+                                                 type:this.state.outputs[this.state.selectedOutput1-1].type,
+                                                 sub_type: 1} // On/Off
+                              i++
+                              outputsNum++
+                    }
+
+                    if(this.state.selectedOutput2 > 0){
+                      outputsArray[i] = {id:this.state.selectedOutput2,
+                                         type_id:this.state.outputs[this.state.selectedOutput2-1].type_id,
+                                         type:this.state.outputs[this.state.selectedOutput2-1].type,
+                                         sub_type: 8} // Valve
+
+                      i++
+                      outputsNum++
+                    }
+
+                    if(this.state.selectedOutput3 > 0){
+                      outputsArray[i] = {id:this.state.selectedOutput3,
+                                         type_id:this.state.outputs[this.state.selectedOutput3-1].type_id,
+                                         type:this.state.outputs[this.state.selectedOutput3-1].type,
+                                         sub_type: 8} // Valve
+
+                      i++
+                      outputsNum++
+                    }
+
+                    if(this.state.selectedOutput4 > 0){
+                      outputsArray[i] = {id:this.state.selectedOutput4,
+                                         type_id:this.state.outputs[this.state.selectedOutput4-1].type_id,
+                                         type:this.state.outputs[this.state.selectedOutput4-1].type,
+                                         sub_type: 8} // Valve
+
+                      i++
+                      outputsNum++
+                    }
+
+                    if(this.state.selectedOutput5 > 0){
+                      outputsArray[i] = {id:this.state.selectedOutput5,
+                                         type_id:this.state.outputs[this.state.selectedOutput5-1].type_id,
+                                         type:this.state.outputs[this.state.selectedOutput5-1].type,
+                                         sub_type: 8} // Valve
+
+                            i++
+                      outputsNum++
+                   }
+
+                    if(this.state.selectedOutput6 > 0){
+                              outputsArray[i] = {id:this.state.selectedOutput6,
+                                                                     type_id:this.state.outputs[this.state.selectedOutput6-1].type_id,
+                                                                     type:this.state.outputs[this.state.selectedOutput6-1].type, sub_type: 8} // Valve
+
+                                    i++
+                              outputsNum++
+                          }
+
+                    if(this.state.selectedOutput7 > 0){
+                              outputsArray[i] = {id:this.state.selectedOutput7,
+                                                                     type_id:this.state.outputs[this.state.selectedOutput7-1].type_id,
+                                                                     type:this.state.outputs[this.state.selectedOutput7-1].type, sub_type: 8} // Valve
+
+                                    i++
+                              outputsNum++
+                          }
+
+                    if(this.state.selectedOutput8 > 0){
+                              outputsArray[i] = {id:this.state.selectedOutput8,
+                                                                     type_id:this.state.outputs[this.state.selectedOutput8-1].type_id,
+                                                                     type:this.state.outputs[this.state.selectedOutput8-1].type, sub_type: 8} // Valve
+
+                                    i++
+                              outputsNum++
+                          }
+
+                    if(this.state.selectedOutput9 > 0){
+                              outputsArray[i] = {id:this.state.selectedOutput9,
+                                                                     type_id:this.state.outputs[this.state.selectedOutput9-1].type_id,
+                                                                     type:this.state.outputs[this.state.selectedOutput9-1].type, sub_type: 8} // Valve
+
+                                    i++
+                              outputsNum++
+                          }
+
+                    if(this.state.selectedOutput10 > 0){
+                              outputsArray[i] = {id:this.state.selectedOutput10,
+                                                                     type_id:this.state.outputs[this.state.selectedOutput10-1].type_id,
+                                                                     type:this.state.outputs[this.state.selectedOutput10-1].type, sub_type: 8} // Valve
+
+                                    i++
+                              outputsNum++
+                          }
+
+                    if(this.state.selectedOutput11 > 0){
+                              outputsArray[i] = {id:this.state.selectedOutput11,
+                                                                     type_id:this.state.outputs[this.state.selectedOutput11-1].type_id,
+                                                                     type:this.state.outputs[this.state.selectedOutput11-1].type, sub_type: 8} // Valve
+
+                                    i++
+                              outputsNum++
+                          }
+
+              }
+
+              thermometerIns.outputsArray = outputsArray
+              thermometerIns.outputsNum = outputsNum
+
+              thermometer.saveThermometerInController(thermometerIns, this.state.mode).then(
+               data => {
+    //                              console.log("get data from felan")
+                      // todo check answer
+                thermometer.updateThermometerInDB(thermometerIns).then(
+                    data1 => {
+    //		                    console.log("get data from update")
+                        if(data1 == true){
+                            this.props.navigation.navigate(this.state.fromPage);
+                        }
+                    }
+           )
+           .catch(
+                    error => {
+                        console.log("error: " + error)
+                        alert(this.props.t("thermometer:errorUpdateThermometer"))
+                    }
+           );
+        })
+              .catch(
+                error =>{
+//                                      console.log("Error in update theometer: " + error)
+                    alert(this.props.t("thermometer:errorUpdateThermometer"))
+                }
+            )
             }
 
-            if(this.state.mode == Vars.modeInsert){
+           if(this.state.mode == Vars.modeInsert){
                  thermometerIns.outputsNum = 0
                  thermometerIns.outputsArray = ""
                  thermometer.getNextId().then(
@@ -627,7 +635,7 @@ export class ThermometerSetting extends React.Component {
                     }
                 )
             }
-        }   
+        }
     }
 
     // Close the Alert
@@ -869,7 +877,7 @@ export class ThermometerSetting extends React.Component {
 		                            formHorizontal={true}
 		                            onPress={(value, index) => {
 		                                        this.setState({thermometerModeType: radioTherm[index].value}, () => {
-		                                                  console.log("Mode type: " + this.state.thermometerModeType + "--" +"---"+radioTherm[index].value)
+//		                                                  console.log("Mode type: " + this.state.thermometerModeType + "--" +"---"+radioTherm[index].value)
 		                                        })}
 		                            }
 	                        />

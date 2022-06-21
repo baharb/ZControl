@@ -199,7 +199,7 @@ import CommonFuncs from '../../Common/lib/CommonFuncs';
                 scenarioDataUdp => {
                    getResponse = 1
                    getError = 0
-		console.log("Get scenario " +scenarioDataUdp.length +"--" +scenarioDataUdp )
+//		console.log("Get scenario " +scenarioDataUdp.length +"--" +scenarioDataUdp )
                    if(scenarioDataUdp.length > 0 && scenarioDataUdp != false){
                          if(timeout != ""){ clearTimeout(timeout)}
                         dataScenario = new Array();
@@ -324,7 +324,7 @@ import CommonFuncs from '../../Common/lib/CommonFuncs';
                 // console.log("Curtain: " + checkedCurtains[i] + "---" + j)
                     
                 if(checkedCurtains[i] && checkedCurtains[i] == true){
-                     console.log("Curtainnnnnnnnnnnnnnnnnnnnn: " +curtains[i].type_id + "---" + curtains[i].value + "---" + i +"---" + curtains[i].type )
+//                     console.log("Curtainnnnnnnnnnnnnnnnnnnnn: " +curtains[i].type_id + "---" + curtains[i].value + "---" + i +"---" + curtains[i].type )
                     scenarioBytes[j] = curtains[i].type_id;
                     scenarioBytes[j + 1] = curtains[i].value; // todo: curtain type
                     scenarioBytes[j + 2] = curtains[i].type;

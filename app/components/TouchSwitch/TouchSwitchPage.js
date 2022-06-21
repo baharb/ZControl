@@ -56,7 +56,7 @@ export class TouchSwitchPage extends React.Component {
 	                   touchSwitch.getAllTouchSwitchesFromController(touchesFromDB).then(
 	                       dataFromC => {
 	                           getResponse = 1
-                               console.log("Done get all TouchSWitches: " +retry)
+//                               console.log("Done get all TouchSWitches: " +retry)
                                if(timeout != ""){ clearTimeout(timeout)  }
 
 	                           this.setState({
@@ -80,7 +80,7 @@ export class TouchSwitchPage extends React.Component {
 	         )
 
 	         timeout = setTimeout(() => {
-                      console.log("get Touch Switch Timeout: " +getError+"---"+getResponse+"---"+retry)
+//                      console.log("get Touch Switch Timeout: " +getError+"---"+getResponse+"---"+retry)
 
                       if(retry == 0){
                                 alert(this.props.t("touchSwitch:errorGetAllTouchSwitches"))

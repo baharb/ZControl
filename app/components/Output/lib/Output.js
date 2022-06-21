@@ -137,7 +137,10 @@ export default class Output {
                                 outputsArray[j].minute = dataOut[++i];
                                 outputsArray[j].second = dataOut[++i];
                                 outputsArray[j].flag = 1
-                                j++
+
+//                                console.log("output id: " + j + "--- h: " +outputsArray[j].hour + "--m: " + outputsArray[j].minute)
+
+                                j++;
 
                                 /// update flag output
                                 if (where.length == "") { where = "id IN (?"; } else { where += ",?"; }
@@ -246,13 +249,13 @@ export default class Output {
                                 reject(error)
                             });
 
-                            console.log(outputsArray[0].id + "-" + outputsArray[1].hour + "-" + outputsArray.length)
+//                            console.log(outputsArray[0].id + "-" + outputsArray[1].hour + "-" + outputsArray.length)
                             resolve(outputsArray)
                         }
                     )
                         .catch(
                             error => {
-                                console.log("errorrrrrrrrrrrrrr: " + error)
+//                                console.log("errorrrrrrrrrrrrrr: " + error)
                                 //                    getResponse = 1
                                 //                    getError = 1
                                 //                    if(retry > 0){
@@ -430,7 +433,7 @@ export default class Output {
                          }
                     }
                     else {
-                        console.log("error in update outputs data len is SMALL ")
+//                        console.log("error in update outputs data len is SMALL ")
                         reject("error in update outputs 0: ")
                     }
                 }

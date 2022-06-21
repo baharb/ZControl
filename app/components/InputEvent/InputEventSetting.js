@@ -105,6 +105,7 @@ export class InputEventSetting extends React.Component {
           this.setState({
             inputs: dataInputs,
             inputsRadio: dataInputs,
+            inputsM: (this.state.inputsRadio != "") ? this.state.inputsRadio.filter(item => item.status !== 0) : ""
           }, () => {
             resolve(true)
           })
@@ -130,6 +131,7 @@ export class InputEventSetting extends React.Component {
     checkedInput.operand = 2
     checkedInput.val = 0
     checkedInput.value = 0
+    checkedInput.id = 0
     checkedInput.index = 0
 
     this.setState({
@@ -366,75 +368,83 @@ export class InputEventSetting extends React.Component {
   }
 
   saveInputEvent(retry) {
-    successName = true
-    successInput = true
-    if ((retry != 0) && !retry) { retry = 2 }
-    let getResponse = 0
-    let getError = 0
-    timeout = ""
-    // alert(this.state.checkedInput)
-    if (this.state.inputEventName.trim().length == 0 || this.state.checkedInput == "") {
-      if (this.state.inputEventName.trim().length == 0) {
-        successName = false
-        setTimeout(() => this.refs.titleTextInput.focus(), 150)
-      }
-
-      if (this.state.checkedInput == "") {
-        successInput = false
-      }
-
-      this.setState({
-        successName: successName,
-        successInput: successInput
-      })
+//    console.log("qq"+(this.state.inputsM == null) + "---" +
+//        (this.state.checkedInput.id == null))
+    if(this.state.checkedInput.id == 0){
+        alert(this.props.t("inputEvent:inputEventSelectInput"))
     }
-    else {
+    else{
 
-      InputEventIns = new Object();
-      InputEventIns.title = this.state.inputEventName;
-      InputEventIns.id = this.state.inputEventId;
-      InputEventIns.inputEventType = this.state.inputEventType;
-      InputEventIns.travel = (this.state.travel == true) ? 1 : 0
-
-      inputEvent = new InputEvent();
-
-//      console.log("In save input E: id:" + this.state.checkedInput.id + "--- value: " + this.state.checkedInput.value + "--- operand: " + this.state.checkedInput.operand)
-      inputEvent.saveInputEvent(InputEventIns, this.state.mode, this.state.checkedInput, this.state.checkedOutputs, this.state.outputs)
-        .then(
-          data => {
-            if (data == true) {
-              // alert("truuuuu");
-              if (timeout != "") { clearTimeout(timeout) }
-              getResponse = 1
-              this.props.navigation.navigate('InputEventPage');
-            }
-            else {
-              getError = 1
-              //                        alert(this.props.t("inputEvent:errorSaveInputEvent"))
-            }
+        successName = true
+        successInput = true
+        if ((retry != 0) && !retry) { retry = 2 }
+        let getResponse = 0
+        let getError = 0
+        timeout = ""
+        // alert(this.state.checkedInput)
+        if (this.state.inputEventName.trim().length == 0 || this.state.checkedInput == "") {
+          if (this.state.inputEventName.trim().length == 0) {
+            successName = false
+            setTimeout(() => this.refs.titleTextInput.focus(), 150)
           }
-        )
-        .catch(
-          error => {
-            getError = 1
-            //                    alert(this.props.t("inputEvent:errorSaveInputEvent"))
-            console.log("error in save input event " + error)
-          }
-        );
 
-      timeout = setTimeout(() => {
-        console.log("Error in save IE Timeout: " + getError + "---" + getResponse + "---" + retry)
-        if (retry == 0) {
-          alert(this.props.t("inputEvent:errorSaveInputEvent"))
+          if (this.state.checkedInput == "") {
+            successInput = false
+          }
+
+          this.setState({
+            successName: successName,
+            successInput: successInput
+          })
         }
         else {
-          if (getResponse == 0 || getError == 1) {
 
-            this.saveInputEvent(retry - 1)
-          }
+          InputEventIns = new Object();
+          InputEventIns.title = this.state.inputEventName;
+          InputEventIns.id = this.state.inputEventId;
+          InputEventIns.inputEventType = this.state.inputEventType;
+          InputEventIns.travel = (this.state.travel == true) ? 1 : 0
+
+          inputEvent = new InputEvent();
+
+    //      console.log("In save input E: id:" + this.state.checkedInput.id + "--- value: " + this.state.checkedInput.value + "--- operand: " + this.state.checkedInput.operand)
+          inputEvent.saveInputEvent(InputEventIns, this.state.mode, this.state.checkedInput, this.state.checkedOutputs, this.state.outputs)
+            .then(
+              data => {
+                if (data == true) {
+                  // alert("truuuuu");
+                  if (timeout != "") { clearTimeout(timeout) }
+                  getResponse = 1
+                  this.props.navigation.navigate('InputEventPage');
+                }
+                else {
+                  getError = 1
+                  //                        alert(this.props.t("inputEvent:errorSaveInputEvent"))
+                }
+              }
+            )
+            .catch(
+              error => {
+                getError = 1
+                //                    alert(this.props.t("inputEvent:errorSaveInputEvent"))
+                console.log("error in save input event " + error)
+              }
+            );
+
+              timeout = setTimeout(() => {
+                console.log("Error in save IE Timeout: " + getError + "---" + getResponse + "---" + retry)
+                if (retry == 0) {
+                  alert(this.props.t("inputEvent:errorSaveInputEvent"))
+                }
+                else {
+                  if (getResponse == 0 || getError == 1) {
+
+                    this.saveInputEvent(retry - 1)
+                  }
+                }
+              }, 2000);
+
         }
-      }, 2000);
-
     }
   }
 
@@ -580,58 +590,69 @@ export class InputEventSetting extends React.Component {
 
     //        selectedInputs ="";
     inputs = new Array();
-    inputs = this.state.inputs;
-    checkedInputs = this.state.checkedInputs;
+//    console.log("$$$$$$"+(this.state.inputsM == null)+"---"+this.state.inputsM.length+"---")
+//    console.log("val 0: " + (this.state.checkedInputs == "") + "---" + this.state.checkedInput.id)
 
-    i = 0;
-    inputIns = new Input()
+    if(this.state.checkedInput.id != 0){
+        inputs = this.state.inputs;
+        checkedInputs = this.state.checkedInputs;
 
-    if (checkedInputs != "") {
-      if (this.state.inputEventType == this.IE_SCENARIO) { // Scenario type selected
-        if (this.state.checkedInput.type == inputIns.INPUT_DIGITAL_TYPE ||
-          this.state.checkedInput.type == inputIns.INPUT_WIFI_WITH_RELAY_TYPE ||
-          this.state.checkedInput.type == inputIns.INPUT_WIFI_WITHOUT_RELAY_TYPE ||
-          this.state.checkedInput.type == inputIns.INPUT_RS485_WITH_RELAY_TYPE ||
-          this.state.checkedInput.type == inputIns.INPUT_RS485_WITHOUT_RELAY_TYPE) {
+        i = 0;
+        inputIns = new Input()
 
-          this.setState({
-            viewScenarioDigital: true,
-            viewScenarioAnalog: false,
-            viewOutputInput: false,
-          }, () => {
-            // For Scenario type, select On, Off, Toggle
-            if (this.refs.refRadioInput != null) {
-              this.refs.refRadioInput.updateIsActiveIndex(this.state.checkedInput.operand);
+//        if (checkedInputs != "") {
+          if (this.state.inputEventType == this.IE_SCENARIO) { // Scenario type selected
+            if (this.state.checkedInput.type == inputIns.INPUT_DIGITAL_TYPE ||
+              this.state.checkedInput.type == inputIns.INPUT_WIFI_WITH_RELAY_TYPE ||
+              this.state.checkedInput.type == inputIns.INPUT_WIFI_WITHOUT_RELAY_TYPE ||
+              this.state.checkedInput.type == inputIns.INPUT_RS485_WITH_RELAY_TYPE ||
+              this.state.checkedInput.type == inputIns.INPUT_RS485_WITHOUT_RELAY_TYPE) {
+
+              this.setState({
+                viewScenarioDigital: true,
+                viewScenarioAnalog: false,
+                viewOutputInput: false,
+              }, () => {
+                // For Scenario type, select On, Off, Toggle
+                if (this.refs.refRadioInput != null) {
+                  this.refs.refRadioInput.updateIsActiveIndex(this.state.checkedInput.operand);
+                }
+              })
+
+
             }
-          })
+            else { // Input analog // THERMOMETER
+              this.setState({
+                viewScenarioDigital: false,
+                viewScenarioAnalog: true,
+                viewOutputInput: false,
+              })
 
+              if (this.refs.refRadioThemp != null) {
+                this.refs.refRadioThemp.updateIsActiveIndex(this.state.checkedInput.operand);
+              }
 
-
-        }
-        else { // Input analog // THERMOMETER
-          this.setState({
-            viewScenarioDigital: false,
-            viewScenarioAnalog: true,
-            viewOutputInput: false,
-          })
-
-          if (this.refs.refRadioThemp != null) {
-            this.refs.refRadioThemp.updateIsActiveIndex(this.state.checkedInput.operand);
+            }
+          }
+          else { // Outputs type selected
+            this.setState({
+              viewScenarioDigital: false,
+              viewScenarioAnalog: false,
+              viewOutputInput: true,
+            })
           }
 
-        }
-      }
-      else { // Outputs type selected
+          //            this.setState({
+          //                selectedInputsArray : selectedInputs,
+          //            })
+//        }
+    }
+    else{
         this.setState({
           viewScenarioDigital: false,
           viewScenarioAnalog: false,
-          viewOutputInput: true,
+          viewOutputInput: false,
         })
-      }
-
-      //            this.setState({
-      //                selectedInputsArray : selectedInputs,
-      //            })
     }
   }
 
@@ -991,28 +1012,35 @@ export class InputEventSetting extends React.Component {
                       labelStyle={commonStyles.radioStyle(i18n.t('common:dir'))}
                       initial={this.state.checkedInput.value}
                       onPress={(value, index) => {
+                       if(this.state.inputsM.length > 0){
+                            if (value == null) {
+                              value = this.state.inputsM[0].value //this.state.checkedInput.value
+                            }
+                            else {
+                              value = this.state.inputsM[index].value
+                            }
 
-                        if (value == null) {
-                          value = this.state.inputsM[0].value //this.state.checkedInput.value
+                            if (index == null) {
+                              checked = this.state.checkedInput
+                            }
+                            else {
+                              checked = this.state.inputsRadio[this.state.inputsM[index].value];
+                            }
+
+                            checked.operand = 2
+                            checked.val = 0;
+                            checked.value = value
+
+                            this.setState({
+                              checkedInput: checked,
+                            })
                         }
-                        else {
-                          value = this.state.inputsM[index].value
+                        else{
+                            value = 0
+//                            checked = this.state.checkedInput
                         }
 
-                        if (index == null) {
-                          checked = this.state.checkedInput
-                        }
-                        else {
-                          checked = this.state.inputsRadio[this.state.inputsM[index].value];
-                        }
 
-                        checked.operand = 2
-                        checked.val = 0;
-                        checked.value = value
-
-                        this.setState({
-                          checkedInput: checked,
-                        })
                       }}
                     />
                   </ScrollView>

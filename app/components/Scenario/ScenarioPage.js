@@ -53,7 +53,7 @@ export class ScenarioPage extends React.Component {
 	            ZagrosDB.buildQuery(Vars.querySelect, "Scenario", "", "status=1", "", "", "", 1).then(
 	                data => {
 	                      getResponse = 1
-	                     console.log("Done get all Scenarios: " +retry)
+//	                     console.log("Done get all Scenarios: " +retry)
 	                     if(timeout != ""){ clearTimeout(timeout)  }
 
 	                    this.setState({

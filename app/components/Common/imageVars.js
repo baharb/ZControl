@@ -62,11 +62,13 @@ const ImageVars = {
                           require('../Common/img/common-light-curtain.png'), require('../Common/img/common-light-closecurtain.png'),
                           require('../Common/img/common-light-cake.png'),require('../Common/img/common-light-closedoor.png'),
                           require('../Common/img/common-light-opendoor.png'), require('../Common/img/common-light-dinning.png'),
-                       require('../Common/img/out-light-airplane.png'),
+                          require('../Common/img/out-light-airplane.png'),
                           require('../Common/img/out-light-faucet.png'), require('../Common/img/out-light-valve.png'),
                           require('../Common/img/out-light-watering.png')],
 
-
+    commonIconArray: [
+         require('../Common/img/common-light-mic.gif')
+    ]
 }
 
 export default ImageVars;
