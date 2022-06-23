@@ -525,6 +525,7 @@ export class InputEventSetting extends React.Component {
               <Text style={commonStyles.touchTextIE(i18n.t("common:dir"))}>{item.name}</Text>
               <RadioForm
                 radio_props={radioOutputs}
+                animation={false}
                 labelStyle={commonStyles.radioStyle(i18n.t('common:dir'))}
                 initial={item.value}
                 formHorizontal={true}
@@ -544,6 +545,7 @@ export class InputEventSetting extends React.Component {
               <Text style={commonStyles.touchTextIE(i18n.t("common:dir"))}>{item.name}</Text>
               <RadioForm
                 radio_props={radioOutputs}
+                animation={false}
                 initial={item.operand}
                 formHorizontal={true}
                 labelStyle={commonStyles.radioStyle(i18n.t('common:dir'))}
@@ -792,6 +794,7 @@ export class InputEventSetting extends React.Component {
               <View style={commonStyles.listRadio(i18n.t('common:dir'))} >
                 <RadioForm
                   ref="refRadioType"
+                  animation={false}
                   formHorizontal={true}
                   labelStyle={commonStyles.radioStyle(i18n.t('common:dir'))}
                   radio_props={radioType}
@@ -822,6 +825,7 @@ export class InputEventSetting extends React.Component {
                     <RadioForm
                       formHorizontal={true}
                       ref="refRadioInput"
+                      animation={false}
                       labelColor={'#b08dbf'}
                       labelStyle={commonStyles.radioStyle(i18n.t('common:dir'))}
                       radio_props={radioInputs}
@@ -880,6 +884,7 @@ export class InputEventSetting extends React.Component {
                     <View style={commonStyles.viewRadio(i18n.t('common:dir'))}>
                       <RadioForm
                         formHorizontal={true}
+                        animation={false}
                         ref="refRadioThemp"
                         labelColor={'#b08dbf'}
                         labelStyle={commonStyles.radioStyle(i18n.t('common:dir'))}
@@ -1008,6 +1013,7 @@ export class InputEventSetting extends React.Component {
                   <ScrollView>
                     <RadioForm
                       ref="refRadioInputs"
+                      animation={false}
                       radio_props={this.state.inputsM}
                       labelStyle={commonStyles.radioStyle(i18n.t('common:dir'))}
                       initial={this.state.checkedInput.value}

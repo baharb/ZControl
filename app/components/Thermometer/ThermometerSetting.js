@@ -870,17 +870,18 @@ export class ThermometerSetting extends React.Component {
 	                        <Text style={commonStyles.txtItemLabel(i18n.t('common:dir'))}>{t('thermometer:tempType')}</Text>
 	                        <View style={commonStyles.listRadio(i18n.t('common:dir')) }>
 			    <RadioForm
-		                            radio_props={radioTherm}
-		                            ref="refRadioModeType"
-		                            labelStyle={commonStyles.radioStyle(i18n.t('common:dir'))}
-		                            initial={1}
-		                            formHorizontal={true}
-		                            onPress={(value, index) => {
-		                                        this.setState({thermometerModeType: radioTherm[index].value}, () => {
+                    radio_props={radioTherm}
+                    ref="refRadioModeType"
+                    animation={false}
+                    labelStyle={commonStyles.radioStyle(i18n.t('common:dir'))}
+                    initial={1}
+                    formHorizontal={true}
+                    onPress={(value, index) => {
+                                this.setState({thermometerModeType: radioTherm[index].value}, () => {
 //		                                                  console.log("Mode type: " + this.state.thermometerModeType + "--" +"---"+radioTherm[index].value)
-		                                        })}
-		                            }
-	                        />
+                                })}
+                    }
+                />
 	                            </View>
 	                    </View>
 

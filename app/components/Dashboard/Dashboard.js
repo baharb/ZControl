@@ -995,6 +995,7 @@ class ThermometerItemList extends React.PureComponent {
 							<View style={commonStyles.listRadioTherm(i18n.t('common:dir'))}>
 								<RadioForm
 									radio_props={radioTherm}
+									animation={false}
 									ref="refRadioModeType"
 									labelStyle={commonStyles.radioStyle(i18n.t('common:dir'))}
 									initial={this.props.modeType}

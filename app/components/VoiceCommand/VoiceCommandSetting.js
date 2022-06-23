@@ -368,6 +368,7 @@ export class VoiceCommandSetting extends React.Component {
                   <View style={commonStyles.listRadio(i18n.t('common:dir'))} >
                       <RadioForm
                       ref="refRadioType"
+                      animation={false}
                       formHorizontal={true}
                       labelStyle={commonStyles.radioStyle(i18n.t('common:dir'))}
                       radio_props={radioType}

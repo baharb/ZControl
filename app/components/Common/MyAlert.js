@@ -75,16 +75,17 @@ componentDidMount(){
 	            <View style={{flex:1, flexDirection: 'column', width: '100%'}} >
 	            <View style={commonStyles.line}></View>
 	            <RadioForm
-	                             radio_props={this.props.radioItems}
-	                             ref="refRadioSelectedConnection"
-	                             labelStyle={commonStyles.radioStyle(i18n.t('common:dir'))}
-	                             initial={this.props.selectedConnection}
-	                             onPress={(value, index) => {
-	                                        selectedConnection =  this.props.radioItems[index].value
-                                                  this.setState({selectedVal: this.props.radioItems[index].value}, () => {
-                                                  })
-	                              }}
-                         />
+                     radio_props={this.props.radioItems}
+                     ref="refRadioSelectedConnection"
+                     animation={false}
+                     labelStyle={commonStyles.radioStyle(i18n.t('common:dir'))}
+                     initial={this.props.selectedConnection}
+                     onPress={(value, index) => {
+                                selectedConnection =  this.props.radioItems[index].value
+                                      this.setState({selectedVal: this.props.radioItems[index].value}, () => {
+                                      })
+                      }}
+                 />
 		     <View style={commonStyles.listViewTouchView(i18n.t('common:dir'))}>
 	                        <Text style={commonStyles.txtItemLabel(i18n.t('common:dir'))}>{this.props.title3}</Text>
                                    <TextInput style={styles.txtInput(i18n.t('common:dir'))}

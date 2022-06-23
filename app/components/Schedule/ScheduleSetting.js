@@ -128,13 +128,13 @@ export class ScheduleSetting extends React.Component {
         endType: 0,
         startRepeatTime: "1",
         endRepeatTime: "0",
-        startYear: 1400,
+        startYear: 1401,
         startMonth: 1,
         startDay: 1,
         startH: 12,
         startM: 1,
         startS: 1,
-        endYear: 1400,
+        endYear: 1401,
         endMonth: 1,
         endDay: 1,
         endH: 12,
@@ -290,7 +290,7 @@ export class ScheduleSetting extends React.Component {
             startDateArray = start.split("/");
 //            console.log("1")
             endyear = 0;
-            endDateArray = new Array(1400, 1, 1);
+            endDateArray = new Array(1401, 1, 1);
 
             endRepeatTime = 0;
             endType = 0;
@@ -392,7 +392,7 @@ export class ScheduleSetting extends React.Component {
             this.getSchedule(scheduleId, retry - 1)
           }
         }
-      }, 2000);
+      }, 1000);
 
     })
 
@@ -465,52 +465,116 @@ export class ScheduleSetting extends React.Component {
   }
 
 
-  initWeekDaysCheckboxes(week) {
+//  initWeekDaysCheckboxes(week) {
+//    // weekDayFlag;
+//    weekByte = week;
+//    weekDayFlag = this.Set(0x00, SATURDAY);
+//    if ((weekByte & weekDayFlag) == weekDayFlag) {
+//      this.checkDayChange(SATURDAY, true);
+//      // console.log("sat true")
+//    }
+//
+//    weekDayFlag = this.Set(0x00, SUNDAY);
+//    if ((weekByte & weekDayFlag) == weekDayFlag) {
+//      this.checkDayChange(SUNDAY, true);
+//      // console.log("sun true")
+//    }
+//
+//    weekDayFlag = this.Set(0x00, MONDAY);
+//    if ((weekByte & weekDayFlag) == weekDayFlag) {
+//      this.checkDayChange(MONDAY, true);
+//      // console.log("mon true")
+//    }
+//
+//    weekDayFlag = this.Set(0x00, THURSDAY);
+//    if ((weekByte & weekDayFlag) == weekDayFlag) {
+//      this.checkDayChange(THURSDAY, true);
+//      // console.log("thu true")
+//    }
+//
+//    weekDayFlag = this.Set(0x00, WEDNESDAY);
+//    if ((weekByte & weekDayFlag) == weekDayFlag) {
+//      this.checkDayChange(WEDNESDAY, true);
+//      // console.log("wed true")
+//    }
+//
+//    weekDayFlag = this.Set(0x00, TUESDAY);
+//    if ((weekByte & weekDayFlag) == weekDayFlag) {
+//      this.checkDayChange(TUESDAY, true);
+//      // console.log("tue true")
+//    }
+//
+//    weekDayFlag = this.Set(0x00, FRIDAY);
+//    if ((weekByte & weekDayFlag) == weekDayFlag) {
+//      this.checkDayChange(FRIDAY, true);
+//      // console.log("fri true")
+//    }
+//  }
+
+
+ initWeekDaysCheckboxes(week) {
     // weekDayFlag;
     weekByte = week;
-    weekDayFlag = this.Set(0x00, SATURDAY);
+    weekDays = this.state.weekDays
+    checkedArray = this.state.checkedDays;
+
+    weekDayFlag = (0x00 | (1 << SATURDAY))
     if ((weekByte & weekDayFlag) == weekDayFlag) {
-      this.checkDayChange(SATURDAY, true);
-      // console.log("sat true")
+      checkedArray[SATURDAY] = true;
+      weekDays= (weekDays | (1 << SATURDAY))
     }
 
-    weekDayFlag = this.Set(0x00, SUNDAY);
+
+    weekDayFlag = (0x00 | (1 << SUNDAY))
+
     if ((weekByte & weekDayFlag) == weekDayFlag) {
-      this.checkDayChange(SUNDAY, true);
-      // console.log("sun true")
+      checkedArray[SUNDAY] = true;
+      weekDays= (weekDays | (1 << SUNDAY))
     }
 
-    weekDayFlag = this.Set(0x00, MONDAY);
+    weekDayFlag = (0x00 | (1 << MONDAY))
     if ((weekByte & weekDayFlag) == weekDayFlag) {
-      this.checkDayChange(MONDAY, true);
-      // console.log("mon true")
+       checkedArray[MONDAY] = true;
+       weekDays= (weekDays | (1 << MONDAY))
     }
 
-    weekDayFlag = this.Set(0x00, THURSDAY);
+
+    weekDayFlag = (0x00 | (1 << TUESDAY))
     if ((weekByte & weekDayFlag) == weekDayFlag) {
-      this.checkDayChange(THURSDAY, true);
-      // console.log("thu true")
+       checkedArray[TUESDAY] = true;
+       weekDays= (weekDays | (1 << TUESDAY))
     }
 
-    weekDayFlag = this.Set(0x00, WEDNESDAY);
+
+    weekDayFlag = (0x00 | (1 << WEDNESDAY))
     if ((weekByte & weekDayFlag) == weekDayFlag) {
-      this.checkDayChange(WEDNESDAY, true);
-      // console.log("wed true")
+       checkedArray[WEDNESDAY] = true;
+       weekDays= (weekDays | (1 << WEDNESDAY))
     }
 
-    weekDayFlag = this.Set(0x00, TUESDAY);
+
+
+    weekDayFlag = (0x00 | (1 << THURSDAY))
     if ((weekByte & weekDayFlag) == weekDayFlag) {
-      this.checkDayChange(TUESDAY, true);
-      // console.log("tue true")
+       checkedArray[THURSDAY] = true;
+       weekDays= (weekDays | (1 << THURSDAY))
     }
 
-    weekDayFlag = this.Set(0x00, FRIDAY);
+
+    weekDayFlag = (0x00 | (1 << FRIDAY))
     if ((weekByte & weekDayFlag) == weekDayFlag) {
-      this.checkDayChange(FRIDAY, true);
-      // console.log("fri true")
+       checkedArray[FRIDAY] = true;
+       weekDays= (weekDays | (1 << FRIDAY))
     }
+//    else{
+//        this.UnSet(weekDays, FRIDAY)
+//    }
+
+    this.setState({
+      checkedDays: checkedArray,
+      weekDays: weekDays,
+    });
   }
-
 
   checkDayChange(index, checked) {
     checkedArray = this.state.checkedDays;
@@ -597,7 +661,7 @@ export class ScheduleSetting extends React.Component {
           onValueChange={(itemValue, itemIndex) =>
             this.setState({ startYear: itemValue })
           }>
-          <Picker.Item label="1400" value={"1400"} />
+
           <Picker.Item label="1401" value={"1401"} />
           <Picker.Item label="1402" value={"1402"} />
           <Picker.Item label="1403" value={"1403"} />
@@ -660,7 +724,7 @@ export class ScheduleSetting extends React.Component {
           onValueChange={(itemValue, itemIndex) =>
             this.setState({ endYear: itemValue })
           }>
-          <Picker.Item label="1400" value={"1400"} />
+
           <Picker.Item label="1401" value={"1401"} />
           <Picker.Item label="1402" value={"1402"} />
           <Picker.Item label="1403" value={"1403"} />
@@ -724,7 +788,7 @@ export class ScheduleSetting extends React.Component {
 
         <ScrollView>
 
-          <LinearGradient colors={['#1d0527', '#350e45', '#4f1965']} style={commonStyles.cont}>
+          <View style={{backgroundColor:'#1d0527'}}>
 
 
             <View style={commonStyles.containerView}>
@@ -1126,6 +1190,7 @@ export class ScheduleSetting extends React.Component {
                   ref="refRadioRepeat"
                   radio_props={radio_props}
                   formHorizontal={true}
+                  animation={false}
                   labelStyle={commonStyles.radioStyle(i18n.t('common:dir'))}
                   initial={0}
                   onPress={(value) => { this.changeRepeat(value, t) }}
@@ -1187,6 +1252,7 @@ export class ScheduleSetting extends React.Component {
                 <RadioForm
                   ref="refRadioFinishType"
                   formHorizontal={true}
+                  animation={false}
                   labelStyle={commonStyles.radioStyle(i18n.t('common:dir'))}
                   radio_props={radioFinishType}
                   initial={0}
@@ -1317,7 +1383,7 @@ export class ScheduleSetting extends React.Component {
 
             </View>
 
-          </LinearGradient>
+          </View>
           {(this.state.alertMod) ? (
             <View>
               <MyAlert modalVisible={this.state.alertMod}

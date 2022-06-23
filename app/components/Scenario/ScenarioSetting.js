@@ -738,6 +738,7 @@ export class ScenarioSetting extends React.Component {
 	                   <View  key={item.id} style={commonStyles.listRadioOutputsScnario(i18n.t('common:dir'))}>
 	                           <RadioForm
 	                           radio_props={radioCurtain}
+	                           animation={false}
 	                           labelStyle={commonStyles.radioStyle(i18n.t('common:dir'))}
 	                           initial={initial}
 	                           formHorizontal={true}
