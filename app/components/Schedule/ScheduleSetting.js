@@ -254,7 +254,7 @@ export class ScheduleSetting extends React.Component {
   getSchedule(scheduleId, retry) {
     return new Promise((resolve, reject) => {
       timeout = ""
-      if ((retry != 0) && !retry) { retry = 4 }
+      if ((retry != 0) && !retry) { retry = 2 }
 //      console.log("Get Schedule: " + retry)
       getResponse = 0
       getError = 0
@@ -262,7 +262,10 @@ export class ScheduleSetting extends React.Component {
       schedule = new Schedule();
       schedule.getSchedule(scheduleId).then(
         data => {
-//          console.log("id: " + scheduleId + "---" + (data[0] & 0x7F))
+//        console.log(data[0] + "-" + data[1] + "-" + data[2] + "-" + data[3] + "-" + data[4] + "-" + data[5] +
+//         "-" + data[6] + "-" + data[7] + "-" + data[8] + "-" + data[9] + "-" + data[10])
+//          console.log("id: " + scheduleId + "---" + data[0] + "---" + (data[0] & 0x7F))
+
           if ((data[0] & 0x7F) != scheduleId) {
             getError = 1
 //            console.log("Error in get Schedule id error: " + (data[0] & 0x7F))
@@ -367,7 +370,7 @@ export class ScheduleSetting extends React.Component {
           error => {
             getError = 1
 
-//            console.log("Error in get Schedule: " + error)
+            console.log("Error in get Schedule: " + error)
 
 
           }
@@ -375,7 +378,7 @@ export class ScheduleSetting extends React.Component {
 
 
       timeout = setTimeout(() => {
-//        console.log("Error in get Schedule Timeout: " + getError + "---" + getResponse + "---" + retry)
+        console.log("Error in get Schedule Timeout: " + getError + "---" + getResponse + "---" + retry)
         if (retry == 0) {
           this.setState({
             spinner: false,
@@ -513,6 +516,7 @@ export class ScheduleSetting extends React.Component {
 
 
  initWeekDaysCheckboxes(week) {
+// console.log("init week days " + week)
     // weekDayFlag;
     weekByte = week;
     weekDays = this.state.weekDays

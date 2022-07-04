@@ -106,14 +106,14 @@ export class SchedulePage extends React.Component {
 
 
           timeout = setTimeout(() => {
-                    console.log("Timeout")
+//                    console.log("Timeout")
 		if((getResponse == 0 && getError == 0) || (getError == 1)){
 			if(retry > 0){
-			  console.log("retry in get all outpus: " +retry)
+//			  console.log("retry in get all outpus: " +retry)
 			  this.getAllSchedules(retry-1)
 			}
 			else {
-			     console.log("error "+retry)
+//			     console.log("error "+retry)
 			      this.setState({
 			                           spinner: false
 			                       })

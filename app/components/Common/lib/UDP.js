@@ -166,9 +166,9 @@ export default class UDP {
             packet[packet.length - 1] = crcBytes[0];
             packet[packet.length - 2] = crcBytes[1];
 
-            //		console.log("In packetsss: "+packet[0] + "--" + packet[1] + "--" + packet[2] + "--" + packet[3] + "--" +
-            //		packet[4] + "--" + packet[5] + "--" + packet[6] + "--" + packet[7] + "--" + packet[8] + "--" + packet[9] + "--" +
-            //		packet[10] + "--" + packet[11] + "--" + packet[12] + "--" +packet[13] + "--" + packet[14] + "--" + packet[15] + "--")
+            		console.log("In packetsss: "+packet[0] + "--" + packet[1] + "--" + packet[2] + "--" + packet[3] + "--" +
+            		packet[4] + "--" + packet[5] + "--" + packet[6] + "--" + packet[7] + "--" + packet[8] + "--" + packet[9] + "--" +
+            		packet[10] + "--" + packet[11] + "--" + packet[12] + "--" +packet[13] + "--" + packet[14] + "--" + packet[15] + "--")
             resolve(packet);
         })
 
@@ -296,7 +296,7 @@ export default class UDP {
 
                                 setTimeout(() => {
                                     if (received == 0) {
-//                                        console.log("force  closeeee : " + "---try: " + trySendFailed + "----freeSend: " + freeSendPacket + "--- timeout: " + retryTimeout)
+                                        console.log("force  closeeee : " + "---try: " + trySendFailed + "----freeSend: " + freeSendPacket + "--- timeout: " + retryTimeout)
 //                                        dgramSocket.close()
                                         trySendFailed++
                                         trys++
@@ -328,6 +328,9 @@ export default class UDP {
 
                             // Receive Data from controller
                             dgramSocket.once('message', function (data, rinfo) {
+                            console.log("In Recieve: "+data[0] + "--" + data[1] + "--" + data[2] + "--" + data[3] + "--" +
+                                        		data[4] + "--" + data[5] + "--" + data[6] + "--" + data[7] + "--" + data[8] + "--" + data[9] + "--" +
+                                        		data[10] + "--" + data[11] + "--" + data[12] + "--" +data[13] + "--" + data[14] + "--" + data[15] + "--")
 //                            console.log("reccccc: " + data)
 //                            var str = String.fromCharCode.apply(null, new Uint8Array(data));
 //                                  self.updateChatter('b received ' + str + ' ' + JSON.stringify(rinfo));

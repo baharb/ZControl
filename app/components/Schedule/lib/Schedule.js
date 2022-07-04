@@ -136,6 +136,8 @@ import CommonFuncs from '../../Common/lib/CommonFuncs';
                                 id = scheduleIns.id;
                             }
 
+//                            console.log("id : " + id)
+
                             resolve(true);
                             this.saveScheduleInDB(id, scheduleIns);
                        }
@@ -153,7 +155,9 @@ import CommonFuncs from '../../Common/lib/CommonFuncs';
                        reject(false)
                   }
                }
-           ).catch(error => { getResponse = 1; getError = 1; reject(error)});
+           ).catch(error => { getResponse = 1; getError = 1;
+           console.log("error in save : " + error)
+           reject(error)});
 
 //           timeout = setTimeout(() => {
 //              console.log("schedule: - " + getResponse+"---"+getError)
@@ -300,9 +304,14 @@ import CommonFuncs from '../../Common/lib/CommonFuncs';
                           startSecond, endYear, endMonth, endDay, endHour,
                           endMinute, endSecond) {
 //         byte[] schedule = new byte[19];
+//        console.log("get s")
         schedule = new Array(19);
+//        console.log("After define" + (scheduleIns.id | 0x80))
 
         schedule[0] = (scheduleIns.travel == 1) ? (scheduleIns.id | 0x80) : scheduleIns.id;
+
+//        console.log("Save schedule : id= " + scheduleIns.id +"---- , OR= " + (scheduleIns.id | 0x80) +
+//        "---- , data[0]= "+ schedule[0] + "---- byte: " )
 //        start date: packet[1]-packet[7]
 //         System.arraycopy(this.getStartDateTime().getByte(), 0, schedule, 1, 7);
         // CommonFunctions.arrayCopy(this.getDateByte(startYear, startMonth, startDay, startH, startM, startS), 0, schedule, 1, 7);
@@ -369,7 +378,7 @@ import CommonFuncs from '../../Common/lib/CommonFuncs';
 
     // Delete a Schedule
     deleteSchedule(scheduleId, retry){
-        if(!retry){retry = 5}
+        if(!retry){retry = 3}
         let getResponse = 0
         let getError = 0
 
@@ -388,6 +397,8 @@ import CommonFuncs from '../../Common/lib/CommonFuncs';
                         params = new Array();
                         params[0] = 0;
                         params[1] = i18n.t('schedule:schedule') + " " + scheduleId;
+
+//                        console.log("Delete schedule : " + scheduleId)
                         // Delete selected Schedule. set status to 0
                         ZagrosDB.buildQuery(Vars.queryUpdate, "Schedule", "status,title", "id="+scheduleId, params, "", "", 0, 0).then(
                            data => {
