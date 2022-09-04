@@ -809,21 +809,21 @@ export default commonStyles = StyleSheet.create({
     padding: 1
   }),
   locationHeight: { height:Dimensions.get('window').height},
-  locationHeightHor: { height:Dimensions.get('window').height - 90},
+  locationHeightHor: { height:Dimensions.get('window').height - 80},
   locationsDashboard: {paddingBottom:150, flex:1},
   iconList: (dir) => ({
-    flex:1,  
-    height: 70, 
+    flex:1,
+    height: 70,
 //    flexDirection: dir === 'right' ? 'row-reverse':'row',
-    backgroundColor: 'rgba(29, 5, 38, 0.3)', 
+    backgroundColor: 'rgba(29, 5, 38, 0.3)',
     padding: 1
   }),
   flatListViewBigTitleLocations: {
     flex: 1,
   },
   listViewTouchText:  (dir) => ({
-    paddingTop: 10, 
-    color: '#b191bd', 
+    paddingTop: 10,
+    color: '#b191bd',
     fontFamily: (dir === 'right') ? 'Vazir-Medium' : 'Nunito-Bold',
     fontSize: (dir === 'right') ? 16 : 18,
   }),
@@ -1045,7 +1045,7 @@ viewTabStyle: (dir) => ({
 viewTabStyleHor: (dir) => ({
 	flex:1,
           flexDirection:(dir === 'right') ? 'row-reverse' : 'row',
-          height:45,
+          height:50,
           alignContent:'center',
           width:'100%',
           justifyContent:'center',
@@ -1057,18 +1057,18 @@ viewTabStyleHor: (dir) => ({
 tabRgb: {flex: 1, padding: 10, height:Dimensions.get('window').height - 380},
 tabRgbHor: {flex: 1, padding: 10, height:Dimensions.get('window').height - 320},
 containerStyle: {flex:1, height: (Dimensions.get('window').height) > 867 ? 55 : 50},
-containerStyleHor: {flex:1, height: 45},
+containerStyleHor: {flex:1, height: 53},
 viewTabStyleTop: (dir) => ({
 	flex:1,
 	flexDirection:(dir === 'right') ? 'row-reverse' : 'row',
 	height:50,
 	alignContent:'center',
 	width:'100%',
-          justifyContent:'center',
-          alignItems:'center',
-          position:'absolute',
-          top:0,
-          left:0
+    justifyContent:'center',
+    alignItems:'center',
+    position:'absolute',
+    top:0,
+    left:0
 }),
 viewTabStyleTS: (dir) => ({
 	flex:1,
@@ -1328,4 +1328,3 @@ voiceCommandSwitch: (dir) => ({
 	marginTop: 10,
 }),
 })
-

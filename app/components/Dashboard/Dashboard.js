@@ -16,7 +16,7 @@ import Commands from '../Common/vars/commands';
 import CommonFunctions from '../Common/lib/CommonFunctions';
 import Slider from '@react-native-community/slider';
 import Curtain from '../Curtain/lib/Curtain';
-import { TriangleColorPicker } from 'react-native-color-picker';
+import { TriangleColorPicker, ColorPicker } from 'react-native-color-picker';
 import {Picker} from '@react-native-community/picker';
 
 import tinycolor from 'tinycolor2'
@@ -33,20 +33,20 @@ clickTherm = 0
 queueWIndex = 0
 queueRIndex = 0
 
-arrayOutputs = [{          
-	outputId: 0, 
+arrayOutputs = [{
+	outputId: 0,
 	outputValue : 0,
 	type : 0,
 	type_id : 0,
 },
-{	        
-	outputId: 0, 
+{
+	outputId: 0,
 	outputValue : 0,
 	type : 0,
 	type_id : 0,
 },
-{        
-	outputId: 0, 
+{
+	outputId: 0,
 	outputValue : 0,
 	type : 0,
 	type_id : 0,
@@ -115,37 +115,37 @@ class TabItem extends React.PureComponent {
 					this.props.viewStyle
 				} >
 
-					<View style={(this.props.containerStyle) ? this.props.containerStyle : commonStyles.tab2First(i18n.t('common:dir'))}>
-						<TouchableOpacity style={[(this.props.styleTab1 == 2) ? commonStyles.styleTab2First(i18n.t('common:dir')) : this.props.styleTab1,
-						{ backgroundColor: (this.state.activeTab == 1) ? this.props.activeTabColor : this.props.inActiveTabColor, }]}
-							onPress={() => { this.changeTab(1) }}>
-							<Text style={commonStyles.tabTitle(i18n.t('common:dir'))}> {(this.props.tab1Text) ? this.props.tab1Text : i18n.t('location:locations')} </Text>
-						</TouchableOpacity>
-					</View>
+                <View style={(this.props.containerStyle) ? this.props.containerStyle : commonStyles.tab2First(i18n.t('common:dir'))}>
+                    <TouchableOpacity style={[(this.props.styleTab1 == 2) ? commonStyles.styleTab2First(i18n.t('common:dir')) : this.props.styleTab1,
+                    { backgroundColor: (this.state.activeTab == 1) ? this.props.activeTabColor : this.props.inActiveTabColor, }]}
+                        onPress={() => { this.changeTab(1) }}>
+                        <Text style={commonStyles.tabTitle(i18n.t('common:dir'))}> {(this.props.tab1Text) ? this.props.tab1Text : i18n.t('location:locations')} </Text>
+                    </TouchableOpacity>
+                </View>
 
-					<View style={(this.props.tab2 != null) ? (this.props.containerStyle) ? this.props.containerStyle : commonStyles.tab2Middle(i18n.t('common:dir')) : commonStyles.displayNone}>
-						<TouchableOpacity style={[(this.props.styleTab2 == 2) ? commonStyles.styleTab2Middle(i18n.t('common:dir')) : this.props.styleTab2,
-						{ backgroundColor: (this.state.activeTab == 2) ? this.props.activeTabColor : this.props.inActiveTabColor }]}
-							onPress={() => { this.changeTab(2) }}>
-							<Text style={commonStyles.tabTitle(i18n.t('common:dir'))}> {(this.props.tab2Text) ? this.props.tab2Text : i18n.t('schedule:schedules')} </Text>
-						</TouchableOpacity>
-					</View>
+                <View style={(this.props.tab2 != null) ? (this.props.containerStyle) ? this.props.containerStyle : commonStyles.tab2Middle(i18n.t('common:dir')) : commonStyles.displayNone}>
+                    <TouchableOpacity style={[(this.props.styleTab2 == 2) ? commonStyles.styleTab2Middle(i18n.t('common:dir')) : this.props.styleTab2,
+                    { backgroundColor: (this.state.activeTab == 2) ? this.props.activeTabColor : this.props.inActiveTabColor }]}
+                        onPress={() => { this.changeTab(2) }}>
+                        <Text style={commonStyles.tabTitle(i18n.t('common:dir'))}> {(this.props.tab2Text) ? this.props.tab2Text : i18n.t('schedule:schedules')} </Text>
+                    </TouchableOpacity>
+                </View>
 
-					<View style={(this.props.tab3) ? (this.props.containerStyle) ? this.props.containerStyle : commonStyles.tab2Second(i18n.t('common:dir')) : commonStyles.displayNone}>
-						<TouchableOpacity style={[(this.props.styleTab1 == 2) ? commonStyles.styleTab2Second(i18n.t('common:dir')) : this.props.styleTab2,
-						{ backgroundColor: (this.state.activeTab == 3) ? this.props.activeTabColor : this.props.inActiveTabColor }]}
-							onPress={() => { this.changeTab(3) }}>
-							<Text style={commonStyles.tabTitle(i18n.t('common:dir'))}> {(this.props.tab3Text) ? this.props.tab3Text : i18n.t('scenario:scenarios')} </Text>
-						</TouchableOpacity>
-					</View>
+                <View style={(this.props.tab3) ? (this.props.containerStyle) ? this.props.containerStyle : commonStyles.tab2Second(i18n.t('common:dir')) : commonStyles.displayNone}>
+                    <TouchableOpacity style={[(this.props.styleTab1 == 2) ? commonStyles.styleTab2Second(i18n.t('common:dir')) : this.props.styleTab2,
+                    { backgroundColor: (this.state.activeTab == 3) ? this.props.activeTabColor : this.props.inActiveTabColor }]}
+                        onPress={() => { this.changeTab(3) }}>
+                        <Text style={commonStyles.tabTitle(i18n.t('common:dir'))}> {(this.props.tab3Text) ? this.props.tab3Text : i18n.t('scenario:scenarios')} </Text>
+                    </TouchableOpacity>
+                </View>
 
-					<View style={(this.props.tab4) ? (this.props.containerStyle) ? this.props.containerStyle : commonStyles.tab2First(i18n.t('common:dir')) : commonStyles.displayNone}>
-						<TouchableOpacity style={[(this.props.styleTab1 == 2) ? commonStyles.styleTab2First(i18n.t('common:dir')) : this.props.styleTab1,
-						{ backgroundColor: (this.state.activeTab == 4) ? this.props.activeTabColor : this.props.inActiveTabColor }]}
-							onPress={() => { this.changeTab(4) }}>
-							<Text style={commonStyles.tabTitle(i18n.t('common:dir'))}> {(this.props.tab4Text) ? this.props.tab4Text : i18n.t('thermometer:thermometer')} </Text>
-						</TouchableOpacity>
-					</View>
+                <View style={(this.props.tab4) ? (this.props.containerStyle) ? this.props.containerStyle : commonStyles.tab2First(i18n.t('common:dir')) : commonStyles.displayNone}>
+                    <TouchableOpacity style={[(this.props.styleTab1 == 2) ? commonStyles.styleTab2First(i18n.t('common:dir')) : this.props.styleTab1,
+                    { backgroundColor: (this.state.activeTab == 4) ? this.props.activeTabColor : this.props.inActiveTabColor }]}
+                        onPress={() => { this.changeTab(4) }}>
+                        <Text style={commonStyles.tabTitle(i18n.t('common:dir'))}> {(this.props.tab4Text) ? this.props.tab4Text : i18n.t('thermometer:thermometer')} </Text>
+                    </TouchableOpacity>
+                </View>
 
 				</View>
 			</View>
@@ -215,7 +215,7 @@ class OutputItem extends React.PureComponent {
                     udpOut.sendUdpPacket("", "", true, this.timeoutOutputRetryUdp).then(
 						dataOutUdp => {
 							getResponse = 1
-							
+
 							queueRIndex = ((queueRIndex+1) >= 4) ? 0 : (queueRIndex+1)
 
 //							console.log("get clicked : " + outputId + "---"+params1[0]+"-"+dataOutUdp[5]+"-----"+params1[2]+"-"+dataOutUdp[6])
@@ -238,7 +238,7 @@ class OutputItem extends React.PureComponent {
 										inClickOutput = 0
 										ennnd2 = new Date().getTime()
 //										console.log("END 2 GET CLICKED: " + (ennnd2 - before) + "---id: " + outputId)
-										//	                                                                                                 
+										//
 									});
 
 								}
@@ -492,7 +492,15 @@ export class RGBItem extends React.PureComponent {
 	colorChange(color) {
 		clickRGB = 1
 //		console.log("new color: " + color)
-		this.setState({ color })
+        if(this.state.mode != 1)
+		{this.setState({
+		    color: color,
+		    mode: 1
+		    })
+		    }
+		else
+		{this.setState({color})  }
+
 	}
 
 	onColorChange(color, mode, speed) {
@@ -566,11 +574,12 @@ export class RGBItem extends React.PureComponent {
 							</View>
 						</TouchableHighlight>
 						: null}
-					<TriangleColorPicker
+					<ColorPicker
 						color={this.state.color}
 						done={this.state.done}
 						onColorChange={color => this.colorChange(color)}
-						onReleaseTouch={done => {
+                        hideSliders={true}
+						onColorSelected={done => {
 							//	                    console.log("done : " + "`$done`" + "---" + this.state.done);
 							// Set state mode to 1. After change color by hand, Static mode should be set.
 							this.setState({ mode: 1 })
@@ -578,7 +587,7 @@ export class RGBItem extends React.PureComponent {
 						}
 						}
 						style={(this.state.visible == true) ?
-							(screenHeight > 650 || (screenHeight > screenWidth)) ? { height: '95%', paddingTop: 5 } : { height: screenHeight - 375, paddingTop: 5 }
+							(screenHeight > 650 || (screenHeight > screenWidth)) ? { height: '100%', paddingTop: 5 } : { height: screenHeight - 375, paddingTop: 5 }
 							:
 							commonStyles.displayNone}
 					/>
@@ -690,7 +699,7 @@ class CurtainItem extends React.PureComponent {
 		getResponse = 0
 		getError = 0
 		timeout = ""
-		
+
 		Curtain.runCurtain(this.props.type_id, this.props.type, command, 1).then(
 			data => {
 				getResponse = 1
@@ -700,7 +709,7 @@ class CurtainItem extends React.PureComponent {
 		)
 		.catch(error => {
 			getError = 1
-		})		
+		})
 
 		timeout = setTimeout(() => {
 			if(getResponse == 0 || getError == 1){
@@ -713,7 +722,7 @@ class CurtainItem extends React.PureComponent {
 			}
 		}, 900);
 
-		
+
 	}
 
 	render() {
