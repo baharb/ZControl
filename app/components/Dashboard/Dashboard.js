@@ -1649,6 +1649,7 @@ export class Dashboard extends React.PureComponent {
 					mode = dataRGB[i]
 					i++;
 					r = String(dataRGB[i])
+                    console.log()
 					i++
 					g = String(dataRGB[i])
 					i++
@@ -1658,9 +1659,11 @@ export class Dashboard extends React.PureComponent {
 					rgbArray[j].mode = mode
 
 					//			col = (r != 0 && g != 0 && b != 0) ? tinycolor("rgb("+r+", "+g+", "+b+")").toHexString() : "#ff0096"
-					rgbArray[j].color = (r != "" && g != "" && b != "") ? tinycolor("rgb(" + r + ", " + g + ", " + b + ")").toHexString() : "#ff0096"
+					rgbArray[j].color = ((r != "" && g != "" && b != "") && (mode != 0)) ? tinycolor("rgb(" + r + ", " + g + ", " + b + ")").toHexString() : "#ff0096"
 
-					//			console.log("id: " + (j+1) +"--Color: " + rgbArray[j].color +"--speed: " + rgbArray[j].speed + "--mode: " + rgbArray[j].mode)
+//                    if(j == 0){
+//					console.log("id: " + (j+1) +"--Color: " + rgbArray[j].color +"--speed: " + rgbArray[j].speed + "--mode: " + rgbArray[j].mode)
+//                    }
 
 					j++;
 				}
