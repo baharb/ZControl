@@ -809,7 +809,7 @@ export default commonStyles = StyleSheet.create({
     padding: 1
   }),
   locationHeight: { height:Dimensions.get('window').height},
-  locationHeightHor: { height:Dimensions.get('window').height - 80},
+  locationHeightHor: { height:Dimensions.get('window').height - 90},
   locationsDashboard: {paddingBottom:150, flex:1},
   iconList: (dir) => ({
     flex:1,  
@@ -1045,7 +1045,7 @@ viewTabStyle: (dir) => ({
 viewTabStyleHor: (dir) => ({
 	flex:1,
           flexDirection:(dir === 'right') ? 'row-reverse' : 'row',
-          height:50,
+          height:45,
           alignContent:'center',
           width:'100%',
           justifyContent:'center',
@@ -1057,18 +1057,18 @@ viewTabStyleHor: (dir) => ({
 tabRgb: {flex: 1, padding: 10, height:Dimensions.get('window').height - 380},
 tabRgbHor: {flex: 1, padding: 10, height:Dimensions.get('window').height - 320},
 containerStyle: {flex:1, height: (Dimensions.get('window').height) > 867 ? 55 : 50},
-containerStyleHor: {flex:1, height: 53},
+containerStyleHor: {flex:1, height: 45},
 viewTabStyleTop: (dir) => ({
 	flex:1,
 	flexDirection:(dir === 'right') ? 'row-reverse' : 'row',
 	height:50,
 	alignContent:'center',
 	width:'100%',
-    justifyContent:'center',
-    alignItems:'center',
-    position:'absolute',
-    top:0,
-    left:0
+          justifyContent:'center',
+          alignItems:'center',
+          position:'absolute',
+          top:0,
+          left:0
 }),
 viewTabStyleTS: (dir) => ({
 	flex:1,

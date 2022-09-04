@@ -2,7 +2,7 @@ import React from 'react';
 import { translate} from 'react-i18next';
 import { KeyboardAvoidingView, ScrollView, View, Text, TextInput, Dimensions, TouchableHighlight, TouchableOpacity, Image} from 'react-native';
 import {Picker} from '@react-native-community/picker';
-import { ColorPicker  } from 'react-native-color-picker';
+import { TriangleColorPicker  } from 'react-native-color-picker';
 import tinycolor from 'tinycolor2';
 import LinearGradient from 'react-native-linear-gradient';
 import commonStyles from '../Common/css/commonStyles';
@@ -386,46 +386,45 @@ export class TouchSwitchSetting extends React.Component {
                                  <View style={{flex:1}}>
                                         <View style={{flex:6}}>
 				<TabItem
-		          tab1=
+		                              tab1=
 						{<View style={{flex:1, marginTop:50}}>
-                    <ColorPicker
-                        color={this.state.color}
-                        hideSliders={true}
-                        onColorSelected={color => {
-                            if(this.state.modeRgb != 1){this.setState({modeRgb:1})}
-                            this.colorChange(color) }
-                        }
-                        onReleaseTouch={done => {
-                                  this.saveTouchSwitch(1,1)
-                        }}
-                        style={{height: '100%'}}
-                      /></View>}
-                        tab2=
-                      {
-                                  <View style={{flex:1, marginTop:50, flexDirection:'column', paddingRight: 10, paddingLeft: 10}}>
-                                  <View style={[commonStyles.listViewTouchView(i18n.t('common:dir'))]}>
-                                  <View style={commonStyles.flex3}>
-                                      <Text style={commonStyles.txtItemLabelSchedule(i18n.t('common:dir'))}>{i18n.t('rgb:mode')}</Text>
-                                  </View>
-                                <View style={[commonStyles.pickerField(i18n.t('common:dir')), commonStyles.viewPickerRgb(i18n.t('common:dir'))]} >
-                                  <Picker
-                                        selectedValue={this.state.modeRgb}
-                                        style={commonStyles.rgbPickerDashboard}
-                                        itemStyle={commonStyles.rgbItemStylePicker(i18n.t("common:dir"))}
-                                        onValueChange={(itemValue, itemIndex) => {
+		                                    <TriangleColorPicker
+		                                        color={this.state.color}
+		                                        onColorChange={color => {
+			                                        if(this.state.modeRgb != 1){this.setState({modeRgb:1})}
+			                                        this.colorChange(color) }
+		                                        }
+		                                        onReleaseTouch={done => {
+		                                                  this.saveTouchSwitch(1,1)
+		                                        }}
+		                                        style={{height: '100%'}}
+		                                      /></View>}
+		                              tab2=
+		                                      {
+                                                          <View style={{flex:1, marginTop:50, flexDirection:'column', paddingRight: 10, paddingLeft: 10}}>
+                                                          <View style={[commonStyles.listViewTouchView(i18n.t('common:dir'))]}>
+                                                          <View style={commonStyles.flex3}>
+                                                              <Text style={commonStyles.txtItemLabelSchedule(i18n.t('common:dir'))}>{i18n.t('rgb:mode')}</Text>
+                                                          </View>
+                                                        <View style={[commonStyles.pickerField(i18n.t('common:dir')), commonStyles.viewPickerRgb(i18n.t('common:dir'))]} >
+                                                          <Picker
+                                                                selectedValue={this.state.modeRgb}
+                                                                style={commonStyles.rgbPickerDashboard}
+                                                                itemStyle={commonStyles.rgbItemStylePicker(i18n.t("common:dir"))}
+                                                                onValueChange={(itemValue, itemIndex) => {
 //                                                                                  console.log("Mode: " + this.state.modeRgb)
-                                                  this.setState({modeRgb: itemValue})
-                                          }
-                                   }>
-                                            <Picker.Item label={i18n.t("rgb:modeOff")} value={0} />
-                                            <Picker.Item label={i18n.t("rgb:modeStatic")} value={1} />
-                                            <Picker.Item label={i18n.t("rgb:modeFade3")} value={2} />
-                                            <Picker.Item label={i18n.t("rgb:modeFade12")} value={3} />
-                                            <Picker.Item label={i18n.t("rgb:modeSw3")} value={4} />
-                                            <Picker.Item label={i18n.t("rgb:modeSw12")} value={5} />
-                                   </Picker>
-                              </View>
-                       </View>
+                                                                          this.setState({modeRgb: itemValue})
+                                                                  }
+                                                           }>
+                                                                    <Picker.Item label={i18n.t("rgb:modeOff")} value={0} />
+                                                                    <Picker.Item label={i18n.t("rgb:modeStatic")} value={1} />
+                                                                    <Picker.Item label={i18n.t("rgb:modeFade3")} value={2} />
+                                                                    <Picker.Item label={i18n.t("rgb:modeFade12")} value={3} />
+                                                                    <Picker.Item label={i18n.t("rgb:modeSw3")} value={4} />
+                                                                    <Picker.Item label={i18n.t("rgb:modeSw12")} value={5} />
+                                                           </Picker>
+                                                      </View>
+                                               </View>
                                                <View style={[commonStyles.listViewTouchView(i18n.t('common:dir'))]}>
                                                                  <View style={commonStyles.flex3}>
                                                                      <Text style={commonStyles.txtItemLabelSchedule(i18n.t('common:dir'))}>{i18n.t('rgb:speed')}</Text>
