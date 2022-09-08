@@ -16,7 +16,7 @@ import Commands from '../Common/vars/commands';
 import CommonFunctions from '../Common/lib/CommonFunctions';
 import Slider from '@react-native-community/slider';
 import Curtain from '../Curtain/lib/Curtain';
-import { TriangleColorPicker, ColorPicker } from 'react-native-color-picker';
+import { ColorPicker } from 'react-native-color-picker';
 import {Picker} from '@react-native-community/picker';
 
 import tinycolor from 'tinycolor2'

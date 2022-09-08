@@ -154,7 +154,7 @@ export class TouchSwitchSetting extends React.Component {
                     start = dataRGB[7];
                     end = dataRGB[8];
 //                    console.log("Data get from controller: " + modeRgb +"---" + r +"---" + g+"---"+b+"---"+speed+"--"+start+"---"+end)
-                    color = (r != "" && g != "" && b != "") ? tinycolor("rgb("+r+", "+g+", "+b+")").toHexString() : "#ff0096"
+                    color = ((r != "" && g != "" && b != "") && (modeRgb != 0)) ? tinycolor("rgb("+r+", "+g+", "+b+")").toHexString() : "#ff0096"
 
                     this.setState({
                         modeRgb: modeRgb,
@@ -382,24 +382,27 @@ export class TouchSwitchSetting extends React.Component {
                 ) : (null) }
 
 	       {(this.state.mode == Vars.modeUpdate) ?
-                                 (
-                                 <View style={{flex:1}}>
-                                        <View style={{flex:6}}>
+                 (
+                 <View style={{flex:1}}>
+                        <View style={{flex:6}}>
 				<TabItem
 		          tab1=
-						{<View style={{flex:1, marginTop:50}}>
+					{<View style={{flex:1, marginTop:50}}>
                     <ColorPicker
                         color={this.state.color}
-                        hideSliders={true}
-                        onColorSelected={color => {
+                        onColorChange={color => {
                             if(this.state.modeRgb != 1){this.setState({modeRgb:1})}
                             this.colorChange(color) }
                         }
-                        onReleaseTouch={done => {
-                                  this.saveTouchSwitch(1,1)
+                        hideSliders={true}
+                        onColorSelected={done => {
+                                this.saveTouchSwitch(1,1)
                         }}
                         style={{height: '100%'}}
-                      /></View>}
+
+                      />
+
+                      </View>}
                         tab2=
                       {
                                   <View style={{flex:1, marginTop:50, flexDirection:'column', paddingRight: 10, paddingLeft: 10}}>

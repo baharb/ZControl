@@ -473,7 +473,7 @@ export default commonStyles = StyleSheet.create({
           padding: 3,
           justifyContent:'center',
           fontFamily: (dir === 'right') ? 'Vazir-Medium' : 'Nunito-Bold',
-          fontSize: 20,
+          fontSize: 19,
           color:'#b08dbf'
   }),
   titleLocationHorDashboard: (dir) => ({

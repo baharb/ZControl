@@ -590,7 +590,7 @@ export class ScenarioSetting extends React.Component {
             if((checkedO[i] == true) && ((i+1) == item.id)){
                 selectedOutputs.push(
                    <View key={i}  style={commonStyles.listViewTouchView(i18n.t('common:dir'))} >
-                   <View style={commonStyles.listImg}><Image source={ImageVars.outputIconArray[item.icon]}></Image></View>
+                   <View style={commonStyles.listImg}><Image source={ImageVars.outputIconLightArray[item.icon]}></Image></View>
 
                    <CheckBox
                         onChange={(checked) => {
