@@ -227,10 +227,12 @@ export default class InputEvent {
 
             j = 7;
             allOutputsLen = outputs.length;
+//            console.log("output id: "+inputEventIns.inputEventType +"--- out len: " + allOutputsLen)
 
             // Output Type
             if (inputEventIns.inputEventType == 1) {
                 for (i = 0; i < allOutputsLen; i++) {
+//                console.log("id: " + i + "---" + checkedOutputs[i])
                     if (checkedOutputs[i] == true) {
                         id = 0
 
@@ -244,6 +246,9 @@ export default class InputEvent {
                         inputEventBytes[j] = id;
                         inputEventBytes[++j] = outputs[i].value;
                         inputEventBytes[++j] = (outputs[i].operand << 4) | outputs[i].type;
+
+//                        console.log("output id: " + id + '-- val: ' + outputs[i].value + "-- operan:" + outputs[i].operand +
+//                        '-- type: ' + outputs[i].type + "----" + ((outputs[i].operand << 4) | outputs[i].type))
 
                         // todo: operand , type
                         ++j;

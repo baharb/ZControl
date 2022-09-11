@@ -455,7 +455,7 @@ export class InputEventSetting extends React.Component {
       dataOutput => {
          for(ii=0; ii < dataOutput.length; ii++){
              dataOutput[ii].value = 2;
-             dataOutput[ii].operand = 0
+             dataOutput[ii].operand = 2
          }
 
         this.setState({
