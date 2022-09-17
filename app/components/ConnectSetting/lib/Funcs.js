@@ -1,6 +1,6 @@
 import { translate} from 'react-i18next';
 import Vars from '../../Common/vars/commonVars';
-import WifiManager from 'react-native-wifi';
+import WifiManager from 'react-native-wifi-reborn';
 import CommonFunctions from '../../Common/lib/CommonFunctions';
 import React from 'react';
 import {AsyncStorage} from 'react-native';

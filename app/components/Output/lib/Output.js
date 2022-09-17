@@ -244,7 +244,7 @@ export default class Output {
                                     resolve(outputsArray)
                                 }
                             ).catch(error => {
-                                console.log(error + "eeeeeeeeeeeee")
+//                                console.log(error + "eeeeeeeeeeeee")
                                 //                            alert(i18n.t("output:errorSaveOutputLocationInDB"));
                                 reject(error)
                             });

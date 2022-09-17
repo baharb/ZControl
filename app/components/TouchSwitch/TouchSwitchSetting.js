@@ -210,7 +210,9 @@ export class TouchSwitchSetting extends React.Component {
 	            setTimeout(() => this.refs.titleTextInput.focus(), 150)
 	        }
 	        else{
-
+                this.setState({
+                    spinner: true,
+                })
 	            touchSwitchIns = new Object();
 	            touchSwitchIns.title = this.state.touchSwitchTitle;
 	            touchSwitchIns.flag = this.state.touchSwitchFlag;
@@ -285,13 +287,19 @@ export class TouchSwitchSetting extends React.Component {
 	                                touchSwitch.updateTouchSwitchInDB(touchSwitchIns).then(
 	                                    data1 => {
 	                                        if(data1 == true){
+	                                            this.setState({
+                                                    spinner: false,
+                                                })
 	                                            this.props.navigation.navigate('TouchSwitchPage');
 	                                        }
 	                                    }
 	                                )
 	                                .catch(
 	                                    error => {
-//	                                        console.log("eror2 " + error)
+	                                     this.setState({
+                                            spinner: false,
+                                        })
+	                                        console.log("eror2 " + error)
 	                                        alert(this.props.t("touchSwitch:errorSaveTouchSwitch"))
 	                                    }
 	                                );
@@ -299,9 +307,12 @@ export class TouchSwitchSetting extends React.Component {
 	                        )
 	                        .catch(
 	                            error => {
-	                                alert(this.props.t("touchSwitch:errorSaveTouchSwitch"))
+                                    this.setState({
+                                        spinner: false,
+                                    })
 
-//	                                console.log("eror3 " + error)
+	                                alert(this.props.t("touchSwitch:errorSaveTouchSwitch"))
+	                                console.log("eror3 " + error)
 	                            }
 	                        );
 	                    }

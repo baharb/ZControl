@@ -250,18 +250,6 @@ export default class UDP {
 //                                        packetFailed++
                                 }
                             })
-//                            console.log("dgram: " + dgramSocket + "----" + dgramSocket.length)
-//                            dgramSocket = dgram.createSocket({
-//                                type: 'udp4',
-//                                debug: true,
-//                                reusePort: true
-//                            });
-
-                            //                     }
-
-                            // if(client == 0){
-
-//                            }, 30);
 
 
                             counter = 1;
@@ -362,6 +350,7 @@ export default class UDP {
                                     }
                                 }
                                 else {
+                                    console.log("Data len is 0")
 //                                    dgramSocket.close()
                                     reject(false)
                                 }

@@ -4,7 +4,7 @@ import UDP from '../../Common/lib/UDP';
 import Commands from '../../Common/vars/commands';
 import Vars from '../../Common/vars/commonVars';
 import CommonFunctions from '../../Common/lib/CommonFunctions';
-import WifiManager from 'react-native-wifi';
+import WifiManager from 'react-native-wifi-reborn';
 import tinycolor from 'tinycolor2';
 
 export default class TouchSwitch  {
@@ -124,7 +124,7 @@ export default class TouchSwitch  {
                     offset += secretKeyBytes.length;                    
                     params[offset] = touchSwitch.type;
 //
-//                   console.log("eeeeeeeeeeeee: " +password.toString() + "--" + ssid.toString() + "---" + securityKey.toString()+ "---"+ offset + "---" + touchSwitch.type +"----params:" + params[0] + "-" + params[1] + "-" + params[2] + "-" + params[3] + "-" +
+//                   console.log("eeeeeeeeeeeee: " +password.toString() + "--" + ssid.toString() + "---" )
 //                      + params[4] + "-" + params[5] + "-" + params[6] + "-" + params[7] + "-" +
 //                      + params[8] + "-" + params[9] + "-" + params[10] + "-" + params[11] + "-" +
 //                      + params[12] + "-" + params[13] + "-" + params[14] + "-" + params[15] + "-" +
@@ -143,29 +143,42 @@ export default class TouchSwitch  {
                                 }
                                 else{
                                     WifiManager.connectToProtectedSSID(ssid.toString(), password.toString(), true)
-                                        .then( data => {
-//                                            console.log(ssid+"--"+password)
+                                    .then( data => {
+                                            console.log(ssid+"--"+password)
+                                            setTimeout(() =>
+                                                resolve(true)
+                                            , 11000);
+
                                         }
                                     )
                                     .catch(error => {
-//                                        console.log("e 6" +error)
+//                                        console.log("error connect 6" +error)
+
+                                        // If disconnect
+                                         setTimeout(() =>
+                                           {
+                                                resolve(true)
+                                            }
+                                           , 20000);
                                     })
 
-                                    resolve(true)
+
                                 }
                             }
                         }
                     )
                     .catch(error => {
-                        alert(i18n.t("touchSwitch:errorSaveTouchSwitch"))
-//                        console.log("error in save key "+error)
+                        //alert(i18n.t("touchSwitch:errorSaveTouchSwitch"))
+                        console.log("error in save key "+error)
+                         reject(false)
                         })
 
                 }
              )
              .catch(error => {
-                 alert(i18n.t("touchSwitch:errorSaveTouchSwitch"))
-//                 console.log("error 5 " + error)
+                 //alert(i18n.t("touchSwitch:errorSaveTouchSwitch"))
+                 console.log("error 5 " + error)
+                 reject(false)
              });
 
        }) // End Promise

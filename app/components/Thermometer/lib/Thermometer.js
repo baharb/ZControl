@@ -5,7 +5,7 @@ import Vars from '../../Common/vars/commonVars';
 import Commands from '../../Common/vars/commands';
 import CommonFunctions from '../../Common/lib/CommonFunctions';
 import InputEvent from '../../InputEvent/lib/InputEvent';
-import WifiManager from 'react-native-wifi';
+import WifiManager from 'react-native-wifi-reborn';
 
  export default class Thermometer  {
 

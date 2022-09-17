@@ -124,6 +124,7 @@ export class OutputPage extends React.Component {
     onClickCancel(){
           this.setState({alertMod:false})
     }
+
     /// Main show page
     render() {
         const renderItem = ({item}) => (

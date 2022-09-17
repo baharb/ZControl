@@ -4,7 +4,7 @@ import UDP from '../../Common/lib/UDP';
 import Vars from '../../Common/vars/commonVars';
 import CommonFunctions from '../../Common/lib/CommonFunctions';
 import Commands from '../../Common/vars/commands';
-import WifiManager from 'react-native-wifi';
+import WifiManager from 'react-native-wifi-reborn';
 
  export default class Curtain  {
 
