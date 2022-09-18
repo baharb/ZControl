@@ -18,6 +18,7 @@ import Slider from '@react-native-community/slider';
 import Curtain from '../Curtain/lib/Curtain';
 import { ColorPicker } from 'react-native-color-picker';
 import {Picker} from '@react-native-community/picker';
+import { WebView } from 'react-native-webview';
 
 import tinycolor from 'tinycolor2'
 import RadioForm from 'react-native-simple-radio-button';
@@ -1164,6 +1165,7 @@ export class Dashboard extends React.PureComponent {
 			spinner: false,
 			selectedThermometer: 1, // todo: change to first thermostat in Location
 			disabled: false,
+			arrowSchedule: "arrow-drop-down"
 		}
 
 		//    this.stopUpdate = 0;
@@ -2124,13 +2126,54 @@ export class Dashboard extends React.PureComponent {
 								</View>
 							</View>
 
-							<View style={commonStyles.flex2}>
+                            {(screenHeight > 400) ?
+							<View style={commonStyles.flex3}>
+							     <View style={(this.state.arrowSchedule == "arrow-drop-up") ? commonStyles.horizontalViewTradingHide :
+							                                                                  commonStyles.horizontalViewTrading} >
+                                     <WebView
+                                             originWhitelist={['*']}
+                                             source={{ html:
+                                              '<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>'+
+                                              '<script type="text/javascript">'+
+                                              'var tradingview_embed_options = {};'+
+                                              'tradingview_embed_options.width = "1000";'+
+                                              'tradingview_embed_options.height = "700";'+
+                                              'tradingview_embed_options.chart = "eX7exSwj";'+
+                                              'new TradingView.chart(tradingview_embed_options);'+
+                                              '</script>'
+                                              }}
+                                           />
+                                            <WebView
+                                                originWhitelist={['*']}
+                                                source={{ html:
+                                                 '<script type="text/javascript" src="http://nerkhbox.com/webmasters/gold/Gold_5.php"></script>'+
+                                                 '<script type="text/javascript">'+
+                                                 'var tradingview_embed_options = {};'+
+                                                 'tradingview_embed_options.width = "1000";'+
+                                                 'tradingview_embed_options.height = "700";'+
+                                                 'tradingview_embed_options.chart = "admGhVz7";'+
+                                                 'new TradingView.chart(tradingview_embed_options);'+
+                                                 '</script>'
+                                                 }}
+                                              />
+
+                                 </View>
 								{(this.state.schedules != "") ?
-									<View style={commonStyles.horizontalViewSchedules} >
-										<View style={commonStyles.titleScenarioViewHor(i18n.t('common:dir'))}>
-											<Text style={commonStyles.titleScenarioHor(i18n.t('common:dir'))}>{i18n.t('schedule:schedules')}</Text>
+									<View style={(this.state.arrowSchedule == "arrow-drop-up") ? commonStyles.horizontalViewSchedulesTrading :
+									                                                             commonStyles.horizontalViewSchedulesTradingHide} >
+										<View style={commonStyles.titleScenarioViewHorTrading(i18n.t('common:dir'))}>
+											<Text style={commonStyles.titleScheduleHorTrading(i18n.t('common:dir'))}>{i18n.t('schedule:schedules')}</Text>
+											<TouchableHighlight
+                                                onPress={() => this.setState({ arrowSchedule: (this.state.arrowSchedule == "arrow-drop-up") ? "arrow-drop-down" : "arrow-drop-up" })} >
+                                                <Icon
+                                                    size={45}
+                                                    color={'#fff'}
+                                                    name={this.state.arrowSchedule}
+                                                />
+                                            </TouchableHighlight>
 										</View>
 
+                                        {(this.state.arrowSchedule == "arrow-drop-up") ?
 										<View style={commonStyles.schedulesFlatlistDashboard}>
 											<FlatList
 												keyExtractor={(item, index) => String("sch-" + item.id)}
@@ -2138,14 +2181,15 @@ export class Dashboard extends React.PureComponent {
 												renderItem={schedules}
 											/>
 										</View>
+										:
+										null
+										}
 
 									</View>
 									: null
 								}
-								<View style={commonStyles.horizontalViewScenarios} >
-									<View style={commonStyles.titleScenarioViewHor(i18n.t('common:dir'))}>
-										<Text style={commonStyles.titleScenarioHor(i18n.t('common:dir'))}>{i18n.t('scenario:scenarios')}</Text>
-									</View>
+								<View style={commonStyles.horizontalViewScenariosTrading} >
+
 									<FlatList
 										keyExtractor={(item, index) => String(index)}
 										data={this.state.scenarios}
@@ -2154,6 +2198,38 @@ export class Dashboard extends React.PureComponent {
 									/>
 								</View>
 							</View>
+							:
+							<View style={commonStyles.flex2}>
+                                {(this.state.schedules != "") ?
+                                    <View style={commonStyles.horizontalViewSchedules} >
+                                        <View style={commonStyles.titleScenarioViewHor(i18n.t('common:dir'))}>
+                                            <Text style={commonStyles.titleScenarioHor(i18n.t('common:dir'))}>{i18n.t('schedule:schedules')}</Text>
+                                        </View>
+
+                                        <View style={commonStyles.schedulesFlatlistDashboard}>
+                                            <FlatList
+                                                keyExtractor={(item, index) => String("sch-" + item.id)}
+                                                data={this.state.schedules.filter((schIns) => schIns.status == 1)}
+                                                renderItem={schedules}
+                                            />
+                                        </View>
+
+                                    </View>
+                                    : null
+                                }
+                                <View style={commonStyles.horizontalViewScenarios} >
+                                    <View style={commonStyles.titleScenarioViewHor(i18n.t('common:dir'))}>
+                                        <Text style={commonStyles.titleScenarioHor(i18n.t('common:dir'))}>{i18n.t('scenario:scenarios')}</Text>
+                                    </View>
+                                    <FlatList
+                                        keyExtractor={(item, index) => String(index)}
+                                        data={this.state.scenarios}
+                                        renderItem={scenarios}
+                                        horizontal={true}
+                                    />
+                                </View>
+                            </View>
+							}
 
 						</View>
 					</LinearGradient>

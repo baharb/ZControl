@@ -570,13 +570,23 @@ export default commonStyles = StyleSheet.create({
               height: 50,
               paddingLeft: (dir === 'right') ? 0 : 15,
               paddingRight: (dir === 'right') ? 15 : 0,
-//	    borderBottomWidth: 1,
-//	    borderBottomColor: '#fff'
-//              backgroundColor:'rgba(75, 31, 93, 0.9)'
+    }),
+  titleScenarioViewHorTrading: (dir) => ({
+              alignItems: 'center',
+              height: 50,
+              paddingLeft: (dir === 'right') ? 0 : 15,
+              paddingRight: (dir === 'right') ? 15 : 0,
+              flex:1,
+              flexDirection: 'row'
     }),
     horizontalViewPart: {flexDirection: 'column', flex:3, margin: 6, backgroundColor: '#1d0527', padding: 8, paddingTop: 2, borderRadius: 10},
     horizontalViewScenarios: {flexDirection: 'column', flex:1, margin: 6, backgroundColor: '#bb86d1', padding: 8, borderRadius: 10},
+    horizontalViewScenariosTrading: {flexDirection: 'column', flex:1, margin: 6, backgroundColor: '#bb86d1', padding: 8, borderRadius: 10},
     horizontalViewSchedules: {flexDirection: 'column', flex:1, margin: 6, backgroundColor: '#693d7c', padding: 8, borderRadius: 10},
+    horizontalViewSchedulesTradingHide: {flexDirection: 'column', flex:1, margin: 6, backgroundColor: '#693d7c', padding: 8, borderRadius: 10},
+    horizontalViewSchedulesTrading: {flexDirection: 'column', flex:4, margin: 6, backgroundColor: '#693d7c', padding: 8, borderRadius: 10},
+    horizontalViewTrading: {flexDirection: 'column', flex:4, margin: 6, backgroundColor: '#bb86d1', padding: 8, borderRadius: 10},
+    horizontalViewTradingHide: {flexDirection: 'column', flex:1, margin: 6, backgroundColor: '#bb86d1', padding: 8, borderRadius: 10},
   titleScenario: (dir) => ({
           alignItems: 'center',
           padding: 3,
@@ -591,6 +601,13 @@ export default commonStyles = StyleSheet.create({
           justifyContent:'center',
           fontFamily: (dir === 'right') ? 'Vazir-Medium' : 'Nunito-Bold',
           fontSize: 20,
+          color:'#fff'
+  }),
+  titleScheduleHorTrading: (dir) => ({
+          alignItems: 'center',
+          justifyContent:'center',
+          fontFamily: (dir === 'right') ? 'Vazir-Medium' : 'Nunito-Bold',
+          fontSize: 18,
           color:'#fff'
   }),
   scheduleItemDashboard: (dir) => ({
@@ -927,6 +944,7 @@ flex1:{flex: 1},
 flex2:{flex:2},
 flex3:{flex:3},
 flex5:{flex: 5},
+flex6:{flex: 6},
 flex8:{flex: 8},
 flex15:{flex:15},
 scheduleDaysView: {marginLeft:2, marginRight: 2, flex: 1},
