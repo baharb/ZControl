@@ -274,7 +274,6 @@ export default class UDP {
                                     else {
                                         send = 1
                                     }
-
                                 })
 
                                 if (!retryTimeout || retryTimeout <= 1) {
