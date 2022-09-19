@@ -540,10 +540,8 @@ export default commonStyles = StyleSheet.create({
           flexDirection: (dir === 'right') ? 'row-reverse':'row',
           paddingTop: 3,
    }),
-
    outputsFlatlistDashboard: {flex:1, marginTop: 50},
-   outputsFlatlistDashboardHor: {flex:1, marginTop: 45},
-//   outputsFlatlistDashboardHor: {flex:1, marginTop: 50},
+   outputsFlatlistDashboardHor: {flex:1, marginTop: 47},
    rgbsFlatlistDashboard: {flex:1, marginTop: 40,height:'100%'},
    thermsFlatlistDashboard: {marginTop: 50},
    thermsFlatlistDashboardHor: {marginTop: 42},
