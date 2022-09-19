@@ -2126,50 +2126,83 @@ export class Dashboard extends React.PureComponent {
 								</View>
 							</View>
 
-                            {(screenHeight > 400) ?
-							<View style={commonStyles.flex3}>
-							     <View style={(this.state.arrowSchedule == "arrow-drop-up") ? commonStyles.horizontalViewTradingHide :
-							                                                                  commonStyles.horizontalViewTrading} >
-                                     <WebView
-                                             originWhitelist={['*']}
-                                             source={{ html:
-                                              '<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>'+
-                                              '<script type="text/javascript">'+
-                                              'var tradingview_embed_options = {};'+
-                                              'tradingview_embed_options.width = "1000";'+
-                                              'tradingview_embed_options.height = "700";'+
-                                              'tradingview_embed_options.chart = "eX7exSwj";'+
-                                              'new TradingView.chart(tradingview_embed_options);'+
-                                              '</script>'
-                                              }}
-                                           />
-                                            <WebView
-                                                originWhitelist={['*']}
-                                                source={{ html:
-                                                 '<script type="text/javascript" src="http://nerkhbox.com/webmasters/gold/Gold_5.php"></script>'+
-                                                 '<script type="text/javascript">'+
-                                                 'var tradingview_embed_options = {};'+
-                                                 'tradingview_embed_options.width = "1000";'+
-                                                 'tradingview_embed_options.height = "700";'+
-                                                 'tradingview_embed_options.chart = "admGhVz7";'+
-                                                 'new TradingView.chart(tradingview_embed_options);'+
-                                                 '</script>'
-                                                 }}
-                                              />
 
-                                 </View>
+
+                            {(screenHeight > 400) ?
+                            <View style={commonStyles.flex3}>
+                             <View style={(this.state.arrowSchedule == "arrow-drop-up") ? commonStyles.horizontalViewTradingHide :
+                                                                                          commonStyles.horizontalViewTrading} >
+                            <TabItem
+                                tab1={
+                                  <View style={{flex:1, marginTop: 45, paddingLeft: 5, paddingRight:5, paddingBottom:3}}>
+                                  <WebView
+                                     originWhitelist={['*']}
+                                     source={{ html:
+                                      '<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>'+
+                                      '<script type="text/javascript">'+
+                                      'var tradingview_embed_options = {};'+
+                                      'tradingview_embed_options.width = "1000";'+
+                                      'tradingview_embed_options.height = "700";'+
+                                      'tradingview_embed_options.chart = "eX7exSwj";'+
+                                      'new TradingView.chart(tradingview_embed_options);'+
+                                      '</script>'
+                                      }}
+                                   />
+                                   </View>
+
+                                }
+
+                                tab2={
+                                   <View style={{flex:1, marginTop: 45, paddingLeft: 5, paddingRight:5}}>
+                                    <WebView
+                                    originWhitelist={['*']}
+                                    source={{ html:
+                                     '<script type="text/javascript" src="http://nerkhbox.com/webmasters/gold/Gold_5.php"></script>'+
+                                     '<script type="text/javascript">'+
+                                     'var tradingview_embed_options = {};'+
+                                     'tradingview_embed_options.width = "1000";'+
+                                     'tradingview_embed_options.height = "700";'+
+                                     'tradingview_embed_options.chart = "admGhVz7";'+
+                                     'new TradingView.chart(tradingview_embed_options);'+
+                                     '</script>'
+                                     }}
+                                  />
+                                  </View>
+                                }
+
+
+                                styleTab2={commonStyles.tab1Second(i18n.t('common:dir'))}
+
+                                styleTab1={commonStyles.tab1First(i18n.t('common:dir'))}
+
+
+                                viewStyle={commonStyles.viewTabStyleTop(i18n.t('common:dir'))}
+
+                                containerStyle={commonStyles.containerStyle}
+                                tab1Text={"Trading"}
+                                tab2Text={"$"}
+                                tab4Text={"$"}
+                                activeTabColor={'#eae5ec'}
+                                inActiveTabColor={'rgba(135,110,144,0.58)'}
+                                tabId={3}
+                            />
+                            </View>
+
 								{(this.state.schedules != "") ?
 									<View style={(this.state.arrowSchedule == "arrow-drop-up") ? commonStyles.horizontalViewSchedulesTrading :
 									                                                             commonStyles.horizontalViewSchedulesTradingHide} >
-										<View style={commonStyles.titleScenarioViewHorTrading(i18n.t('common:dir'))}>
-											<Text style={commonStyles.titleScheduleHorTrading(i18n.t('common:dir'))}>{i18n.t('schedule:schedules')}</Text>
+										<View >
 											<TouchableHighlight
                                                 onPress={() => this.setState({ arrowSchedule: (this.state.arrowSchedule == "arrow-drop-up") ? "arrow-drop-down" : "arrow-drop-up" })} >
+                                                <View style={commonStyles.titleScheduleViewHorTrading(i18n.t('common:dir'))}>
+                                                <Text style={commonStyles.titleScheduleHorTrading(i18n.t('common:dir'))}>{i18n.t('schedule:schedules')}</Text>
+
                                                 <Icon
                                                     size={45}
                                                     color={'#fff'}
                                                     name={this.state.arrowSchedule}
                                                 />
+                                                </View>
                                             </TouchableHighlight>
 										</View>
 

@@ -265,7 +265,7 @@ export default class UDP {
                                 dgramSocket.send(msgArray, 0, msgArray.length, port, ip, function (err) {
 //                                    console.log("ip "+ip +"--"+port)
                                     if (err) {
-                                        console.log("Error in  send: " + JSON.stringify(err) + "---");
+//                                        console.log("Error in  send: " + JSON.stringify(err) + "---");
 //                                        dgramSocket.close()
                                         freeSendPacket = true
                                         reject(false)
