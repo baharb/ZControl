@@ -1165,7 +1165,8 @@ export class Dashboard extends React.PureComponent {
 			spinner: false,
 			selectedThermometer: 1, // todo: change to first thermostat in Location
 			disabled: false,
-			arrowSchedule: "arrow-drop-down"
+			arrowSchedule: "arrow-drop-down",
+			arrowTrading: "arrow-drop-up",
 		}
 
 		//    this.stopUpdate = 0;
@@ -2132,7 +2133,23 @@ export class Dashboard extends React.PureComponent {
                             {(screenHeight > 400) ?
                             <View style={commonStyles.flex3}>
                              <View style={(this.state.arrowSchedule == "arrow-drop-up") ? commonStyles.horizontalViewTradingHide :
-                                                                                          commonStyles.horizontalViewTrading} >
+                                                                                        commonStyles.horizontalViewTrading} >
+                            <View>
+                             <TouchableHighlight
+                                  style={{height: 40, marginTop:40}}
+                                  onPress={() => this.setState({
+                                      arrowTrading: (this.state.arrowTrading == "arrow-drop-up") ? "arrow-drop-down" : "arrow-drop-up"  ,
+                                      arrowSchedule: (this.state.arrowSchedule == "arrow-drop-up") ? "arrow-drop-down" : "arrow-drop-up"
+                                  })} >
+
+                                  <Icon
+                                      size={45}
+                                      color={'#fff'}
+                                      name={this.state.arrowTrading}
+                                  />
+                             </TouchableHighlight>
+                             </View>
+                             <View style={{flex:1,marginTop: -40}}>
                             <TabItem
                                 tab1={
                                   <View style={{flex:1, marginTop: 45, paddingLeft: 5, paddingRight:5, paddingBottom:3}}>
@@ -2172,12 +2189,12 @@ export class Dashboard extends React.PureComponent {
                                 }
 
 
-                                styleTab2={commonStyles.tab1Second(i18n.t('common:dir'))}
 
-                                styleTab1={commonStyles.tab1First(i18n.t('common:dir'))}
+                                styleTab2={commonStyles.tab3Second(i18n.t('common:dir'))}
 
+                                styleTab1={commonStyles.tab3First(i18n.t('common:dir'))}
 
-                                viewStyle={commonStyles.viewTabStyleTop(i18n.t('common:dir'))}
+                                viewStyle={commonStyles.viewTabStyleTrading(i18n.t('common:dir'))}
 
                                 containerStyle={commonStyles.containerStyle}
                                 tab1Text={"Trading"}
@@ -2188,21 +2205,26 @@ export class Dashboard extends React.PureComponent {
                                 tabId={3}
                             />
                             </View>
+                            </View>
 
-								{(this.state.schedules != "") ?
+							{(this.state.schedules != "") ?
 									<View style={(this.state.arrowSchedule == "arrow-drop-up") ? commonStyles.horizontalViewSchedulesTrading :
 									                                                             commonStyles.horizontalViewSchedulesTradingHide} >
-										<View >
+										<View>
 											<TouchableHighlight
-                                                onPress={() => this.setState({ arrowSchedule: (this.state.arrowSchedule == "arrow-drop-up") ? "arrow-drop-down" : "arrow-drop-up" })} >
+                                                onPress={() => this.setState({
+                                                    arrowSchedule: (this.state.arrowSchedule == "arrow-drop-up") ? "arrow-drop-down" : "arrow-drop-up" ,
+                                                    arrowTrading: (this.state.arrowTrading == "arrow-drop-up") ? "arrow-drop-down" : "arrow-drop-up"
+                                                 })} >
                                                 <View style={commonStyles.titleScheduleViewHorTrading(i18n.t('common:dir'))}>
-                                                <Text style={commonStyles.titleScheduleHorTrading(i18n.t('common:dir'))}>{i18n.t('schedule:schedules')}</Text>
-
                                                 <Icon
                                                     size={45}
                                                     color={'#fff'}
+                                                    style={{height: 40}}
                                                     name={this.state.arrowSchedule}
                                                 />
+                                                <Text style={commonStyles.titleScheduleHorTrading(i18n.t('common:dir'))}>{i18n.t('schedule:schedules')}</Text>
+
                                                 </View>
                                             </TouchableHighlight>
 										</View>

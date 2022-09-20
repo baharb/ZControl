@@ -573,18 +573,18 @@ export default commonStyles = StyleSheet.create({
   titleScheduleViewHorTrading: (dir) => ({
               alignItems: 'center',
               height: 35,
-              paddingLeft: (dir === 'right') ? 0 : 15,
-              paddingRight: (dir === 'right') ? 15 : 0,
+              paddingLeft: (dir === 'right') ? 0 : 5,
+              paddingRight: (dir === 'right') ? 5 : 0,
               flexDirection: 'row'
     }),
     horizontalViewPart: {flexDirection: 'column', flex:3, margin: 6, backgroundColor: '#1d0527', padding: 8, paddingTop: 2, borderRadius: 10},
     horizontalViewScenarios: {flexDirection: 'column', flex:1, margin: 6, backgroundColor: '#bb86d1', padding: 8, borderRadius: 10},
     horizontalViewScenariosTrading: {flexDirection: 'column', flex:2, margin: 6, backgroundColor: '#bb86d1', padding: 8, borderRadius: 10},
     horizontalViewSchedules: {flexDirection: 'column', flex:1, margin: 6, backgroundColor: '#693d7c', padding: 8, borderRadius: 10},
-    horizontalViewSchedulesTradingHide: {flexDirection: 'column', flex:1, margin: 6, backgroundColor: '#693d7c', padding: 8, borderRadius: 10},
-    horizontalViewSchedulesTrading: {flexDirection: 'column', flex:7, margin: 6, backgroundColor: '#693d7c', padding: 8, borderRadius: 10},
-    horizontalViewTrading: {flexDirection: 'column', flex:7, marginRight:6, marginLeft:6, marginTop: 3, marginBottom:2, borderRadius: 10},
-    horizontalViewTradingHide: {flexDirection: 'column', flex:1, marginRight:6, marginLeft:6, marginTop: 3, marginBottom:2,  borderRadius: 10},
+    horizontalViewSchedulesTradingHide: {flexDirection: 'column', flex:1, margin: 6, backgroundColor: '#693d7c', padding: 1, paddingTop: 8, borderRadius: 10},
+    horizontalViewSchedulesTrading: {flexDirection: 'column', flex:7, margin: 6, marginTop: 40, backgroundColor: '#693d7c', padding: 1, paddingBottom: 8, paddingTop: 8, borderRadius: 10},
+    horizontalViewTrading: {flexDirection: 'column', flex:7, marginRight:6, marginLeft:6, marginTop: -40, marginBottom:2, borderRadius: 10},
+    horizontalViewTradingHide: {flexDirection: 'column', flex:1, marginRight:6, marginLeft:6, marginTop: -40, marginBottom:2,  borderRadius: 10},
   titleScenario: (dir) => ({
           alignItems: 'center',
           padding: 3,
@@ -1048,15 +1048,15 @@ tabItemDashboard: {flex:1, flexDirection:'column'},
 viewTabStyle: (dir) => ({
 	flex:1,
 	flexDirection: (dir === 'right') ? 'row-reverse' : 'row',
-          height:50,
-          justifyContent:'center',
-          position:'absolute',
-          top:0,
-          left: 0,
-          right: 0,
-          marginRight: 10,
-          marginLeft: 10,
-          marginTop: (Dimensions.get('window').height) - 150
+      height:50,
+      justifyContent:'center',
+      position:'absolute',
+      top:0,
+      left: 0,
+      right: 0,
+      marginRight: 10,
+      marginLeft: 10,
+      marginTop: (Dimensions.get('window').height) - 150
 }),
 viewTabStyleHor: (dir) => ({
 	flex:1,
@@ -1086,6 +1086,14 @@ viewTabStyleTop: (dir) => ({
     top:0,
     left:0
 }),
+viewTabStyleTrading: (dir) => ({
+    justifyContent:'flex-start',
+    alignItems:'flex-start',
+	flexDirection:(dir === 'right') ? 'row-reverse' : 'row',
+	height:50,
+	width:'100%',
+    position:'absolute',
+}),
 viewTabStyleTS: (dir) => ({
 	flex:1,
 	flexDirection:(dir === 'right') ? 'row-reverse' : 'row',
@@ -1112,6 +1120,20 @@ tab1First: (dir) => ({
       color: '#1d0527',
 
  }),
+ tab3First: (dir) => ({
+ 	alignItems: 'center',
+   paddingTop: 2,
+   marginTop:5,
+   marginBottom:5,
+   marginLeft: 10,
+   marginRight: 10,
+   borderTopLeftRadius: 10,
+   borderTopRightRadius:10,
+   width: 100,
+     height:40,
+   fontFamily: (dir === 'right') ? 'Vazir-Medium' : 'Nunito-Bold',
+   color: '#1d0527',
+  }),
  tab1Second: (dir) => (
           {
 	          alignItems: 'center',
@@ -1126,6 +1148,21 @@ tab1First: (dir) => ({
 	          flex:1,
 	          fontFamily: (dir === 'right') ? 'Vazir-Medium' : 'Nunito-Bold',
       color: 'rgba(29, 5, 39, 0.9)',
+}),
+
+ tab3Second: (dir) => (
+  {
+      alignItems: 'center',
+      alignSelf:'flex-end',
+      paddingTop: 2,
+      marginTop:5,
+      marginBottom:5,
+      borderTopLeftRadius: 10,
+     borderTopRightRadius:10,
+     width: 100,
+     height:40,
+      fontFamily: (dir === 'right') ? 'Vazir-Medium' : 'Nunito-Bold',
+    color: 'rgba(29, 5, 39, 0.9)',
 }),
 tab1FirstHor: (dir) => ({
 	alignItems: 'center',
