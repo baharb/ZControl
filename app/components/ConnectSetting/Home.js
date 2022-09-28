@@ -3,6 +3,7 @@ import { translate} from 'react-i18next';
 import i18n from 'i18next';
 import { AsyncStorage, View , Image, Text, Alert} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import Spinner from 'react-native-loading-spinner-overlay';
 import commonStyles from '../Common/css/commonStyles';
 import styles from './css/styles';
 import ZagrosDB from '../Common/lib/DB';
@@ -21,6 +22,7 @@ INPUT_EVENT_MAX_NUMBER = 70
     this.state = {
       language: i18n.language,
       alertMod: false,
+      spinner: true,
       staticIp: "",
       selectedVal: 0,
     }
@@ -108,6 +110,7 @@ INPUT_EVENT_MAX_NUMBER = 70
                                   Output.OUTPUT_ANALOG = data[6]
                                   // Output.OUTPUT_NUMBER = 25
                                   // console.log
+                                  this.setState({spinner:false})
                                   this.props.navigation.navigate('Dashboard');
                               }
                               else{
@@ -131,6 +134,7 @@ INPUT_EVENT_MAX_NUMBER = 70
                                         //alert(i18n.t('controller:errorResponseConnectController'));
                                     this.setState({
                                          alertMod: true,
+                                         spinner: false,
                                     })
                               }
                           }
@@ -143,6 +147,9 @@ INPUT_EVENT_MAX_NUMBER = 70
 //                    Setting.makeBaseTables();
 //                    this.props.navigation.navigate('Dashboard');
 //                    console.log("Setting is not exists...")
+                    this.setState({
+                         spinner: false,
+                    })
                     this.props.navigation.navigate('selectLanguage');
                 }
             }
@@ -162,6 +169,7 @@ INPUT_EVENT_MAX_NUMBER = 70
                 else{
                           this.setState({
                                     alertMod: true,
+                                    spinner: false,
                           })
                 }
          }
@@ -170,6 +178,7 @@ INPUT_EVENT_MAX_NUMBER = 70
     goToSetting(){
         this.setState({
              alertMod: false,
+             spinner: false,
         })
         this.props.navigation.navigate('connectToController');
     }
@@ -287,6 +296,12 @@ INPUT_EVENT_MAX_NUMBER = 70
                            />
                    </View>
                ) : (null) }
+
+                <Spinner
+                  visible={this.state.spinner}
+                  textContent={this.props.t('common:loading')}
+                  textStyle={commonStyles.spinnerText(i18n.t("common:dir"))}
+                />
                              </View>
               </LinearGradient>
 

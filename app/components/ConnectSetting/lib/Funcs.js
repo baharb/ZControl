@@ -375,7 +375,7 @@ export class Funcs extends React.Component {
 //                                                                                   }
                                                                               }
                                                                           );
-                                                     }, 35000);
+                                                     }, 45000);
 
 
                                                       // })

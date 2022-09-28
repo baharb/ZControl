@@ -18,7 +18,6 @@ export class ScenarioPage extends React.Component {
       super(props);
       this.state ={
           scenarios : "",
-          showList: true,
           add: "",
       }
 
@@ -172,7 +171,7 @@ export class ScenarioPage extends React.Component {
 
         return (
 
-                 <LinearGradient colors={['#1d0527', '#350e45', '#4f1965']} style={commonStyles.cont} isShow={this.state.showList} >
+                 <LinearGradient colors={['#1d0527', '#350e45', '#4f1965']} style={commonStyles.cont} >
 
                     <View  style={commonStyles.flex1}>
 

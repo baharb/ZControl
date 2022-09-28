@@ -38,15 +38,21 @@ export class selectLanguage extends React.Component {
       }
     }
 
-    async goToPage()
+    goToPage()
     {
-//    console.log("from page: " + this.state.fromPage)
-        if(this.state.fromPage != ""){
-               this.props.navigation.navigate(this.state.fromPage);
+
+
+//    console.log("from page: *" + this.state.fromPage+"*" + (this.state.fromPage == ""))
+        if(this.state.fromPage == ""){
+//            console.log("go to connect")
+                this.props.navigation.navigate('connectToController');
+
         }
         else{
+//        console.log("opposite")
+         this.props.navigation.navigate(this.state.fromPage);
 //            CommonFuncs.insertSetting().then(data => {
-              this.props.navigation.navigate('connectToController');
+
 //            })
 
 //            .catch(error => {console.log("Error in insert setting ... "+ error) } )
@@ -88,7 +94,12 @@ export class selectLanguage extends React.Component {
                           </View>
                           <View style={styles.viewFlags(i18n.t("common:dir"))}>
                           <View style={styles.viewFlag} >
-                           <TouchableOpacity  style={styles.flagBtn} onPress={() => Funcs.onChangeLang('fa')}>
+                           <TouchableOpacity  style={styles.flagBtn} onPress={() => {
+                                Funcs.onChangeLang('fa')
+//                                setTimeout(() => this.goToPage(), 10000)
+
+                                }}>
+
                               <Image
                                       style={styles.flagImage}
                                       source={require('../Common/img/iranFlag.png')}

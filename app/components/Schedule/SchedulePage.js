@@ -21,7 +21,6 @@ export class SchedulePage extends React.Component {
       super(props);
       this.state = {
           schedules : "",
-          showList: true,
           add: "",
           spinner: true,
           alertMod:false,
@@ -191,12 +190,8 @@ clickRun(id){
         );
 
         return (
-                 <LinearGradient colors={['#1d0527', '#350e45', '#4f1965']} style={commonStyles.cont} isShow={this.state.showList} >
-		<Spinner
-	          visible={this.state.spinner}
-	          textContent={this.props.t('common:loading')}
-	          textStyle={commonStyles.spinnerText(i18n.t("common:dir"))}
-	        />
+         <LinearGradient colors={['#1d0527', '#350e45', '#4f1965']} style={commonStyles.cont}>
+
                     <View  style={commonStyles.flex1}>
                      <FlatList
                          extraData={this.state}
@@ -204,11 +199,7 @@ clickRun(id){
                          data={this.state.schedules}
                          renderItem={renderItem}
                      />
-                    <MyAlert modalVisible={this.state.alertMod}  onClick2={() => this.clickRun(this.state.idModal)}
-                      onClick1={() => this.onClick1()}
-                      title1={i18n.t('common:cancel')}
-                      title2={i18n.t('common:actions.ok')}
-                      title={this.state.titleModal}   />
+
                     </View>
 
                     <View style={commonStyles.floatingContainer(i18n.t('common:dir'))}>
@@ -220,6 +211,16 @@ clickRun(id){
                                 <Image source={require('../Common/img/common-light-refresh.png')}  style={commonStyles.floatingImage} />
                             </ActionButton.Item>
                         </ActionButton>
+                         <Spinner
+                              visible={this.state.spinner}
+                              textContent={this.props.t('common:loading')}
+                              textStyle={commonStyles.spinnerText(i18n.t("common:dir"))}
+                            />
+                            <MyAlert modalVisible={this.state.alertMod}  onClick2={() => this.clickRun(this.state.idModal)}
+                              onClick1={() => this.onClick1()}
+                              title1={i18n.t('common:cancel')}
+                              title2={i18n.t('common:actions.ok')}
+                              title={this.state.titleModal}   />
 
                     </View>
 

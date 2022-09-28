@@ -28,7 +28,7 @@ outputIns = new Output()
 stopUpdate = 0;
 inUpdateOutputs = 0
 inClickOutput = 0
-// disabled = false
+
 clicked = 0
 clickTherm = 0
 queueWIndex = 0
@@ -1163,7 +1163,6 @@ export class Dashboard extends React.PureComponent {
 			selectedLocation: 0,
 			shouldUpdate: true,
 			tabId: 1,
-			spinner: false,
 			selectedThermometer: 1, // todo: change to first thermostat in Location
 			disabled: false,
 			arrowSchedule: "arrow-drop-down",
@@ -2000,8 +1999,9 @@ export class Dashboard extends React.PureComponent {
 											data={this.state.outputs.filter((outputIns) => outputIns.location_id == item.id)}
 											renderItem={outputsItems}
 											horizontal={false}
-											numColumns={4}
-										/></View>}
+											numColumns={(screenWidth > 1024) ? 4:3}
+										/></View>
+										}
 
 								tab2={(this.state.rgbs != "") ?
 									<View style={commonStyles.rgbsFlatlistDashboard}>
