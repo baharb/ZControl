@@ -7,6 +7,8 @@
     "voiceLanguage":"Es-ES",
     "language":"spanish",
     "scanWiredModules":"Escanear módulos cableados",
+    "trading": "Trading",
+    "gold": "Gold",
     "actions": {
       "toggleToGerman": "Alemán",
       "toggleToEnglish": "Inglés",
@@ -14,7 +16,7 @@
       "toggleToFarsi": "Persa",
       "toggleToSpanish": "Español",
       "next": "Próximo paso",
-      "ok": "OK"
+      "ok": "OK",
     },
     "loading":"Cargando...",
     "firstSettingWaiting":"Esto puede tardar unos minutos, espere ...",

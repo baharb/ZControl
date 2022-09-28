@@ -33,6 +33,7 @@ clicked = 0
 clickTherm = 0
 queueWIndex = 0
 queueRIndex = 0
+tradingView = 1
 
 arrayOutputs = [{
 	outputId: 0,
@@ -1186,7 +1187,7 @@ export class Dashboard extends React.PureComponent {
 
 		output = new Output()
 
-
+        this.webView = React.createRef();
 		//    console.log("in constructorrrrrrrrrrrrrrrrrrrrrrrrrrrr")
 	}
 
@@ -2093,6 +2094,7 @@ export class Dashboard extends React.PureComponent {
 
 	render() {
 		outputIns = new Output()
+//        const webView= React.useRef<WebView>(null);
 
 		scenarios = ({ item }) => (
 			<ScenarioItem
@@ -2130,7 +2132,7 @@ export class Dashboard extends React.PureComponent {
 
 
 
-                            {(screenHeight > 400) ?
+                            {((screenHeight > 500) && (tradingView == 1)) ?
                             <View style={commonStyles.flex3}>
                              <View style={(this.state.arrowSchedule == "arrow-drop-up") ? commonStyles.horizontalViewTradingHide :
                                                                                         commonStyles.horizontalViewTrading} >
@@ -2154,17 +2156,10 @@ export class Dashboard extends React.PureComponent {
                                 tab1={
                                   <View style={{flex:1, marginTop: 45, paddingLeft: 5, paddingRight:5, paddingBottom:3}}>
                                   <WebView
-                                     originWhitelist={['*']}
-                                     source={{ html:
-                                      '<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>'+
-                                      '<script type="text/javascript">'+
-                                      'var tradingview_embed_options = {};'+
-                                      'tradingview_embed_options.width = "1000";'+
-                                      'tradingview_embed_options.height = "700";'+
-                                      'tradingview_embed_options.chart = "eX7exSwj";'+
-                                      'new TradingView.chart(tradingview_embed_options);'+
-                                      '</script>'
-                                      }}
+                                        originWhitelist={['*']}
+                                        source={{ uri:
+                                          'https://s.tradingview.com/widgetembed/?frameElementId=tradingview_c1a31&symbol=BINANCE%3ABTCUSDT&interval=60&hidesidetoolbar=0&symboledit=1&saveimage=1&toolbarbg=f1f3f6&studies=%5B%5D&theme=Dark&style=1&withdateranges=1&studies_overrides=%7B%7D&overrides=%7B%7D&enabled_features=%5B%5D&disabled_features=%5B%5D&locale=en&utm_source=www.coingecko.com&utm_medium=widget&utm_campaign=chart&utm_term=BINANCE%3ABTCUSDT'
+                                        }}
                                    />
                                    </View>
 
@@ -2173,22 +2168,31 @@ export class Dashboard extends React.PureComponent {
                                 tab2={
                                    <View style={{flex:1, marginTop: 45, paddingLeft: 5, paddingRight:5}}>
                                     <WebView
-                                    originWhitelist={['*']}
+                                    cacheEnabled={false}
+                                    ref={this.webView}
+                                    pullToRefreshEnabled={true}
                                     source={{ html:
-                                     '<script type="text/javascript" src="http://nerkhbox.com/webmasters/gold/Gold_5.php"></script>'+
-                                     '<script type="text/javascript">'+
-                                     'var tradingview_embed_options = {};'+
-                                     'tradingview_embed_options.width = "1000";'+
-                                     'tradingview_embed_options.height = "700";'+
-                                     'tradingview_embed_options.chart = "admGhVz7";'+
-                                     'new TradingView.chart(tradingview_embed_options);'+
-                                     '</script>'
-                                     }}
-                                  />
+                                      '<tgju' +
+                                      '    type="market-overview"' +
+                                      '    items="137119,137123,137120,137121,137122"' +
+                                      '    columns=""' +
+                                      '    token="webservice"' +
+                                      '></tgju>' +
+                                      '<script src="https://api.accessban.com/v1/widget/v2" defer></script>' }}
+
+                                      onLoadEnd={(syntheticEvent) => {
+                                          // update component to be aware of loading status
+                                          const { nativeEvent } = syntheticEvent;
+                                          setTimeout(() => {
+                                              this.webView.current.reload()
+                                           }, 300000)
+//                                          console.log("endddd")
+                                        }}
+
+                                      />
+
                                   </View>
                                 }
-
-
 
                                 styleTab2={commonStyles.tab3Second(i18n.t('common:dir'))}
 
@@ -2197,9 +2201,9 @@ export class Dashboard extends React.PureComponent {
                                 viewStyle={commonStyles.viewTabStyleTrading(i18n.t('common:dir'))}
 
                                 containerStyle={commonStyles.containerStyle}
-                                tab1Text={"Trading"}
-                                tab2Text={"$"}
-                                tab4Text={"$"}
+                                tab1Text={i18n.t('common:trading')}
+                                tab2Text={i18n.t('common:gold')}
+                                tab4Text={i18n.t('common:gold')}
                                 activeTabColor={'#eae5ec'}
                                 inActiveTabColor={'rgba(135,110,144,0.58)'}
                                 tabId={3}

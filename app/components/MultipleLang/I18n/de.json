@@ -6,6 +6,8 @@
     "controllerSetting":"تنظیمات کنترلر",
     "voiceLanguage":"fa-IR",
     "scanWiredModules":"اسکن ماژول های سیمی",
+    "trading": "Trading",
+    "gold": "Gold",
     "actions": {
       "toggleToGerman": "آلمانی",
       "toggleToEnglish": "انگلیسی",

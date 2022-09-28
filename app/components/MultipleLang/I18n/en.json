@@ -7,6 +7,8 @@
     "voiceLanguage":"En-US",
     "language":"english",
     "scanWiredModules":"Scan wired modules",
+    "trading": "Trading",
+    "gold": "Gold",
     "actions": {
       "toggleToGerman": "German",
       "toggleToEnglish": "English",
