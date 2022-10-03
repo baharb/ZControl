@@ -28,42 +28,12 @@ INPUT_EVENT_MAX_NUMBER = 70
     }
   }
 
-//    backAction = () => {
-//
-//        console.log("classssss nameeee: "+this.props.navigation.state.routeName)
-////    const {dispatch, nav} = this.props;
-//    console.log("index: " + this.props.navigation.state)
-//
-//      if(this.props.isFocused){
-//         Alert.alert(
-//           "",
-//           i18n.t('common:exitApp'),
-//           [
-//             {
-//               text: i18n.t('common:cancel'),
-//               onPress: () => null,
-//               style: "cancel"
-//             },
-//             { text: i18n.t('common:yes'), onPress: () => BackHandler.exitApp() }
-//           ],
-//           { cancelable: false }
-//      );
-//      }
-//      else{
-//        this.props.navigation.goBack(null)
-//        return true
-//      }
-////      return true;
-//    };
 
     componentDidMount(){
 //        BackHandler.addEventListener("hardwareBackPress", this.backAction);
         setTimeout(() => {this.goToPage(7) }, 3000);
     }
 
-//    componentWillUnmount() {
-//        BackHandler.removeEventListener("hardwareBackPress", this.backAction);
-//    }
 
 
     goToPage(retry)
@@ -241,6 +211,7 @@ INPUT_EVENT_MAX_NUMBER = 70
                                                this.goToPage(7)
                                                this.setState({
                                                     alertMod:false,
+                                                    spinner:true,
                                                })
                                         }
                                         else{
@@ -260,6 +231,7 @@ INPUT_EVENT_MAX_NUMBER = 70
                                                this.goToPage(7)
                                                this.setState({
                                                         alertMod:false,
+                                                        spinner: true,
                                                })
                                         }}
                                 ).catch(error => {
@@ -280,6 +252,7 @@ INPUT_EVENT_MAX_NUMBER = 70
                                     this.goToPage(7)
                                     this.setState({
                                          alertMod:false,
+                                         spinner:true,
                                     })
                                 })
 //                                console.log("ip: " + staticIp + "---" + selectedConnection)

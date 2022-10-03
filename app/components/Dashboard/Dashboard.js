@@ -33,7 +33,7 @@ clicked = 0
 clickTherm = 0
 queueWIndex = 0
 queueRIndex = 0
-tradingView = 1
+tradingView = 0
 
 arrayOutputs = [{
 	outputId: 0,
@@ -1652,7 +1652,7 @@ export class Dashboard extends React.PureComponent {
 					mode = dataRGB[i]
 					i++;
 					r = String(dataRGB[i])
-                    console.log()
+//                    console.log()
 					i++
 					g = String(dataRGB[i])
 					i++

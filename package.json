@@ -1,6 +1,6 @@
 {
   "name": "ZControl",
-  "version": "5.3.3",
+  "version": "5.3.5",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
