@@ -94,7 +94,7 @@ export class CurtainSetting extends React.Component {
                                             setTimeout(() => {
 //                                                console.log("Add .... ")
                                                 this.props.navigation.navigate('CurtainPage');
-                                            }, 20000);
+                                            }, 30000);
 
                                         }
                                     }

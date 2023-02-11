@@ -183,7 +183,10 @@ export class connectToController extends React.Component {
 
                     <View style={commonStyles.viewOkButton} >
                       <MyButton title={t('common:actions.next') } dir={t("common:dir")}
-                           onPress={() => this.firstSetting(t) }>
+                           onPress={() => {
+                                if(this.state.successSsid && this.state.successPass && this.state.successSix) {this.firstSetting(t) }
+                           }}>
+
                       </MyButton>
                     </View>
 
